@@ -1,0 +1,47 @@
+/* Home.css */
+.home-page {
+    background-color: #FFF7E6;
+    padding: 20px;
+  }
+  
+  .home-page h1 {
+    color: #5D4037;
+  }
+  
+  .home-page p {
+    color: #3E2723;
+  }
+  
+  .cake-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .cake-list div {
+    border: 1px solid #C8E6C9;
+    padding: 15px;
+    width: 200px;
+  }
+  
+  .cake-list img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .cake-list h3 {
+    color: #5D4037;
+  }
+  
+  .cake-list p {
+    color: #3E2723;
+  }
+  
+  .cake-list button {
+    background-color: #FFC107;
+    color: #3E2723;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  

@@ -1,6 +1,7 @@
 // src/pages/Home.js
 import React from 'react';
 import { useSelector } from 'react-redux';
+import './Home.css';  // Import the external CSS file
 
 const Home = () => {
   const cakes = useSelector((state) => state.cake.cakes);
