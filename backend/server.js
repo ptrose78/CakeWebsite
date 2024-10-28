@@ -1,19 +1,30 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
-const port = 3306;
+const port = 5000;
 
 app.use(cors());
 app.use(express.json());
 
+console.log('backend')
+
 // MySQL connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'nqteuute_cake_website',
-    password: '59520Rose!',
-    database: 'nqteuute_cake_website'
+  host     : process.env.HOST,
+  user     : process.env.USER,
+  password : process.env.PASSWORD,
+  database : process.env.DATABASE
+});
+
+db.connect((err) => {
+    if (err) {
+        console.error('Database connection failed:', err.stack);
+        return;
+    }
+    console.log('Connected to database.');
 });
 
 // API endpoint to get cake data
