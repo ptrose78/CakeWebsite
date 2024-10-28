@@ -1,5 +1,16 @@
 // src/features/cake/cakeSlice.js
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const fetchCakes = async () => {
+  try {
+      const response = await axios.get('http://localhost:3000/api/cakes');
+      console.log(response.data);
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching the cake prices', error);
+  }
+}
 
 const initialState = {
   cakes: [
@@ -18,6 +29,7 @@ const cakeSlice = createSlice({
     },
   },
 });
+
 
 export const { addCake } = cakeSlice.actions;
 

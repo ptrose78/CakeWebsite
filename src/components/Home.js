@@ -1,6 +1,7 @@
 // src/pages/Home.js
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { fetchCakes } from '../features/cake/cakeSlice';
 import './Home.css';  // Import the external CSS file
 
 const Home = () => {
@@ -32,7 +33,7 @@ const Home = () => {
   });
 
  
-console.log('hi')
+console.log('hi2')
   
   return (
     <div className="home-page">
