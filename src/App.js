@@ -1,10 +1,10 @@
 import './App.css';
-import Home from './components/Home';
+import CakeList from './components/CakeList.js';
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <CakeList />
     </div>
   );
 }
