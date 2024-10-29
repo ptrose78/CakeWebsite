@@ -7,34 +7,28 @@ export const fetchCakes = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get('https://website-605cd4d9.nqt.euu.temporary.site/wp-json/custom/v1/cakedata');
+      console.log(response.data)
       return response.data;
     } catch (error) {
+      console.log('error fetchCakes')
       throw Error ('Error fetching the cake prices');
-    }
+    } 
   }
 );
 
-const initialState = {
-  cakes: [
-    { id: 1, name: 'Chocolate Cake', price: 25, image: '/images/chocolate-cake.jpg' },
-    { id: 2, name: 'Vanilla Cake', price: 20, image: '/images/vanilla-cake.jpg' },
-    { id: 3, name: 'Red Velvet Cake', price: 30, image: '/images/red-velvet-cake.jpg' },
-  ],
-};
-
 const cakeSlice = createSlice({
-  name: 'cake',
+  name: 'cakes',
   initialState: {
     cakes: [],
     status: 'idle',
-    error: IdleDeadline, 
+    error: null, 
   },
   reducers: {
     addCake: (state, action) => {
       state.cakes.push(action.payload);
     }
   },
-  extraReducers: (builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(fetchCakes.pending, (state) => {
         state.status = 'loading';
@@ -44,7 +38,7 @@ const cakeSlice = createSlice({
         state.cakes = action.payload;
       })
       .addCase(fetchCakes.rejected, (state, action) => {
-        state.statue = "rejected;"
+        state.statue = "rejected";
         state.error = action.error.message;
       });
   }
@@ -52,5 +46,8 @@ const cakeSlice = createSlice({
 
 
 export const { addCake } = cakeSlice.actions;
+export const selectCakes = (state) => state.cakes.cakes;
+export const selectCakesStatus = (state) => state.cakes.status;
+export const selectCakesError = (state) => state.cakes.error;
 
 export default cakeSlice.reducer;

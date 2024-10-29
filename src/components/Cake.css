@@ -1,4 +1,4 @@
-/* Home.css */
+/* Cake.css */
 .home-page {
     background-color: #FFF7E6;
     padding: 20px;
@@ -19,7 +19,8 @@
     justify-content: center; 
   }
   
-  .cake-list div {
+  .cake-list li {
+    list-style-type: none;
     border: 1px solid #C8E6C9;
     padding: 15px;
     width: 200px;
