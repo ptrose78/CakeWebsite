@@ -1,16 +1,18 @@
 // src/features/cake/cakeSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchCakes = async () => {
-  try {
-      const response = await axios.get('http://localhost:3000/api/cakes');
-      console.log(response.data);
+export const fetchCakes = createAsyncThunk(
+  'cakes/fetchCakes',
+  async () => {
+    try {
+      const response = await axios.get('https://website-605cd4d9.nqt.euu.temporary.site/wp-json/custom/v1/cakedata');
       return response.data;
-  } catch (error) {
-      console.error('Error fetching the cake prices', error);
+    } catch (error) {
+      throw Error ('Error fetching the cake prices');
+    }
   }
-}
+);
 
 const initialState = {
   cakes: [
@@ -22,12 +24,30 @@ const initialState = {
 
 const cakeSlice = createSlice({
   name: 'cake',
-  initialState,
+  initialState: {
+    cakes: [],
+    status: 'idle',
+    error: IdleDeadline, 
+  },
   reducers: {
     addCake: (state, action) => {
       state.cakes.push(action.payload);
-    },
+    }
   },
+  extraReducers: (builder) {
+    builder
+      .addCase(fetchCakes.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchCakes.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.cakes = action.payload;
+      })
+      .addCase(fetchCakes.rejected, (state, action) => {
+        state.statue = "rejected;"
+        state.error = action.error.message;
+      });
+  }
 });
 
 
