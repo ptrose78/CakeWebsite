@@ -1,7 +1,7 @@
 // src/pages/Home.js
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCakes, selectCakes, selectCakesStatus, selectCakesError } from '../features/cake/cakeSlice';
+import { fetchCakes, selectCakes, selectCakesStatus, selectCakesError } from '../../features/cake/cakeSlice';
 import './Cake.css';  // Import the external CSS file
 
 const CakeList = () => {
@@ -73,10 +73,6 @@ const CakeList = () => {
   });
  
   return (
-    <div className="home-page">
-      <h1>Welcome to Betty's Bakes</h1>
-      <p>Delicious cakes made with love, for every occasion!</p>
-
       <div className="cake-list">
       {cakesWithImages.map((cake) => (
         <li key={cake.id}>
@@ -91,7 +87,6 @@ const CakeList = () => {
           </li>
         ))}
       </div>
-    </div>
   );
 };
 
