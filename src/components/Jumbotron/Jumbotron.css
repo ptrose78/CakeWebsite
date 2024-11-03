@@ -1,29 +1,46 @@
 .jumbotron {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #f7e7d1; /* soft beige */
+    background-color: #f0c289; /* soft beige */
     color: #5A3E36; /* warm, dark brown */
   }
+
+.jumbotron-content {
+  display: flex;
+    align-items: center; /* Vertically centers items */
+    justify-content: center; /* Centers content horizontally */
+}
+
+.jumbotron img {
+    max-width: 100px; /* Adjust the size of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: -25px; /* Space between logo and headline */
+}
   
   .jumbotron h1 {
     font-family: 'Pacifico', cursive;
-    font-size: 2.5em;
+    font-size: 2.6em;
+    margin-bottom: 1px;
   }
   
   .jumbotron p {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.4em;
+    margin-top: 1px;
+    margin-bottom: 10px;
   }
   
   .order-button {
     background-color: #D9663D; /* soft orange */
     border: none;
-    padding: 12px 24px;
+    padding: 18px 14px;
     color: #fff;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 1.4em;
+    margin-top: 2px;
   }
   
   .order-button:hover {
