@@ -1,4 +1,4 @@
-// src/pages/Home.js
+// src/pages/CakeList.js
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCakes, selectCakes, selectCakesStatus, selectCakesError } from '../../features/cake/cakeSlice';

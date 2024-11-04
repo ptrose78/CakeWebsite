@@ -1,27 +1,26 @@
 
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateJumbotron, selectJumbotron } from '../../features/jumbotron/jumbotronSlice';
-import { fetchLogoImage, selectLogoImage, selectLogoStatus} from '../../features/logo/logoSlice';
+import { fetchJumbotronImage, selectJumbotron } from '../../features/jumbotron/jumbotronSlice';
 import './Jumbotron.css'; 
 
 const Jumbotron = () => {
   const dispatch = useDispatch();
 
-  const { headline, subtext } = useSelector(selectJumbotron);
-  const { logoImage } = useSelector(selectLogoImage) || {};
+  const { jumbotronImage, headline, subtext } = useSelector(selectJumbotron);
+  
 
   useEffect(() => {
-    if (!logoImage) {
-      dispatch(fetchLogoImage());
+    if (!jumbotronImage) {
+      dispatch(fetchJumbotronImage());
     }
   }, [dispatch]);
 
     return (
         <div className="jumbotron">
           <div className="jumbotron-content" style={{ display: 'flex', alignItems: 'center' }}>
-            {logoImage ? (
-              <img src={logoImage} alt="Betty's Bakes Logo" style={{ marginRight: '2px' }} />
+            {jumbotronImage ? (
+              <img src={jumbotronImage} alt="Jumbotron Logo" style={{ marginRight: '2px' }} />
             ) : (
               <p>Loading logo...</p>
             )}
