@@ -1,0 +1,90 @@
+/* src/components/Navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+    background-color: #f8f4ea;
+  }
+  
+  .navbar-left .logo {
+    height: 50px;
+    width: 50px;
+  }
+  
+  .nav-bar-right {
+    display: flex;         
+    align-items: center;   
+    justify-content: flex-end; 
+    min-width: 150px;      
+    height: 100%;         
+    padding: 0 10px;       
+}
+  
+  .cart-btn, .menu-btn {
+    font-size: 22px;
+    margin-left: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+ /* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  /* Main dropdown label styling */
+  .dropdown-label {
+    background-color: #D9663D; /* soft orange */
+    color: #fff;
+    padding: 12px 16px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for label */
+  .dropdown-label:hover {
+    background-color: #B24A2F; /* slightly darker orange */
+  }
+  
+  /* Dropdown content style */
+  .dropdown-content {
+    display: none; /* Initially hidden */
+    position: absolute;
+    background-color: #f0c289; /* soft beige */
+    min-width: 160px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 10px 0;
+    z-index: 1;
+    font-family: 'Open Sans', sans-serif;
+    top: 100%; /* Positions content below label */
+  }
+  
+  /* Show dropdown on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Link styles in dropdown */
+  .dropdown-content a {
+    color: #5A3E36; /* warm, dark brown */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1.1em;
+    transition: background-color 0.2s ease;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #FFD9B3; /* light peach */
+    color: #D9663D; /* matches label color */
+    border-radius: 8px;
+  }
