@@ -1,49 +1,58 @@
 .jumbotron {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #f0c289; /* soft beige */
-    color: #5A3E36; /* warm, dark brown */
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Aligns content closer to the top */
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 10vh; /* Adds space from the top, adjust as needed */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f0c289; /* Soft beige */
+  color: #5A3E36; /* Warm, dark brown */
+  text-align: center;
+  box-sizing: border-box;
+}
 
 .jumbotron-content {
   display: flex;
-    align-items: center; /* Vertically centers items */
-    justify-content: center; /* Centers content horizontally */
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .jumbotron img {
-    max-width: 100px; /* Adjust the size of the logo */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: -25px; /* Space between logo and headline */
+  max-width: 15%;
+  height: auto;
+  margin-right: -25px;
 }
-  
-  .jumbotron h1 {
-    font-family: 'Pacifico', cursive;
-    font-size: 2.6em;
-    margin-bottom: 1px;
-  }
-  
-  .jumbotron p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.4em;
-    margin-top: 1px;
-    margin-bottom: 10px;
-  }
-  
-  .order-button {
-    background-color: #D9663D; /* soft orange */
-    border: none;
-    padding: 18px 14px;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1.4em;
-    margin-top: 2px;
-  }
-  
-  .order-button:hover {
-    background-color: #B24A2F;
-  }
-  
+
+.jumbotron h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 5vw;
+  margin-bottom: 10px;
+}
+
+.jumbotron p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2.5vw;
+  margin-top: 5px;
+}
+
+.order-button {
+  background-color: #D9663D; /* Soft orange */
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 2.5vw;
+  margin-top: 10px;
+}
+
+.order-button:hover {
+  background-color: #B24A2F;
+}

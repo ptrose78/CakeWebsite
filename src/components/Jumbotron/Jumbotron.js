@@ -19,11 +19,7 @@ const Jumbotron = () => {
     return (
         <div className="jumbotron">
           <div className="jumbotron-content" style={{ display: 'flex', alignItems: 'center' }}>
-            {jumbotronImage ? (
               <img src={jumbotronImage} alt="Jumbotron Logo" style={{ marginRight: '2px' }} />
-            ) : (
-              <p>Loading logo...</p>
-            )}
             <h1>{headline}</h1>
           </div>
           <p>{subtext}</p>

@@ -1,14 +1,13 @@
 import './App.css';
-import CakeList from './components/Cake/CakeList.js';
+import Navbar from './components/Navbar/Navbar.js'
 import Jumbotron from './components/Jumbotron/Jumbotron.js';
-import Logo from './components/Logo/Logo.js';
+import CakeList from './components/Cake/CakeList.js';
 
 function App() {
   return (
     <div className="App">
-      <Logo />
+      <Navbar />
       <Jumbotron />
-      <CakeList />
     </div>
   );
 }
