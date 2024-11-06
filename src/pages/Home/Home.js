@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar.js'
 import Jumbotron from '../../components/Jumbotron/Jumbotron.js';
 
 function Home() {
@@ -13,4 +12,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default Home;   
