@@ -17,7 +17,7 @@ function App() {
 
           {/* Define routes for the pages */}
           <Routes>
-            <Route path="cakes" element={<Cakes />} />
+          <Route path="/cakes" element={<Cakes />} />
           </Routes>
         </div>
   );
