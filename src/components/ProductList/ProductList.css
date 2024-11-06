@@ -1,4 +1,4 @@
-/* Cake.css */
+/* Product.css */
 .home-page {
     background-color: #FFF7E6;
     padding: 20px;
@@ -12,34 +12,34 @@
     color: #3E2723;
   }
   
-  .cake-list {
+  .product-list {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center; 
   }
   
-  .cake-list li {
+  .product-list li {
     list-style-type: none;
     border: 1px solid #C8E6C9;
     padding: 15px;
     width: 200px;
   }
   
-  .cake-list img {
+  .product-list img {
     width: 100%;
     border-radius: 10px;
   }
   
-  .cake-list h3 {
+  .product-list h3 {
     color: #5D4037;
   }
   
-  .cake-list p {
+  .product-list p {
     color: #3E2723;
   }
   
-  .cake-list button {
+  .product-list button {
     background-color: #FFC107;
     color: #3E2723;
     padding: 10px;
