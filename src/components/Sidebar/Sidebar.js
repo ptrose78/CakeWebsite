@@ -10,7 +10,6 @@ const Sidebar = () => {
 
     const dispatch = useDispatch();
     const isMenuOpen = useSelector(selectIsMenuOpen);
-    console.log(isMenuOpen)
 
     const handleMenuToggle = () => {
         if (isMenuOpen) {

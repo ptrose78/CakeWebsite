@@ -9,7 +9,6 @@ export const fetchJumbotronImage = createAsyncThunk('jumbotron/jumbotronImage', 
       throw new Error('Network response was not ok');
     }
     const blob = await response.blob();
-    console.log(blob)
     return URL.createObjectURL(blob); // Returns a blob URL for the image
   });
 
