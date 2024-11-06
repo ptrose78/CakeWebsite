@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import './App.css';
 import Cakes from './pages/Cakes/Cakes.js';
 import Cupcakes from './pages/Cupcakes/Cupcakes.js';
+import Cookies from './pages/Cookies/Cookies.js';
 import Home from './pages/Home/Home.js'
 import Navbar from './components/Navbar/Navbar.js'
-import Jumbotron from './components/Jumbotron/Jumbotron.js';
 
 function App() {
   const location = useLocation();
@@ -18,6 +18,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path="/cakes" element={<Cakes />} />
           <Route path="/cupcakes" element={<Cupcakes />} />
+          <Route path="/cookies" element={<Cookies />} />
           </Routes>
         </div>
   );
