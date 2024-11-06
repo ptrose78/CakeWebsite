@@ -5,6 +5,8 @@ import jumbotronReducer from '../features/jumbotron/jumbotronSlice';
 import productReducer from '../features/productList/productListSlice';
 import logoReducer from '../features/logo/logoSlice';
 import dropdownMenuReducer from '../features/dropdownMenu/dropdownMenuSlice';
+import cakeOrderFormReducer from '../features/cakeOrderForm/cakeOrderFormSlice';
+import orderFormVisibilityReducer from '../features/orderFormVisibility/orderFormVisibilitySlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +15,7 @@ export const store = configureStore({
     products: productReducer,
     logo: logoReducer,
     dropdownMenu: dropdownMenuReducer,
+    cakeOrderForm: cakeOrderFormReducer,
+    orderFormVisibility: orderFormVisibilityReducer,
   },
 });

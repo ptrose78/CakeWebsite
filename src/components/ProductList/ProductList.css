@@ -47,3 +47,36 @@
     cursor: pointer;
   }
   
+  .product-list button {
+    background-color: #FFC107;
+    color: #3E2723;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+  }
+  
+  .product-list button:hover {
+    background-color: #FFB300;
+    color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .product-list button:focus {
+    outline: none;
+    border: 2px solid #FFB300;
+    box-shadow: 0 0 10px rgba(255, 179, 0, 0.7);
+  }
+  
+  .product-list button:active {
+    background-color: #FF8F00;
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

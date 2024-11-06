@@ -9,6 +9,7 @@ import {
   setTypeFilter,
   selectFilteredProducts,
 } from '../../features/productList/productListSlice';
+import { showOrderForm } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
 import './ProductList.css';  // Import the external CSS file
 
 const ProductList = ({category}) => {
@@ -18,6 +19,10 @@ const ProductList = ({category}) => {
   const error = useSelector(selectProductsError);
 
   const [productsWithImages, setProductsWithImages] = useState([]);
+
+  const handleCustomizeClick = (product) => {
+    dispatch(showOrderForm(product));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,8 +76,8 @@ const ProductList = ({category}) => {
           ) : (
             <p>Image not available</p>
           )}
-            <button>Order Now</button>
-          </li>
+            <button onClick={() => handleCustomizeClick(product)}>Customize</button>
+        </li>
         ))}
       </div>
   );
