@@ -16,7 +16,7 @@ const Navbar = () => {
 
             <div className="navbar-right">
                 <div className="cart-icon">
-                    🛒 <span className="cart-count"></span>
+                    🛒
                 </div>
                 <Sidebar />
             </div>

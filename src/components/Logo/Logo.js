@@ -17,9 +17,9 @@ useEffect(() => {
 
 
 return (
-    <div>
+   
         <img className="logo" src={logoImage} alt="Betty's Bakes Logo" />
-    </div>
+    
     )
 };
 

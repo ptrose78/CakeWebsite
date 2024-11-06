@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchJumbotronImage, selectJumbotron } from '../../features/jumbotron/jumbotronSlice';
 import './Jumbotron.css'; 
+import DropdownMenu from '../DropdownMenu/DropdownMenu.js';
 
 const Jumbotron = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Jumbotron = () => {
             <h1>{headline}</h1>
           </div>
           <p>{subtext}</p>
-          <button className="order-button">Shop Now</button>
+          <DropdownMenu className="jumbotron" header="Shop Now" menuId="menu2" />
         </div>
       );
     };

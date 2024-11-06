@@ -3,11 +3,11 @@
   flex-direction: column;
   justify-content: flex-start; /* Aligns content closer to the top */
   align-items: center;
-  width: 100vw;
+  width: 100%;
+  overflow: hidden;
   height: 100vh;
   padding-top: 10vh; /* Adds space from the top, adjust as needed */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   background-color: #f0c289; /* Soft beige */
   color: #5A3E36; /* Warm, dark brown */
   text-align: center;
