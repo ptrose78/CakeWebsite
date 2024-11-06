@@ -7,7 +7,6 @@ import './DropdownMenu.css';
 const DropdownMenu = ({ className, header, menuId }) => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state) => selectMenuState(state, menuId));
-    console.log(isOpen)
 
     const handleToggle = () => {
         dispatch(toggleMenu(menuId));
