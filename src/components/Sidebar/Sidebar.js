@@ -1,9 +1,10 @@
-// src/components/DropdownMenu/DropdownMenu.js
+// src/components/Sidebar/Sidebar.js
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsMenuOpen, openMenu, closeMenu } from '../../features/sidebar/sidebarSlice.js';
 import './Sidebar.css';
+import DropdownMenu from '../DropdownMenu/DropdownMenu.js';
 
 const Sidebar = () => {
 
@@ -20,19 +21,18 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="dropdown-container">
-        <button className="menu-button" onClick={handleMenuToggle}>
-            {isMenuOpen ? '✕' : '☰'}
-        </button>
-        <div className={`dropdown-menu ${isMenuOpen ? 'open' : ''}`}>
-                <a href="/about">About Us</a>
-                <div className="dropdown-label">Our Treats</div>
-                <a href="/cakes">Cakes</a>
-                <a href="/cupcakes">Cupcakes</a>
-                <a href="/cookies">Cookies</a>
-                <a href="/contact">Contact</a>
+        <div className="sidebar-container">
+            <button className="menu-button" onClick={handleMenuToggle}>
+                {isMenuOpen ? '✕' : '☰'}
+            </button>
+            
+            <div className={`sidebar-menu ${isMenuOpen ? 'open' : ''}`}>          
+                    <DropdownMenu menuId="menu1" header="Our Treats" />
+                    <a href="/about">About</a>
+                    <a href="/about">Contact Us</a>
+            </div>   
+            
         </div>
-    </div>
     )
 }
 

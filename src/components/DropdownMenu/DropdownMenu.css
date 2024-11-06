@@ -1,0 +1,86 @@
+/* Dropdown container stays in flow */
+.dropdown-container {
+    width: 100%;
+    margin: 0;
+}
+
+/* Header button with caret */
+.dropdown-menu {
+    width: 100%; /* Full width of the container */
+    text-align: center; /* Center text */
+    border: none;
+    font-size: 1.0em;
+    font-weight: bold;
+    padding: 10px;
+    color: #5A3E36; /* Dark brown */
+    background-color: #e4cd4d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers both text and caret */
+    gap: 5px; /* Space between text and caret */
+    margin-top: 14px;
+}
+
+/* Jumbotron button styling */
+.dropdown-menu.jumbotron {
+    width: 15%;
+    height: 85px;
+    background-color: #283626; /* Darker beige for emphasis */
+    color: #ffffff; /* White text */
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 5px; /* Rounded corners */
+    border: 2px solid transparent; /* Border for button style */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Button shadow */
+    display: inline-flex; /* Inline-flex to prevent full-width */
+}
+
+/* Hover effect for jumbotron button */
+.dropdown-menu.jumbotron:hover {
+    background-color: #cfa44e; /* Slightly darker beige */
+    color: #ffffff;
+    border-color: #d2993b; /* Border color on hover */
+}
+
+/* Caret transition */
+.caret {
+    transition: transform 0.3s ease;
+}
+
+.caret.open {
+    transform: rotate(180deg);
+}
+
+/* Dropdown content container with sliding effect */
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #e2caad; /* Beige color */
+
+    transition: max-height 0.3s ease;
+}
+
+/* Open state for dropdown with expanded height */
+.dropdown-content.show {
+    max-height: 200px; /* Adjust this value based on content */
+    overflow: visible;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+    color: #5A3E36;
+    padding: 10px 15px;
+    margin: 0px;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #D9663D; /* Highlighted orange on hover */
+    color: #fff;
+}
