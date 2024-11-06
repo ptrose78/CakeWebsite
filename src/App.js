@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import './App.css';
 import Navbar from './components/Navbar/Navbar.js'
 import Jumbotron from './components/Jumbotron/Jumbotron.js';
-import Cakes from './pages/Cakes/Cakes.js'
+import Cakes from './pages/Cakes/Cakes.js';
+import Cupcakes from './pages/Cupcakes/Cupcakes.js';
 
 
 function App() {
@@ -13,11 +14,12 @@ function App() {
         <div className="App">
           <Navbar />
           
-          {location.pathname !== '/cakes' && <Jumbotron />}
+          {location.pathname !== '/cakes' && location.pathname !== '/cupcakes' && <Jumbotron />}
 
           {/* Define routes for the pages */}
           <Routes>
           <Route path="/cakes" element={<Cakes />} />
+          <Route path="/cupcakes" element={<Cupcakes />} />
           </Routes>
         </div>
   );
