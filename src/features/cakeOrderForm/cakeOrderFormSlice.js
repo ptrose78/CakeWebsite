@@ -22,8 +22,7 @@ const cakeOrderFormSlice = createSlice({
         clearOrder: (state) => Object.assign(state, initialState),
     },
 });
-//const print = (state) => console.log(state.initialState);
-//print();
+
 export const { setLayerSize, setFlavor, setButtercreamColor, setCakeMessage, setNotes, clearOrder } = cakeOrderFormSlice.actions;
 
 export const selectCakeOrderForm = (state) => state.cakeOrderForm;

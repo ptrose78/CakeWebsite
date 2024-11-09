@@ -5,6 +5,7 @@ import ROUTES from "../../app/routes";
 import {Link} from "react-router-dom";
 import Logo from '../Logo/Logo.js';
 import Sidebar from '../Sidebar/Sidebar.js';
+import Cart from '../Cart/Cart.js'
 import './Navbar.css';
 
 
@@ -17,9 +18,7 @@ const Navbar = () => {
             </div>
 
             <div className="navbar-right">
-                <div className="cart-icon">
-                    🛒
-                </div>
+                <Cart />
                 <Sidebar />
             </div>
         </nav>
