@@ -18,15 +18,10 @@ import './CakeOrderForm.css';
 const CakeOrderForm = ({ product, onClose }) => {
     const dispatch = useDispatch();
     const order = useSelector(selectCakeOrderForm);
-    console.log(order)
 
     const handleAddToCart = () => {
         console.log("Order added to cart:", order);
         dispatch(clearOrder()); // Optional: clear the form after adding to cart
-    };
-
-    const handleBuyNow = () => {
-        console.log("Proceed to buy with order:", order);
     };
 
     return (
@@ -108,7 +103,7 @@ const CakeOrderForm = ({ product, onClose }) => {
 
                 <div className="button-group">
                     <button onClick={handleAddToCart} className="add-to-cart">Add to Cart</button>
-                    <Link to={ROUTES.checkoutRoute()}><button onClick={handleBuyNow} className="buy-now">Buy Now</button></Link>
+                    <Link to={ROUTES.checkoutRoute()}><button className="buy-now">Buy Now</button></Link>
                 </div>
             </div>
         </div>

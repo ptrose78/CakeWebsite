@@ -8,6 +8,7 @@ import dropdownMenuReducer from '../features/dropdownMenu/dropdownMenuSlice';
 import cakeOrderFormReducer from '../features/cakeOrderForm/cakeOrderFormSlice';
 import orderFormVisibilityReducer from '../features/orderFormVisibility/orderFormVisibilitySlice';
 import paymentFormReducer from '../features/paymentForm/paymentFormSlice';
+import cartReducer from '../features/cart/cartSlice';
 
 
 export const store = configureStore({
@@ -20,5 +21,6 @@ export const store = configureStore({
     cakeOrderForm: cakeOrderFormReducer,
     orderFormVisibility: orderFormVisibilityReducer,
     paymentForm: paymentFormReducer,
+    cart: cartReducer
   },
 });
