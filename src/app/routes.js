@@ -1,5 +1,6 @@
 const ROUTES = {
-    homeRoute: () => "/"
+    homeRoute: () => "/",
+    checkoutRoute: () =>"/checkout"
 };
   
 export default ROUTES;

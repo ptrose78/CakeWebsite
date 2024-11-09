@@ -10,7 +10,10 @@ import {
     clearOrder, 
     selectCakeOrderForm 
 } from '../../features/cakeOrderForm/cakeOrderFormSlice';
+import ROUTES from "../../app/routes";
+import {Link} from "react-router-dom";
 import './CakeOrderForm.css';
+
 
 const CakeOrderForm = ({ product, onClose }) => {
     const dispatch = useDispatch();
@@ -105,7 +108,7 @@ const CakeOrderForm = ({ product, onClose }) => {
 
                 <div className="button-group">
                     <button onClick={handleAddToCart} className="add-to-cart">Add to Cart</button>
-                    <button onClick={handleBuyNow} className="buy-now">Buy Now</button>
+                    <Link to={ROUTES.checkoutRoute()}><button onClick={handleBuyNow} className="buy-now">Buy Now</button></Link>
                 </div>
             </div>
         </div>
