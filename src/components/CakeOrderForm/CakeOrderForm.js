@@ -1,15 +1,20 @@
 // src/pages/CakeOrderForm/CakeOrderForm.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { 
+    setId,
     setLayerSize, 
     setFlavor, 
     setButtercreamColor, 
     setCakeMessage, 
-    setNotes, 
+    setNotes,
+    setQuantity,
+    setPrice,
     clearOrder, 
-    selectCakeOrderForm 
+    selectCakeOrderForm, 
 } from '../../features/cakeOrderForm/cakeOrderFormSlice';
+import { addOrder, selectCart, removeOrder, clearCart } from  "../../features/cart/cartSlice.js"
 import ROUTES from "../../app/routes";
 import {Link} from "react-router-dom";
 import './CakeOrderForm.css';
@@ -17,18 +22,30 @@ import './CakeOrderForm.css';
 
 const CakeOrderForm = ({ product, onClose }) => {
     const dispatch = useDispatch();
+    
+    const orders = useSelector(selectCart);
     const order = useSelector(selectCakeOrderForm);
+    console.log(orders)
+    
+    useEffect(() => {
+        dispatch(setId(uuidv4()));
+        dispatch(setPrice(product.price));
+    }, [dispatch]);
 
-    const handleAddToCart = () => {
-        console.log("Order added to cart:", order);
-        dispatch(clearOrder()); // Optional: clear the form after adding to cart
+    const handleAddToCart =  async (e) => {
+        e.preventDefault();
+        dispatch(setId(uuidv4()));
+        console.log(order)
+        dispatch(addOrder({orders, newOrder: order})); 
     };
 
     return (
         <div className="cake-order-container">
 
             <div className={`cake-order-form ${product ? 'visible' : ''}`}>
-                <button className="button-close" onClick={onClose}>✕</button>
+                <button className="button-close" onClick={() => { 
+                    onClose(); 
+                 }}>✕</button>
                 
                 <div className="product-header">
                     {product.image ? (
@@ -39,9 +56,10 @@ const CakeOrderForm = ({ product, onClose }) => {
                     <h2>{product?.name} Order</h2>
                 </div>
 
+                <form id="payment-form" onSubmit={handleAddToCart}>        
                 <div className="form-group">
                     <label>Layer Cake Size:</label>
-                    <select onChange={(e) => dispatch(setLayerSize(e.target.value))} value={order.layerSize}>
+                    <select onChange={(e) => dispatch(setLayerSize(e.target.value))}>
                         <option value="">Select size</option>
                         <option value="4-inch">4" (serves 1-4)</option>
                         <option value="6-inch">6" (serves 8-10)</option>
@@ -52,7 +70,7 @@ const CakeOrderForm = ({ product, onClose }) => {
 
                 <div className="form-group">
                     <label>Cake Flavor:</label>
-                    <select onChange={(e) => dispatch(setFlavor(e.target.value))} value={order.flavor}>
+                    <select onChange={(e) => dispatch(setFlavor(e.target.value))}>
                         <option value="">Select flavor</option>
                         <option value="chocolate">Chocolate</option>
                         <option value="vanilla">Vanilla</option>
@@ -66,7 +84,7 @@ const CakeOrderForm = ({ product, onClose }) => {
 
                 <div className="form-group">
                     <label>Base Buttercream Color:</label>
-                    <select onChange={(e) => dispatch(setButtercreamColor(e.target.value))} value={order.buttercreamColor}>
+                    <select onChange={(e) => dispatch(setButtercreamColor(e.target.value))}>
                         <option value="">Select color</option>
                         <option value="as-pictured">As pictured</option>
                         <option value="blue">Blue</option>
@@ -87,8 +105,7 @@ const CakeOrderForm = ({ product, onClose }) => {
                     <input 
                         type="text" 
                         placeholder="Enter your message" 
-                        onChange={(e) => dispatch(setCakeMessage(e.target.value))}
-                        value={order.cakeMessage} 
+                        onChange={(e) => dispatch(setCakeMessage(e.target.value))} 
                     />
                 </div>
 
@@ -97,14 +114,28 @@ const CakeOrderForm = ({ product, onClose }) => {
                     <textarea 
                         placeholder="Enter any special instructions" 
                         onChange={(e) => dispatch(setNotes(e.target.value))}
-                        value={order.notes}
+                    />
+                </div>
+
+                <div className="form-quantity">
+                    <label>Quantity:</label>
+                    <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        min="1" 
+                        max="100" 
+                        step="1"
+                        onChange={(e) => dispatch(setQuantity(Number(e.target.value)))}
+                        required 
                     />
                 </div>
 
                 <div className="button-group">
-                    <button onClick={handleAddToCart} className="add-to-cart">Add to Cart</button>
-                    <Link to={ROUTES.checkoutRoute()}><button className="buy-now">Buy Now</button></Link>
+                    <button type="submit" className="add-to-cart">Add to Cart</button>
+                    <Link to={ROUTES.checkoutRoute()}><button type="submit" className="buy-now">Buy Now</button></Link>
                 </div>
+                </form>
             </div>
         </div>
     );

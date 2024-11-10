@@ -7,15 +7,15 @@
     color: #5A3E36;
     cursor: pointer;
     position: fixed;
-    top: 9px;
-    right: 10px;
+    top: 15px;
+    right: 7px;
     z-index: 1000;
 }
 
 /* Sidebar menu */
 .sidebar-menu {
     position: fixed;
-    top: 50px;
+    top: 40px;
     right: -250px;
     height: 100%;
     width: 250px;
