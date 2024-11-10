@@ -1,59 +1,73 @@
-// src/features/cart/cartSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  items: [], // Each item will have { id, orderDetails: {name, ...}, price, quantity }
-  totalQuantity: 0,
-  totalPrice: 0,
+// Load initial state from localStorage, or fall back to defaults
+const loadFromLocalStorage = () => {
+  try {
+    const serializedState = localStorage.getItem('cart');
+    return serializedState ? JSON.parse(serializedState) : { orders: [], totalQuantity: 0, totalPrice: 0 };
+  } catch (e) {
+    console.error("Could not load cart from localStorage", e);
+    return { orders: [], totalQuantity: 0, totalPrice: 0 };
+  }
 };
+
+const saveToLocalStorage = (state) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('cart', serializedState);
+  } catch (e) {
+    console.error("Could not save cart to localStorage", e);
+  }
+};
+
+const initialState = loadFromLocalStorage();
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action) => {
-      const { id, name, orderDetails, price, quantity } = action.payload;
-
-      const existingItem = state.items.find((item) => item.id === id);
-      if (existingItem) {
-        existingItem.quantity += quantity;
+    addOrder: (state, action) => {
+      const { orders, newOrder } = action.payload;
+      const existingOrder = state.orders.find((order) => order.id === newOrder.id);
+      if (existingOrder) {
+        existingOrder.quantity += newOrder.quantity;
       } else {
-        state.items.push({ id, name, orderDetails, price, quantity });
+        state.orders.push(newOrder);
       }
 
-      state.totalQuantity += quantity;
-      state.totalPrice += price * quantity;
+      state.totalQuantity += newOrder.quantity;
+      state.totalPrice += newOrder.price * newOrder.quantity;
+
+      saveToLocalStorage(state); // Persist state after update
     },
-    removeItem: (state, action) => {
-      const { id } = action.payload;
 
-      const itemIndex = state.items.findIndex((item) => item.id === id);
-      if (itemIndex >= 0) {
-        const item = state.items[itemIndex];
-        state.totalQuantity -= item.quantity;
-        state.totalPrice -= item.price * item.quantity;
+    removeOrder: (state, action) => {
+      const orderId = action.payload;
+      const orderIndex = state.orders.findIndex((order) => order.id === orderId);
 
-        state.items.splice(itemIndex, 1);
+      if (orderIndex >= 0) {
+        const order = state.orders[orderIndex];
+        state.totalQuantity -= order.quantity;
+        state.totalPrice -= order.price * order.quantity;
+
+        state.orders.splice(orderIndex, 1);
       }
-    },
-    updateItemQuantity: (state, action) => {
-      const { id, quantity } = action.payload;
 
-      const item = state.items.find((item) => item.id === id);
-      if (item) {
-        state.totalQuantity += quantity - item.quantity;
-        state.totalPrice += (quantity - item.quantity) * item.price;
-        item.quantity = quantity;
-      }
+      saveToLocalStorage(state); // Persist state after update
     },
+
     clearCart: (state) => {
-      state.items = [];
+      state.orders = [];
       state.totalQuantity = 0;
       state.totalPrice = 0;
+
+      saveToLocalStorage(state); // Persist cleared state
     },
   },
 });
 
-export const { addItem, removeItem, updateItemQuantity, clearCart } = cartSlice.actions;
+export const { addOrder, removeOrder, clearCart } = cartSlice.actions;
+
+export const selectCart = (state) => state.cart;
 
 export default cartSlice.reducer;
