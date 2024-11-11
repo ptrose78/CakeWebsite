@@ -1,8 +1,9 @@
 import React from 'react';
 import PaymentForm from '../../components/PaymentForm/PaymentForm.js';
-import './Checkout.css'
+import { selectCart, removeItem, updateQuantity } from '../../features/cart/cartSlice.js';
+import './Payment.css'
 
-function Checkout() {
+function Payment() {
   
     return (
         <div>
@@ -11,4 +12,4 @@ function Checkout() {
     )
 }
 
-export default Checkout;   
+export default Payment;   

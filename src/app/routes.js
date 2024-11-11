@@ -1,6 +1,7 @@
 const ROUTES = {
     homeRoute: () => "/",
-    checkoutRoute: () =>"/checkout"
+    cartRoute: () => '/cart',
+    paymentRoute: () =>"/payment"
 };
   
 export default ROUTES;

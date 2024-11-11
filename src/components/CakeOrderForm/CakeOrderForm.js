@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { 
+    setName,
+    setImage, 
     setId,
     setLayerSize, 
     setFlavor, 
@@ -11,10 +13,10 @@ import {
     setNotes,
     setQuantity,
     setPrice,
-    clearOrder, 
+    clearItems, 
     selectCakeOrderForm, 
-} from '../../features/cakeOrderForm/cakeOrderFormSlice';
-import { addOrder, selectCart, removeOrder, clearCart } from  "../../features/cart/cartSlice.js"
+} from '../../features/cakeOrderForm/cakeOrderFormSlice.js';
+import { addItem, selectCart, removeItem, clearCart } from  "../../features/cart/cartSlice.js"
 import ROUTES from "../../app/routes";
 import {Link} from "react-router-dom";
 import './CakeOrderForm.css';
@@ -23,20 +25,22 @@ import './CakeOrderForm.css';
 const CakeOrderForm = ({ product, onClose }) => {
     const dispatch = useDispatch();
     
-    const orders = useSelector(selectCart);
-    const order = useSelector(selectCakeOrderForm);
-    console.log(orders)
+    const items = useSelector(selectCart);
+    const item = useSelector(selectCakeOrderForm);
+    console.log(items)
     
     useEffect(() => {
         dispatch(setId(uuidv4()));
+        dispatch(setName(product.name));
+        dispatch(setImage(product.image));
         dispatch(setPrice(product.price));
     }, [dispatch]);
 
     const handleAddToCart =  async (e) => {
         e.preventDefault();
         dispatch(setId(uuidv4()));
-        console.log(order)
-        dispatch(addOrder({orders, newOrder: order})); 
+        console.log(items)
+        dispatch(addItem({items, newItem: item})); 
     };
 
     return (
@@ -133,7 +137,7 @@ const CakeOrderForm = ({ product, onClose }) => {
 
                 <div className="button-group">
                     <button type="submit" className="add-to-cart">Add to Cart</button>
-                    <Link to={ROUTES.checkoutRoute()}><button type="submit" className="buy-now">Buy Now</button></Link>
+                    <Link to={ROUTES.cartRoute()}><button type="submit" className="buy-now">Buy Now</button></Link>
                 </div>
                 </form>
             </div>
