@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home/Home.js';
 import Cakes from './pages/Cakes/Cakes.js';
 import Cupcakes from './pages/Cupcakes/Cupcakes.js';
 import Cookies from './pages/Cookies/Cookies.js';
-import Home from './pages/Home/Home.js'
-import Checkout from './pages/Checkout/Checkout.js'
-import Navbar from './components/Navbar/Navbar.js'
+import Cart from './pages/Cart/Cart.js';
+import Payment from './pages/Payment/Payment.js';
+import Navbar from './components/Navbar/Navbar.js';
 
 function App() {
   const location = useLocation();
@@ -20,7 +21,8 @@ function App() {
           <Route path="/cakes" element={<Cakes />} />
           <Route path="/cupcakes" element={<Cupcakes />} />
           <Route path="/cookies" element={<Cookies />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<Payment />} />
           </Routes>
         </div>
   );

@@ -2,7 +2,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = 
-    {   id: "",
+    {   name:"",
+        image: "",
+        id: "",
         layerSize: "",
         flavor: "",
         buttercreamColor: "",
@@ -16,6 +18,8 @@ const cakeOrderFormSlice = createSlice({
     name: 'cakeOrderForm',
     initialState,
     reducers: {
+        setName: (state, action) => {state.name = action.payload},
+        setImage: (state, action) => {state.image = action.payload},
         setId: (state, action) => { state.id = action.payload; },
         setLayerSize: (state, action) => { state.layerSize = action.payload; },
         setFlavor: (state, action) => { state.flavor = action.payload; },
@@ -28,7 +32,7 @@ const cakeOrderFormSlice = createSlice({
     },
 });
 
-export const { setId, setLayerSize, setFlavor, setButtercreamColor, setCakeMessage, setNotes, setQuantity, setPrice, clearOrder } = cakeOrderFormSlice.actions;
+export const { setName, setImage, setId, setLayerSize, setFlavor, setButtercreamColor, setCakeMessage, setNotes, setQuantity, setPrice, clearOrder } = cakeOrderFormSlice.actions;
 
 export const selectCakeOrderForm = (state) => state.cakeOrderForm;
 

@@ -7,13 +7,13 @@ import { useSelector } from 'react-redux';
 import Logo from '../Logo/Logo.js';
 import Sidebar from '../Sidebar/Sidebar.js';
 import { selectCart } from '../../features/cart/cartSlice';
-import Cart from '../Cart/Cart.js'
+import CartIcon from '../CartIcon/CartIcon.js'
 import './Navbar.css';
 
 
 const Navbar = () => {
 
-    const orders = useSelector(selectCart);
+    const items = useSelector(selectCart);
 
     return (
         <nav className='navbar'>
@@ -24,12 +24,12 @@ const Navbar = () => {
             <div className="navbar-right">
                 <div className="cart-container">
                     <div className="cart-info">
-                        <div className="cart-item-count">{orders.totalQuantity}</div>
+                        <div className="cart-item-count">{items.totalQuantity}</div>
                         <div className="cart-total-price">
-                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(orders.totalPrice)}
+                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(items.totalPrice)}
                         </div>
                     </div>
-                    <Link className="cart-link" to={ROUTES.checkoutRoute()}><Cart /></Link>
+                    <Link className="cart-link" to={ROUTES.cartRoute()}><CartIcon/></Link>
                 </div>
             <Sidebar />
             </div>

@@ -21,6 +21,7 @@ const ProductList = ({category}) => {
   const [productsWithImages, setProductsWithImages] = useState([]);
 
   const handleCustomizeClick = (product) => {
+    console.log(product)
     dispatch(showOrderForm(product));
   };
 
