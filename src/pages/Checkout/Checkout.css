@@ -1,4 +1,9 @@
 /* Styling for the checkout content */
+
+a {
+    text-decoration: none;
+}
+
 .checkout-content {
     display: flex;
     justify-content: space-between;

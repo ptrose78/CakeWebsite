@@ -77,7 +77,7 @@ const ProductList = ({category}) => {
           ) : (
             <p>Image not available</p>
           )}
-            <button onClick={() => handleCustomizeClick(product)}>Customize</button>
+            <button onClick={() => handleCustomizeClick(product)}>Order</button>
         </li>
         ))}
       </div>
