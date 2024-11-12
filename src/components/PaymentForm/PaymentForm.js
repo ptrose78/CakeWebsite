@@ -5,13 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startPayment, paymentSuccess, paymentFailure } from '../../features/paymentForm/paymentFormSlice';
 
 const PaymentForm = () => {
-  const dispatch = useDispatch();
-  const { status, error } = useSelector((state) => state.paymentForm); // Using Redux state to manage payment status
-  const [paymentForm, setPaymentForm] = useState(null);
-  const [amount, setAmount] = useState(50);
-
-  const appId = 'sandbox-sq0idb-zULV6wHsQsZe3Yzw1uYv9Q';
-  const locationId = 'L7WBNVW98SF8K';
+ 
+  const appId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_APPLICATION_ID;
+  const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
 
   const [card, setCard] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState('');
@@ -30,7 +26,6 @@ const PaymentForm = () => {
       const payments = window.Square.payments(appId, locationId);
 
       if (!payments) {
-        console.error('Payments instance could not be initialized');
         return;
       }
 
@@ -39,7 +34,6 @@ const PaymentForm = () => {
         await card.attach('#card-container'); // Attach to React-rendered div
         setCard(card);
       } catch (err) {
-        console.error('Error initializing card:', err);
       }
     };
 
@@ -65,10 +59,8 @@ const PaymentForm = () => {
         const payments = window.Square.payments(appId, locationId);
         const verificationToken = await verifyBuyer(payments, tokenResult.token);
         const cardResults = await storeCard(tokenResult.token, verificationToken);
-        console.debug('Card Stored:', cardResults);
       }
       } catch (err) {
-        console.error('Payment failed:', err);
         setPaymentStatus('FAILURE');
       }
   };
@@ -145,7 +137,17 @@ return (
   <div>
     <form id="payment-form" onSubmit={handlePayment}>
       <div id="card-container"></div>
-      <button id="card-button" type="submit">Pay $1.00</button>
+      <p>All transactions are secure and encrypted.</p>
+                
+        <section className="terms-conditions">
+          <input type="checkbox" id="terms" required />
+            <label htmlFor="terms">
+              I agree that I will pick up my order in person in Oak Creek, Wisconsin. I understand that Betty Bakes does not issue refunds for erroneously placed orders. *
+            </label>
+        </section>
+                
+        <button id="card-button" type="submit" className="place-order-btn">Place Order Now</button>
+        
       <div>
         <label>
           <input

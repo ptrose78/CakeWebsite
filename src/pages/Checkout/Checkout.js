@@ -2,14 +2,14 @@ import React from 'react';
 import ROUTES from "../../app/routes";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCustomerInfo, updateOrderInfo, toggleAccountCreation } from '../../features/checkout/checkoutSlice';
+import { updateCustomerInfo, updateOrderInfo, toggleAccountCreation, selectCheckout } from '../../features/checkout/checkoutSlice';
 import { selectCart } from '../../features/cart/cartSlice';
 import './Checkout.css';
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-  const checkoutData = useSelector((state) => state.checkout);
+  const checkoutData = useSelector(selectCheckout);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,9 +20,9 @@ const Checkout = () => {
     }
   };
 
-  const handleAccountCreation = () => {
-    dispatch(toggleAccountCreation());
-  };
+//   const handleAccountCreation = () => {
+//     dispatch(toggleAccountCreation());
+//   };
 
   return (
     <div className="checkout-page">
@@ -75,7 +75,7 @@ const Checkout = () => {
             <div className="input-container">
               <input
                 type="time"
-                name="orderTime"
+                name="pickupTime"
                 value={checkoutData.orderInfo.pickupTime}
                 onChange={handleInputChange}
                 required
@@ -134,8 +134,8 @@ const Checkout = () => {
             <div className="input-container">
                 <input 
                 type="text" 
-                name="Zip Code" 
-                placeholder="Zip Code" 
+                name="zipcode" 
+                placeholder="zipcode" 
                 required
                 value={checkoutData.customerInfo.zipcode} 
                 onChange={handleInputChange} />
@@ -144,7 +144,7 @@ const Checkout = () => {
 
             <div className="input-container">
                 <select name="state" required value={checkoutData.customerInfo.state} onChange={handleInputChange} >
-                        <option value="" disabled selected>Select State *</option>
+                        <option value="" disabled>Select State *</option>
                                 <option value="WI" selected>Wisconsin</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -201,7 +201,7 @@ const Checkout = () => {
 
             <div className="input-container">
                 <select name="country" required value={checkoutData.customerInfo.country} onChange={handleInputChange} >
-                    <option value="" disabled selected>Select Country *</option>
+                    <option value="" disabled>Select Country *</option>
                     <option value="US">United States</option>
                 </select>
                 <label>Country *</label> 
@@ -223,11 +223,11 @@ const Checkout = () => {
             <button className="continue-btn">Continue to Payment →</button>
           </Link>
         </div>
-
         {/* Order Summary Section - Second Column */}
         <div className="order-summary">
           <h2>Order Summary</h2>
           <div className="ordered-items">
+            
             {cart.items.map((item) => (
               <div key={item.id} className="order-item">
                 <div className="item-name">{item.name}</div>
