@@ -1,76 +1,150 @@
-import React from "react";
+import React from 'react';
+import ROUTES from "../../app/routes";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { updateCustomerInfo, updateOrderInfo, toggleAccountCreation } from '../../features/checkout/checkoutSlice';
 import { selectCart } from '../../features/cart/cartSlice';
 import './Checkout.css';
 
 const Checkout = () => {
-    const cart = useSelector(selectCart);
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
+  const checkoutData = useSelector((state) => state.checkout);
 
-    return (
-        <div className="checkout-page">
-            <div className="checkout-header">
-                <h1>Checkout</h1>
-                <p>info@bettybakes.com</p>
-                <p>Returning customer? <a href="/login">Click here to login</a></p>
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name in checkoutData.customerInfo) {
+      dispatch(updateCustomerInfo({ [name]: value }));
+    } else if (name in checkoutData.orderInfo) {
+      dispatch(updateOrderInfo({ [name]: value }));
+    }
+  };
+
+  const handleAccountCreation = () => {
+    dispatch(toggleAccountCreation());
+  };
+
+  return (
+    <div className="checkout-page">
+      <div className="checkout-header">
+        <h1>Checkout</h1>
+        <p>info@bettybakes.com</p>
+        <p>Returning customer? <a href="/login">Click here to login</a></p>
+      </div>
+
+      <div className="checkout-content">
+        {/* Customer Information Form - First Column */}
+        <div className="checkout-form">
+          <h2>Customer Information</h2>
+          <form>
+            <div className="input-container email">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={checkoutData.customerInfo.email}
+                onChange={handleInputChange}
+                placeholder="Email"
+                required
+              />
+              <label htmlFor="email">Email *</label>
             </div>
 
-            <div className="checkout-content">
-                {/* Customer Information Form - First Column */}
-                <div className="checkout-form">
-                    <h2>Customer Information</h2>
-                    <form>
-                        <div class="input-container email">
-                            <input type="email" id="email" name="email" placeholder="Email" required />
-                            <label for="email">Email *</label>
-                        </div>
+            {/* <div className="checkbox-container">
+              <input
+                type="checkbox"
+                id="createAccount"
+                name="createAccount"
+                onChange={handleAccountCreation}
+              />
+              <label htmlFor="createAccount">Create an account?</label>
+            </div> */}
 
-                        <div class="checkbox-container">
-                            <input type="checkbox" id="createAccount" name="createAccount" />
-                            <label for="createAccount">Create an account?</label>
-                        </div>
+            <h3>Pickup Date and Time</h3>
+            <div className="input-container">
+              <input
+                type="date"
+                name="pickupDate"
+                value={checkoutData.orderInfo.pickupDate}
+                onChange={handleInputChange}
+                required
+              />
+              <label>Select pickup date *</label>
+            </div>
 
-                        <h3>Pickup Date and Time</h3>
+            <div className="input-container">
+              <input
+                type="time"
+                name="orderTime"
+                value={checkoutData.orderInfo.pickupTime}
+                onChange={handleInputChange}
+                required
+              />
+              <label>Select pickup time *</label>
+            </div>
 
-                        <div className="input-container">
-                            <input type="date" name="pickupDate" placeholder="" required />
-                            <label>Select pickup date *</label>
-                        </div>
+            <h3>Billing Address</h3>
+            <div className="input-container">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="John"
+                required
+                value={checkoutData.customerInfo.firstName}
+                onChange={handleInputChange}
+              />
+              <label>First Name *</label>
+            </div>
 
-                        <div className="input-container">
-                            <input type="time" name="orderTime" placeholder="" required />
-                            <label>Select pickup time *</label>
-                        </div>
+            <div className="input-container">
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Doe"
+                required
+                value={checkoutData.customerInfo.lastName}
+                onChange={handleInputChange}
+              />
+              <label>Last Name *</label>
+            </div>
 
-                        <h3>Billing Address</h3>
+            <div className="input-container">
+              <input
+                type="text"
+                name="address"
+                placeholder="Street Address"
+                required
+                value={checkoutData.customerInfo.address}
+                onChange={handleInputChange}
+              />
+              <label>Street Address *</label>
+            </div>
 
-                        <div className="input-container">
-                            <input type="text" name="firstName" placeholder="John" required />
-                            <label>First Name *</label>
-                        </div>
+            <div className="input-container">
+                <input 
+                type="text" 
+                name="city" 
+                placeholder="City" 
+                required
+                value={checkoutData.customerInfo.city} 
+                onChange={handleInputChange} />
+                <label>Town / City *</label>
+            </div> 
 
-                        <div className="input-container">
-                            <input type="text" name="lastName" placeholder="Doe" required />
-                            <label>Last Name *</label>
-                        </div>
+            <div className="input-container">
+                <input 
+                type="text" 
+                name="Zip Code" 
+                placeholder="Zip Code" 
+                required
+                value={checkoutData.customerInfo.zipcode} 
+                onChange={handleInputChange} />
+                <label>Zip Code *</label>
+            </div>
 
-                        <div className="input-container">
-                            <input type="text" name="address" placeholder="Street Address" required />
-                            <label>Street Address *</label>
-                        </div>
-
-                        <div className="input-container">
-                            <input type="text" name="city" placeholder="City" required />
-                            <label>Town / City *</label>
-                        </div>
-
-                        <div className="input-container">
-                            <input type="text" name="postcode" placeholder="Postcode" required />
-                            <label>Postcode *</label>
-                        </div>
-
-                        <div className="input-container">
-                            <select name="state" required>
-                                <option value="" disabled selected>Select State *</option>
+            <div className="input-container">
+                <select name="state" required value={checkoutData.customerInfo.state} onChange={handleInputChange} >
+                        <option value="" disabled selected>Select State *</option>
                                 <option value="WI" selected>Wisconsin</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -122,68 +196,74 @@ const Checkout = () => {
                                 <option value="WV">West Virginia</option>
                                 <option value="WY">Wyoming</option>
                             </select>
-                            <label>State *</label>
-                        </div>
-
-                        <div className="input-container">
-                            <select name="country" required>
-                                <option value="" disabled selected>Select Country *</option>
-                                <option value="US" selected>United States (US)</option>
-                            </select>
-                            <label>Country *</label>
-                        </div>
-
-                        <div className="input-container">
-                            <input type="tel" name="phone" placeholder="Phone" required />
-                            <label>Phone *</label>
-                        </div>
-                    </form>
-
-                    <button className="continue-btn">Continue to Payment →</button>
-                </div>
-
-                {/* Order Summary Section - Second Column */}
-                <div className="order-summary">
-                    <h2>Order Summary</h2>
-                    <div className="ordered-items">
-                        {cart.items.map((item) => (
-                            <div key={item.id} className="order-item">
-                                <div className="item-name">{item.name}</div>
-                                <div className="item-details">
-                                    <p>Layer Cake Size: {item.layerSize} ({item.servingSize})</p>
-                                    <p>Cake Flavor: {item.flavor}</p>
-                                    <p>Base Buttercream Color: {item.buttercreamColor}</p>
-                                    {item.cakeMessage && <p>Cake Message: {item.cakeMessage}</p>}
-                                    {item.notes && <p>Notes: {item.notes}</p>}
-                                </div>
-                                <div className="item-total">
-                                    <strong>Total: {new Intl.NumberFormat("en-US", {
-                                        style: "currency",
-                                        currency: "USD",
-                                    }).format(item.price * item.quantity)}</strong>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="order-totals">
-                        <div className="grand-total">
-                            <strong>Grand Total: {new Intl.NumberFormat("en-US", {
-                                style: "currency",
-                                currency: "USD",
-                            }).format(cart.totalPrice)}</strong>
-                        </div>
-                    </div>
-                </div>
+                            <label>State *</label>              
             </div>
 
-            <footer>
-                <div className="footer-text">
-                    <p>Copyright © 2024 Betty Bakes All Rights Reserved</p>
-                </div>
-            </footer>
+            <div className="input-container">
+                <select name="country" required value={checkoutData.customerInfo.country} onChange={handleInputChange} >
+                    <option value="" disabled selected>Select Country *</option>
+                    <option value="US">United States</option>
+                </select>
+                <label>Country *</label> 
+            </div>
+
+            <div className="input-container">
+                <input 
+                type="text" 
+                name="phone" 
+                placeholder="phone" 
+                required
+                value={checkoutData.customerInfo.phone} 
+                onChange={handleInputChange} />
+                <label>Phone *</label>
+            </div>                     
+          </form>
+
+          <Link className="checkout-link" to={ROUTES.paymentRoute()}>
+            <button className="continue-btn">Continue to Payment →</button>
+          </Link>
         </div>
-    );
+
+        {/* Order Summary Section - Second Column */}
+        <div className="order-summary">
+          <h2>Order Summary</h2>
+          <div className="ordered-items">
+            {cart.items.map((item) => (
+              <div key={item.id} className="order-item">
+                <div className="item-name">{item.name}</div>
+                <div className="item-details">
+                  <p>Layer Cake Size: {item.layerSize} ({item.servingSize})</p>
+                  <p>Cake Flavor: {item.flavor}</p>
+                  <p>Base Buttercream Color: {item.buttercreamColor}</p>
+                  {item.cakeMessage && <p>Cake Message: {item.cakeMessage}</p>}
+                  {item.notes && <p>Notes: {item.notes}</p>}
+                </div>
+                <div className="item-total">
+                  <strong>
+                    Total: {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.price * item.quantity)}
+                  </strong>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="order-totals">
+            <div className="grand-total">
+              <strong>
+                Grand Total: {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(cart.totalPrice)}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div className="footer-text">
+          <p>Copyright © 2024 Betty Bakes All Rights Reserved</p>
+        </div>
+      </footer>
+    </div>
+  );
 };
 
 export default Checkout;

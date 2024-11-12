@@ -9,7 +9,7 @@ import cakeOrderFormReducer from '../features/cakeOrderForm/cakeOrderFormSlice';
 import orderFormVisibilityReducer from '../features/orderFormVisibility/orderFormVisibilitySlice';
 import paymentFormReducer from '../features/paymentForm/paymentFormSlice';
 import cartReducer from '../features/cart/cartSlice';
-
+import checkoutReducer from '../features/checkout/checkoutSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +21,7 @@ export const store = configureStore({
     cakeOrderForm: cakeOrderFormReducer,
     orderFormVisibility: orderFormVisibilityReducer,
     paymentForm: paymentFormReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    checkout: checkoutReducer
   },
 });

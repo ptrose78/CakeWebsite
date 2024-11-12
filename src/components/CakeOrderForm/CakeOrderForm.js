@@ -1,6 +1,7 @@
 // src/pages/CakeOrderForm/CakeOrderForm.js
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { v4 as uuidv4 } from 'uuid';
 import { 
     setName,
@@ -17,6 +18,7 @@ import {
     selectCakeOrderForm, 
 } from '../../features/cakeOrderForm/cakeOrderFormSlice.js';
 import { addItem, selectCart, removeItem, clearCart } from  "../../features/cart/cartSlice.js"
+import {  hideOrderForm, selectOrderFormVisibility } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
 import ROUTES from "../../app/routes";
 import {Link} from "react-router-dom";
 import './CakeOrderForm.css';
@@ -24,9 +26,11 @@ import './CakeOrderForm.css';
 
 const CakeOrderForm = ({ product, onClose }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate(); 
     
     const items = useSelector(selectCart);
     const item = useSelector(selectCakeOrderForm);
+    const hideOrderForm = useSelector(selectOrderFormVisibility);
     console.log(items)
     
     useEffect(() => {
@@ -36,11 +40,19 @@ const CakeOrderForm = ({ product, onClose }) => {
         dispatch(setPrice(product.price));
     }, [dispatch]);
 
-    const handleAddToCart =  async (e) => {
-        e.preventDefault();
+    const handleAddToCart =  async (e, button) => {
+        if (e && e.preventDefault) {
+            e.preventDefault(); // Prevent default only if `e` is an event
+        }
+        
         dispatch(setId(uuidv4()));
-        console.log(items)
         dispatch(addItem({items, newItem: item})); 
+
+        if (button === "buy") {
+            navigate(ROUTES.cartRoute()); // Navigate to cart
+        }
+
+        onClose();
     };
 
     return (
@@ -136,8 +148,8 @@ const CakeOrderForm = ({ product, onClose }) => {
                 </div>
 
                 <div className="button-group">
-                    <button type="submit" className="add-to-cart">Add to Cart</button>
-                    <Link to={ROUTES.cartRoute()}><button type="submit" className="buy-now">Buy Now</button></Link>
+                    <button onClick={(e) => {handleAddToCart(e)}} className="add-to-cart">Add to Cart</button>
+                    <button onClick={(e) => {handleAddToCart(e, "buy")}} className="buy-now">Buy Now</button>
                 </div>
                 </form>
             </div>
