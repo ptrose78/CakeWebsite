@@ -1,0 +1,86 @@
+.payments-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.payments-header h1 {
+    font-size: 2rem;
+}
+
+.payments-header p {
+    margin: 5px 0;
+}
+
+.payments-progress {
+    margin: 15px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.payments-details h2 {
+    margin: 20px 0 10px;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 15px;
+    color:#4b4949
+  }
+  
+  .info-table th,
+  .info-table td {
+    border: 1px solid #e0dcdc;
+    padding: 10px;
+    vertical-align: top;
+  }
+  
+  .info-table th {
+    background-color: #a08a8a;
+    font-weight: bold;
+  }
+
+  .info-table td {
+    background-color: #fcf7f7;
+  }
+  
+  .info-table td a {
+    color: #4a9ef7;
+    text-decoration: none;
+  }
+  
+  .info-table td a:hover {
+    color: #0d68ca;
+  }
+  
+
+.credit-card-input {
+    margin: 10px 0;
+}
+
+.credit-card-input input {
+    width: 100%;
+    padding: 8px;
+}
+
+.terms-conditions {
+    margin: 20px 0;
+}
+
+.place-order-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.place-order-btn:hover {
+    background-color: #45a049;
+}

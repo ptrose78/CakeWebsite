@@ -1,15 +1,54 @@
-import React from 'react';
+// Payments.jsx
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCheckout } from "../../features/checkout/checkoutSlice";
 import PaymentForm from '../../components/PaymentForm/PaymentForm.js';
-import { selectCart, removeItem, updateQuantity } from '../../features/cart/cartSlice.js';
-import './Payment.css'
+import './Payment.css';
 
-function Payment() {
-  
+const Payment = () => {
+    
+    const { customerInfo, billingAddress, orderInfo } = useSelector(selectCheckout);
+
     return (
-        <div>
-            <PaymentForm />
-        </div>
-    )
-}
+        <div className="payments-page">
+            <header className="payments-header">
+                <h1>Payment</h1>
+                <p>info@bettybakes.com</p>
+                <p>Returning customer? <a href="/login">Click here to login</a></p>
+            </header>
 
-export default Payment;   
+            <section className="payments-details">
+                <h2>Order Summary</h2>
+
+                <table className="info-table">
+                <tbody>
+                    <tr>
+                    <td>Email</td>
+                    <td>{customerInfo.email}</td>
+                    <td><a href="/checkout">Change</a></td>
+                    </tr>
+                    <tr>
+                    <td>Billing</td>
+                    <td>
+                        {customerInfo.firstName} {customerInfo.lastName}, {customerInfo.address}, {customerInfo.city}, {customerInfo.state} {customerInfo.zip}, {customerInfo.country}
+                    </td>
+                    <td><a href="/checkout">Change</a></td>
+                    </tr>
+                    <tr>
+                    <td>Pickup Info</td>
+                    <td>
+                        {orderInfo.deliveryMethod}, {orderInfo.pickupDate}, {orderInfo.pickupTime}
+                    </td>
+                    <td><a href="/checkout">Change</a></td>
+                    </tr>
+                </tbody>
+                </table>
+
+                <h2>Payment Information</h2>
+                <PaymentForm />
+            </section>
+        </div>     
+    );
+};
+
+export default Payment;
