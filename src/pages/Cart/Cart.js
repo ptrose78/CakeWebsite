@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ROUTES from "../../app/routes";
+import {Link} from "react-router-dom";
 import { selectCart, removeItem, updateQuantity } from '../../features/cart/cartSlice';
 import './Cart.css'
 
 const Cart = () => {
   const cart = useSelector(selectCart); // Get items from Redux state
   const items = cart.items;
-  console.log(items)
 
   const dispatch = useDispatch();
 
@@ -33,18 +34,19 @@ const Cart = () => {
 
         {items.map((item) => (
           <div key={item.id} className="cart-item">
+            <button onClick={() => handleRemove(item.id)} className="remove-btn">x</button>
             {/* First Column: Product (Image + Name) */}
             <div className="cart-column product">
-              <div className="product-image">
-                <button onClick={() => handleRemove(item.id)} className="remove-btn">x</button>
+            <div className="product-image">
                 {item.image ? (
                   <img src={item.image} alt={item.name} width="100" height="100" />
                 ) : (
                   <p>Image not available</p>
                 )}
-              </div>
-              <div className="product-name">{item.name}</div>
             </div>
+              
+            <div className="product-name">{item.name}</div>
+          </div>
 
             {/* Second Column: Details */}
             <div className="cart-column details">
@@ -95,9 +97,11 @@ const Cart = () => {
             currency: "USD",
           }).format(cart.totalPrice)} {/* totalPrice is the sum of all items */}
         </div>
-        <button className="proceed-button" >
-          Proceed to Checkout
-        </button>
+        <Link className="checkout-link" to={ROUTES.checkoutRoute()}>
+          <button className="proceed-button" >
+            Proceed to Checkout
+          </button>
+        </Link>
       </div>
     </div>
 );

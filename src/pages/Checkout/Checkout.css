@@ -1,0 +1,246 @@
+/* Styling for the checkout content */
+.checkout-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Styling for the form section */
+.checkout-form {
+    flex: 1;
+    max-width: 60%;
+}
+
+/* Styling for the order summary section */
+.order-summary {
+    flex: 1;
+    max-width: 35%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Align vertically */
+    justify-content: center; /* Center horizontally under the email input */
+    gap: 8px; /* Add space between checkbox and label */
+    margin-top: 10px; /* Space between email and checkbox container */
+    margin-bottom: 24px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+.checkbox-container label {
+    font-size: 14px;
+    color: #555;
+}
+ 
+.input-container.email {
+    margin-bottom: -15px;
+}
+
+/* Input field container with floating label */
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+
+/* Label styling */
+.input-container label {
+    position: absolute;
+    left: 12px;
+    top: 0px;
+    font-size: 12px;
+    color: #be6d3e;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Remove placeholder for date and time inputs */
+.input-container input[type="date"]:not(:valid) + label,
+.input-container input[type="time"]:not(:valid) + label,
+.input-container input[type="email"]:not(:valid) + label {
+    color: #be6d3e; 
+}
+
+.input-container input[type="date"]:valid + label,
+.input-container input[type="time"]:valid + label,
+.input-container input[type="email"]:valid + label {
+    color: #40b446;
+}
+
+
+/* Input and select fields */
+.input-container input,
+.input-container select {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+/* When input is focused, move the label */
+.input-container:focus-within label,
+.input-container select:focus-within label {
+    top: 0px;
+    font-size: 12px;
+    color: #555;
+    transition: all 0.2s ease-in-out;
+}
+
+/* When input has text, move the label */
+.input-container input:not(:placeholder-shown) + label,
+.input-container select:not([value=""]) + label {
+    top: -15px;
+    font-size: 12px;
+    color: #40b446;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Placeholder styling */
+.input-container input::placeholder,
+.input-container select::placeholder {
+    color: transparent;  /* Hide placeholder text when user starts typing */
+}
+
+/* When input or select is focused or has content, hide the placeholder */
+.input-container input:focus::placeholder,
+.input-container select:focus::placeholder,
+.input-container input:not(:placeholder-shown)::placeholder,
+.input-container select:not([value=""])::placeholder {
+    color: transparent;
+}
+
+/* When input is empty, show placeholder text */
+.input-container input:not(:focus):not(:placeholder-shown)::placeholder,
+.input-container select:not([value=""]):not(:focus)::placeholder {
+    color: #aaa; /* Placeholder text color */
+}
+
+.order-summary {
+    width: 100%;
+    background-color: #f9f9f9; /* Light gray background for contrast */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Inner spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 20px auto; /* Center it within the second column */
+}
+
+.order-summary h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333; /* Darker text for readability */
+    text-align: center; /* Center title */
+    border-bottom: 2px solid #ff6f61; /* Accent color for title */
+    padding-bottom: 10px; /* Space below title */
+}
+
+.ordered-items {
+    margin-bottom: 20px; /* Space between items and totals */
+}
+
+.order-item {
+    margin-bottom: 15px; /* Space between each order item */
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.item-details p {
+    font-size: 14px;
+    color: #777;
+    margin: 2px 0; /* Tighten spacing */
+}
+
+.item-total {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e26256; /* Highlight item total */
+    margin-top: 5px;
+}
+
+.order-totals {
+    border-top: 1px solid #ddd; /* Separator line */
+    padding-top: 15px;
+    
+}
+
+.order-totals div {
+    display: flex;
+    justify-content: center; /* Align amounts to the right */
+    font-size: 16px;
+    margin: 5px 0; /* Space between rows */
+}
+
+.total span:last-child {
+    font-weight: bold; /* Emphasize total */
+    color: #333; /* Darker for importance */
+}
+
+.continue-btn {
+    display: block;
+    width: 100%; /* Make it full width */
+    max-width: 300px; /* Limit max width for better responsiveness */
+    margin: 20px auto; /* Center the button and add spacing */
+    padding: 12px 20px; /* Add padding for size */
+    background-color: #4CAF50; /* Primary color */
+    color: #fff; /* White text for contrast */
+    font-size: 16px; /* Adjust font size */
+    font-weight: bold; /* Make text bold */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor for interaction */
+    text-align: center; /* Center text */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.continue-btn:hover {
+    background-color: #45a049; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slightly elevate the button */
+}
+
+.continue-btn:active {
+    background-color: #337436; /* Even darker shade when clicked */
+    transform: translateY(0); /* Reset elevation */
+}
+
+/* Hide Order Summary on mobile devices */
+@media (max-width: 768px) {
+    .order-summary {
+        display: none;
+    }
+}
+
+/* Increase width as the screen grows */
+@media (min-width: 600px) {
+    .order-summary {
+        width: 55%;  /* Increase width to 70% on medium screens */
+    }
+}
+
+@media (min-width: 900px) {
+    .order-summary {
+        width: 40%;  /* Increase width to 50% on larger screens */
+    }
+}
+
+@media (min-width: 1200px) {
+    .order-summary {
+        width: 30%;  /* Increase width to 40% on very large screens */
+    }
+}
