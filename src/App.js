@@ -6,6 +6,7 @@ import Cakes from './pages/Cakes/Cakes.js';
 import Cupcakes from './pages/Cupcakes/Cupcakes.js';
 import Cookies from './pages/Cookies/Cookies.js';
 import Cart from './pages/Cart/Cart.js';
+import Checkout from './pages/Checkout/Checkout.js';
 import Payment from './pages/Payment/Payment.js';
 import Navbar from './components/Navbar/Navbar.js';
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cupcakes" element={<Cupcakes />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment" element={<Payment />} />
           </Routes>
         </div>

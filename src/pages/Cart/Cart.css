@@ -5,11 +5,11 @@
     text-align: left;
     border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
-    margin-bottom: 10px;
     font-size: 18px;
   }
   
   .cart-item {
+    position: relative;
     display: grid;
     grid-template-columns: 2fr 2fr 1fr 1fr 1fr; /* Same as header */
     gap: 10px;
@@ -54,6 +54,11 @@
     text-align: left;
   }
   
+  .product-image {
+    position: relative;
+    display: inline-block; /* Makes the container adjust to the image size */
+  } 
+
   .product-image img {
     border-radius: 8px;
     object-fit: cover;
@@ -77,16 +82,20 @@
   }
   
   .remove-btn {
-    background-color: #ff4d4d;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 0, 0, 0.692); /* Optional: button background color */
+    color: white; /* Optional: button text color */
+    font-size: 20px; /* Optional: button text size */
+    padding: 5px;
     border: none;
-    color: white;
-    padding: 5px 10px;
     cursor: pointer;
-  }
-  
-  .remove-btn:hover {
-    background-color: #e60000;
-  }
+}
+
+.remove-btn:hover {
+    background-color: rgba(255, 0, 0, 0.89); /* Optional: change color on hover */
+}
 
   /* Remove spinner controls in Chrome, Safari, Edge */
 input[type="number"]::-webkit-outer-spin-button,
