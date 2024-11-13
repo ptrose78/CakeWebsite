@@ -30,7 +30,7 @@ const Payment = () => {
                     <tr>
                     <td>Billing</td>
                     <td>
-                        {customerInfo.firstName} {customerInfo.lastName}, {customerInfo.address}, {customerInfo.city}, {customerInfo.state} {customerInfo.zip}, {customerInfo.country}
+                        {customerInfo.firstName} {customerInfo.lastName}, {customerInfo.address}, {customerInfo.city}, {customerInfo.state} {customerInfo.zipcode}, {customerInfo.country}
                     </td>
                     <td><a href="/checkout">Change</a></td>
                     </tr>
@@ -45,7 +45,7 @@ const Payment = () => {
                 </table>
 
                 <h2>Payment Information</h2>
-                <PaymentForm />
+                <PaymentForm customerInfo={customerInfo} />
             </section>
         </div>     
     );

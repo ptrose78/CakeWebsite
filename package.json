@@ -46,6 +46,7 @@
   },
   "proxy": "http://website-605cd4d9.nqt.euu.temporary.site",
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "react-app-rewired": "^2.2.1"
   }
 }
