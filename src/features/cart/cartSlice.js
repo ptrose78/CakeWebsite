@@ -60,7 +60,7 @@ const cartSlice = createSlice({
 
       saveToLocalStorage(state); // Persist state after update
     },
-    updateQuantity: (state, action) => {
+    updateTotalQuantityAndTotalPrice: (state, action) => {
       const {itemId, newQuantity} = action.payload;
       console.log(itemId)
       console.log(newQuantity)
@@ -71,7 +71,7 @@ const cartSlice = createSlice({
         const item = state.items[itemIndex];
         if (newQuantity>0) {
           state.totalQuantity += newQuantity - item.quantity;
-          state.totalPrice += item.price * (item.quantity - newQuantity);
+          state.totalPrice += item.price * (newQuantity - item.quantity);
           item.quantity = newQuantity;
         }
       }
