@@ -256,12 +256,6 @@ const Checkout = () => {
           </div>
         </div>
       </div>
-
-      <footer>
-        <div className="footer-text">
-          <p>Copyright © 2024 Betty Bakes All Rights Reserved</p>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -3,11 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startPayment, paymentSuccess, paymentFailure } from '../../features/paymentForm/paymentFormSlice';
+import { selectCart } from '../../features/cart/cartSlice';
+
 
 const PaymentForm = ({customerInfo}) => {
  
   const appId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_APPLICATION_ID;
   const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
+
+  const cart = useSelector(selectCart);
+  console.log(cart.totalPrice)
 
   const [card, setCard] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState('');
@@ -39,45 +44,42 @@ const PaymentForm = ({customerInfo}) => {
     loadSquare();
   }, []);
 
-  const handlePayment = async (e) => {
+  const handlePayment = async (e, cart) => {
     e.preventDefault();
     if (!card) return;
     
-
     try {
       
       const tokenResult = await card.tokenize();
-      console.log(tokenResult.status)
       
         if (tokenResult.status === 'OK') {
           const payments = window.Square.payments(appId, locationId);
+          
           //create the customer
           const customerResults = await createCustomer(tokenResult.token, customerInfo);
-          console.log(customerResults.customer.id)
-
+    
           //create the payment
-          const verificationToken = await verifyBuyer(payments, tokenResult.token, customerInfo, 'CHARGE');
-          console.log(verificationToken)
+          console.log(payments)
+          //const verificationToken = await verifyBuyer(payments, tokenResult.token, customerInfo, 'CHARGE');
 
-          const paymentResults = await createPayment(tokenResult.token, customerResults, verificationToken);
-          console.log(paymentResults)
+          const paymentResults = await createPayment(tokenResult.token, customerResults, cart);
 
           if (paymentResults.success === true) {
-            setPaymentStatus('SUCCESS');
+            setPaymentStatus('SUCCESS Charged');
           } else {
-            setPaymentStatus('FAILURE');
+            setPaymentStatus('FAILURE Charged');
           }
 
-      console.log(shouldStoreCard)
-      //Optionally store the card
+          //Optionally store the card
           if (shouldStoreCard) {
             const verificationToken = await verifyBuyer(payments, tokenResult.token, customerInfo, 'STORE');        
+            console.log(verificationToken)
             const cardResults = await storeCard(tokenResult.token, customerResults, verificationToken);
           
             if (cardResults.success === true) {
-              setPaymentStatus('SUCCESS');
+              setPaymentStatus('SUCCESS Stored');
             } else {
-              setPaymentStatus('FAILURE');
+              setPaymentStatus('FAILURE Stored');
             }
           }
         } 
@@ -86,7 +88,22 @@ const PaymentForm = ({customerInfo}) => {
       }
   };
 
-  const createPayment = async (token, customerResults, verificationToken) => {
+  const createPayment = async (token, customerResults, cart) => {
+
+    console.log('start payment')
+    const body = JSON.stringify({
+      locationId,
+      sourceId: token,
+      idempotencyKey: window.crypto.randomUUID(),
+      customerId: customerResults.customer.id,
+      amountMoney: {
+        amount: cart.totalPrice,
+        currency: 'USD'
+      }
+    })
+
+    console.log(body)
+    
     console.log(customerResults.customer.id)
     const response = await fetch('http://localhost:3000/payment', {
       method: 'POST',
@@ -96,16 +113,20 @@ const PaymentForm = ({customerInfo}) => {
       body: JSON.stringify({
         locationId,
         sourceId: token,
-        verificationToken,
         idempotencyKey: window.crypto.randomUUID(),
-        customerId: customerResults.customer.id
+        customerId: customerResults.customer.id,
+        amountMoney: {
+          amount: cart.totalPrice,
+          currency: 'USD'
+        }
       }),
     });
+    console.log('completed payment')
     return response.json();
   };
  
   const verifyBuyer = async (payments, token, customerInfo, intent) => {
-  
+    console.log('verifybuyer starts')
     const verificationDetails = {
       billingContact: {
         addressLines: [customerInfo.address, ''],
@@ -117,12 +138,11 @@ const PaymentForm = ({customerInfo}) => {
         region: '',
         city: customerInfo.city,
       },
-      intent: intent,
-      amount: '100',
-      currencyCode: 'USD'
+      intent: intent
     };
 
     try {
+      console.log('startver')
       const verificationResults = await payments.verifyBuyer(token, verificationDetails);
       console.log('verRes:', verificationResults)
   
@@ -154,18 +174,6 @@ const PaymentForm = ({customerInfo}) => {
 
   const body = JSON.stringify(bodyParameters);
 
-  // try {
-  //   console.log('createCustomer')
-  //   const verificationResults = await payments.verifyBuyer(token, verificationDetails);
-  //   console.log('verificationResults:', verificationResults)
-
-  //   if (!verificationResults || !verificationResults.token) {
-  //     throw new Error('Buyer verification failed: No token received.');
-  //   }
-  // } catch (error) {
-  //   throw new Error('Buyer verification failed.');
-  // }
-
   const response = await fetch('http://localhost:3000/customer', {
     method: 'POST',
     headers: {
@@ -192,7 +200,7 @@ const PaymentForm = ({customerInfo}) => {
     sourceId: 'cnon:card-nonce-ok',
     verificationToken,
     idempotencyKey: window.crypto.randomUUID(),
-    customerId: customerResults.customer.id
+    customerId: customerResults.customer.id,
   };
 
   const body = JSON.stringify(bodyParameters);
@@ -215,28 +223,28 @@ const PaymentForm = ({customerInfo}) => {
 
 return (
   <div>
-    <form id="payment-form" onSubmit={handlePayment}>
+    <form id="payment-form" onSubmit={(e) => handlePayment(e, cart)}>
       <div id="card-container"></div>
       <p>All transactions are secure and encrypted.</p>
                 
         <section className="terms-conditions">
           <input type="checkbox" id="terms" required />
             <label htmlFor="terms">
-              I agree that I will pick up my order in person in Oak Creek, Wisconsin. I understand that Betty Bakes does not issue refunds for erroneously placed orders. *
+              I agree that I will pick up my order in person in Oak Creek, Wisconsin. I understand that Betty's Bakes does not issue refunds for erroneously placed orders. *
             </label>
         </section>
                 
         <button id="card-button" type="submit" className="place-order-btn">Place Order Now</button>
         
       <div>
-        <label>
+        {/* <label>
           <input
             type="checkbox"
             id="store-card-checkbox"
             onChange={(e) => setShouldStoreCard(e.target.checked)}
           />
           Save this card for future use
-        </label>
+        </label> */}
       </div>
     </form>
     {paymentStatus && (

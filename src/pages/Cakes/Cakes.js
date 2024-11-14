@@ -20,7 +20,6 @@ const Cakes = () => {
                     onClose={() => dispatch(hideOrderForm())} 
                 />
             )}
-
         </div>
     )
 }

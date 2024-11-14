@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductList from '../../components/ProductList/ProductList.js'
+import ProductList from '../../components/ProductList/ProductList.js';
 
 const Cupcakes = () => {
     return(
