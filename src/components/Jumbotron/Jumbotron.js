@@ -24,7 +24,7 @@ const Jumbotron = () => {
             <h1>{headline}</h1>
           </div>
           <p>{subtext}</p>
-          <DropdownMenu className="jumbotron" header="Shop Now" menuId="menu2" />
+          <DropdownMenu className="jumbotron menu2" header="Shop Now" menuId="menu2" />
         </div>
       );
     };

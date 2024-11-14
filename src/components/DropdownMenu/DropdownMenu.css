@@ -84,3 +84,27 @@
     background-color: #D9663D; /* Highlighted orange on hover */
     color: #fff;
 }
+
+.menu3 {
+    display: inline-block;
+    margin-top: -20px;
+    z-index: 1000;
+    width: 100%
+}
+.menu3 + .dropdown-content {
+    position: absolute;
+}
+
+.dropdown-menu.menu3 {
+    background-color: white;
+}
+
+@media (min-width: 768px) {
+    .menu2 {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+}

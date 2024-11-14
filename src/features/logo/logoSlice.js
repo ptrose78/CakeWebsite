@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Asynchronous thunk for fetching the image
 export const fetchLogoImage = createAsyncThunk('logo/fetchLogoImage', async () => {
-    const imageUrl = '/cms/wp-content/uploads/2024/11/logo.png';
+    const imageUrl = '/cms/wp-content/uploads/2024/11/siteLogo.png';
     const response = await fetch(imageUrl);
     if (!response.ok) {
       throw new Error('Network response was not ok');
