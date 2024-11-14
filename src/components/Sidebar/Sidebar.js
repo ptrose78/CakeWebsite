@@ -28,7 +28,7 @@ const Sidebar = () => {
             <div className={`sidebar-menu ${isMenuOpen ? 'open' : ''}`}>          
                     <DropdownMenu menuId="menu1" header="Our Treats" />
                     <a href="/about">About</a>
-                    <a href="/about">Contact Us</a>
+                    <a href="/contactus">Contact Us</a>
             </div>   
             
         </div>

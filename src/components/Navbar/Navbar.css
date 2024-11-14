@@ -1,57 +1,61 @@
-/* src/components/Navbar.css */
-
-.navbar {
-    display: flex;
+/* Common Navbar Styles */
+.header {
+  display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f0c289; /* Soft beige */
-  }
-  
-  .navbar-left {
-    height: 50px;
-  }
-
-  .navbar-left .logo {
-    height: 50px;
-    width: 50px;
-  }
-  
-  .nav-bar-right {
-    display: inline-block;       
-    align-items: center;      
-    min-width: 150px;      
-    height: 100%;   
-    position: relative;              
+    background-color: white; /* Soft beige */
 }
-  
 
+.header-left {
+  height: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-30%);
+}
+
+.header-left .logo {
+  height: 150px;
+  width: 150px;
+}
+
+.header-right {
+  display: inline-block;       
+  align-items: center;      
+  min-width: 10px;      
+  height: 100%;   
+  position: absolute;   
+  top: 10px;
+  right: -25px;           
+}
+
+/* Cart Container */
 .cart-container {
   text-decoration: none; /* Ensure no underline applied globally */
   position: relative;
   display: inline-block;
   width: fit-content; /* Adjusts container width based on content */
-  margin-left: -125px; /* Move the whole container to the left */
+  margin-left: -125px; /* Keeps alignment in check for mobile */
 }
 
 .cart-info {
   position: absolute;
-  top: 10px; /* Moves the info box directly above the cart icon */ 
-  left: 50%;  /* Start positioning at the center */
-  transform: translate(-50%, -100%); /* Center horizontally and align vertically above the icon */
-  width: max-content; /* Ensures contents don’t overflow */
+  top: 10px; 
+  left: 50%;  
+  transform: translate(-50%, -100%);
+  width: max-content; 
   display: flex;
   justify-content: space-between;
-  gap: 10px; /* Space between quantity and price */
-  background-color: rgb(220, 226, 205); /* Optional: adds a background for better readability */
-  padding: 2px 5px; /* Optional: small padding around info */
-  border-radius: 4px; /* Optional: rounded corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
-  pointer-events: none; /* Ensure it's non-interactive */
+  gap: 10px;
+  background-color: rgb(220, 226, 205); 
+  padding: 2px 5px; 
+  border-radius: 4px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  pointer-events: none; 
 }
 
 .cart-item-count,
 .cart-total-price {
-  font-size: 11px; /* Adjust font size */
+  font-size: 11px;
   color: #0c0a0a;
   text-align: center;
   font-weight: bold;
@@ -59,4 +63,87 @@
 
 .cart-link {
   text-decoration: none;
+}
+
+.sidebar-menu {
+  margin-top: -10.5px;
+}
+
+/* Full-Width Navbar for Desktop View */
+.navbar-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 140px;
+  margin-bottom: -10px;
+  padding: 10px 0;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.navbar-links li {
+  margin: 0 20px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #f5a03e;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .navbar {
+      flex-direction: column; /* Separate header from navbar */
+      margin-top: 0px; /* Ensure the navbar aligns below the header */
+      display: none;
+  }
+
+  .header {
+      justify-content: space-between;
+      padding: 10px 30px;
+      margin-bottom: 20px;
+  }
+
+  .cart-container {
+      margin-left: -180px; /* Re-center cart icon */
+  }
+
+  .header-left {
+    height: 20px;
+    position: relative;
+    left: 0%;
+  }
+  
+  .header-left .logo {
+    height: 60px;
+    width: 60px;
+    margin-top: -10px;
+    margin-left: -15px;
+  }
+  
+  .header-right {
+    display: inline-block;       
+    align-items: center;      
+    min-width: 10px;      
+    height: 100%;   
+    position: absolute;   
+    top: 10px;
+    right: -25px;           
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar-container {
+      display: none; /* Hide Sidebar in desktop view */
+  }
+
+  .navbar-links {
+      display: flex; /* Full navbar links for desktop */
+  }
 }
