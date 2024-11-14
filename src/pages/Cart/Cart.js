@@ -16,7 +16,7 @@ const Cart = () => {
   };
 
   const handleQuantityChange = (id, value) => {
-    dispatch(updateQuantity({ itemId: id, newQuantity: value })); // Dispatch quantity update action
+    dispatch(updateTotalQuantityAndTotalPrice({ itemId: id, newQuantity: value })); // Dispatch quantity update action
   };
 
   return (
