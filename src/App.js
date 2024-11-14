@@ -9,12 +9,15 @@ import Cart from './pages/Cart/Cart.js';
 import Checkout from './pages/Checkout/Checkout.js';
 import Payment from './pages/Payment/Payment.js';
 import Navbar from './components/Navbar/Navbar.js';
+import Footer from './components/Footer/Footer.js';
+
 
 function App() {
   const location = useLocation();
 
   return (
         <div className="App">
+          <div className="content">
           <Navbar />
           {/* Define routes for the pages */}
           <Routes>
@@ -26,6 +29,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment" element={<Payment />} />
           </Routes>
+          </div>
+          <Footer />
         </div>
   );
 }
