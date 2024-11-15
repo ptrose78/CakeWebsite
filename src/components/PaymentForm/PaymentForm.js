@@ -12,7 +12,6 @@ const PaymentForm = ({customerInfo}) => {
   const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
 
   const cart = useSelector(selectCart);
-  console.log(cart.totalPrice)
 
   const [card, setCard] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState('');
@@ -57,13 +56,25 @@ const PaymentForm = ({customerInfo}) => {
           
           //create the customer
           const customerResults = await createCustomer(tokenResult.token, customerInfo);
-    
+
+          ////create the order
+          const orderResults = await createOrder(tokenResult.token, locationId, cart);
+          console.log(orderResults)
+          console.log(orderResults.order.order.id)
+
+          // if (orderResults.success === true) {
+          //   setPaymentStatus('SUCCESS Ordered');
+          // } else {
+          //   setPaymentStatus('FAILURE Ordered');
+          // }
+
+
           //create the payment
-          console.log(payments)
+          
           //const verificationToken = await verifyBuyer(payments, tokenResult.token, customerInfo, 'CHARGE');
 
-          const paymentResults = await createPayment(tokenResult.token, customerResults, cart);
-
+          const paymentResults = await createPayment(tokenResult.token, customerResults, orderResults);
+          console.log(paymentResults)
           if (paymentResults.success === true) {
             setPaymentStatus('SUCCESS Charged');
           } else {
@@ -88,38 +99,27 @@ const PaymentForm = ({customerInfo}) => {
       }
   };
 
-  const createPayment = async (token, customerResults, cart) => {
+  const createPayment = async (token, customerResults, orderResults) => {
 
-    console.log('start payment')
     const body = JSON.stringify({
       locationId,
       sourceId: token,
       idempotencyKey: window.crypto.randomUUID(),
       customerId: customerResults.customer.id,
+      orderId: orderResults.order.order.id,
       amountMoney: {
         amount: cart.totalPrice,
         currency: 'USD'
       }
     })
 
-    console.log(body)
-    
     console.log(customerResults.customer.id)
     const response = await fetch('http://localhost:3000/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        locationId,
-        sourceId: token,
-        idempotencyKey: window.crypto.randomUUID(),
-        customerId: customerResults.customer.id,
-        amountMoney: {
-          amount: cart.totalPrice,
-          currency: 'USD'
-        }
-      }),
+      body
     });
     console.log('completed payment')
     return response.json();
@@ -192,8 +192,50 @@ const PaymentForm = ({customerInfo}) => {
   return result;
 };
 
+const createOrder = async (token, locationId, cart) => {
+  
+  console.log('createOrder function')
+  const lineItems = cart.items.map((item) => {
+    return {
+      name: item.name,
+      quantity: item.quantity.toString(),
+      basePriceMoney: {
+        amount:  Math.round(item.price * 100),
+        currency: 'USD'
+      }
+    };
+  });
+  
+  const bodyParameters = {
+    order: {
+      locationId: locationId,
+      referenceId: 'my-order-001',
+      lineItems: lineItems,
+    },
+    idempotencyKey: window.crypto.randomUUID()
+  }
 
- const storeCard = async (token, customerResults, verificationToken) => {
+  const body = JSON.stringify(bodyParameters);
+  console.log('payload:', body)
+  
+  const orderResponse = await fetch('http://localhost:3000/order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body,
+  })
+
+  if (orderResponse.ok) {
+    return orderResponse.json();
+  }
+
+  const errorBody = await orderResponse.text();
+    throw new Error(errorBody);
+}
+
+
+const storeCard = async (token, customerResults, verificationToken) => {
  
   const bodyParameters = {
     locationId,
