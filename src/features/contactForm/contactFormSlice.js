@@ -1,4 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const postContactForm = createAsyncThunk(
+  'contactform/postContactForm',
+  async (contact) => {
+    try {
+      const response = await fetch('http://localhost:3000/contactForm', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contact) 
+      })
+      console.log(response)
+      return response;
+    } catch (error) {
+      console.log('Error posting contact form')
+      throw Error ('Error posting the contact form');
+    }
+  }
+)
 
 const initialState = {
   name: { first: '', last: '' },
@@ -14,6 +34,7 @@ const initialState = {
   message: '',
   humanCheck: '',
   isSubmitVisible: false, // Determines visibility of the submit button
+  submissionResult: ''
 };
 
 const contactFormSlice = createSlice({
@@ -36,6 +57,20 @@ const contactFormSlice = createSlice({
     resetForm(state) {
       return initialState; // Reset to initial state
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(postContactForm.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(postContactForm.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.submissionResult = action.payload.ok;
+      })
+      .addCase(postContactForm.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 
