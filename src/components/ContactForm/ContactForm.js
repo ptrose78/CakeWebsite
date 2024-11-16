@@ -1,11 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateField, checkHuman, resetForm, selectContactForm } from '../../features/contactForm/contactFormSlice';
+import { postContactForm } from '../../features/contactForm/contactFormSlice.js'
 import './ContactForm.css'
 
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contact = useSelector(selectContactForm);
+
+  console.log(JSON.stringify(contact) )
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,14 +20,18 @@ const ContactForm = () => {
     dispatch(checkHuman());
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Submitted:', contact);
-    dispatch(resetForm());
+  const handleSubmit = (contact) => {
+    console.log(contact)
+    console.log(JSON.stringify(contact) )
+    dispatch(postContactForm(contact));
+  
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => {
+      e.preventDefault(); // Prevent the default form submission
+      handleSubmit(contact); // Call your function with `contact`
+    }}>
       <label>
         Name*
         <div>
@@ -131,6 +138,10 @@ const ContactForm = () => {
 
       {contact.isSubmitVisible && (
         <button type="submit">Submit</button>
+      )}
+
+      {contact.submissionResult && (
+        <p className="submission-message">"Form successfully submitted. We'll get back to you in 1 business day."</p>
       )}
     </form>
   );
