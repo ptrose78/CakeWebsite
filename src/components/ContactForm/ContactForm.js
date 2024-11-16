@@ -99,13 +99,12 @@ const ContactForm = () => {
       </label>
 
       <label>
-        Phone*
+        Phone
         <input
           type="tel"
           name="phone"
           value={contact.phone}
           onChange={handleChange}
-          required
         />
       </label>
 
