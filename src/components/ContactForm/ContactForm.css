@@ -43,7 +43,7 @@ form {
   /* Submit Button */
   button,
   input[type="submit"] {
-    background-color: #007bff;
+    background-color: #45a049;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -55,7 +55,7 @@ form {
   
   button:hover,
   input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #357a39;
   }
   
   /* Disabled state for button */
