@@ -1,0 +1,92 @@
+/* General form styles */
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff; /* Match your page background for consistency */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Form heading to match page styles */
+  form h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Form labels */
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  /* Inputs and Textarea */
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Submit Button */
+  button,
+  input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover,
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Disabled state for button */
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Layout adjustments for proper alignment with navbar */
+  .container {
+    padding: 0 15px; /* Ensure it aligns with the page container */
+  }
+  
+  form {
+    margin-top: 40px; /* Add space below navbar */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    form {
+      padding: 15px;
+    }
+  
+    div {
+      flex-direction: column;
+    }
+  
+    input[type="text"],
+    input[type="tel"] {
+      width: 100%;
+      margin: 0;
+    }
+  }
+  

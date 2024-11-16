@@ -16,6 +16,7 @@
 .header-left .logo {
   height: 150px;
   width: 150px;
+  margin-right: 100px;
 }
 
 .header-right {
@@ -83,6 +84,10 @@
 
 .navbar-links li {
   margin: 0 20px;
+}
+
+.navbar-links li.about {
+  margin-left: 4px;
 }
 
 .navbar-links a {
