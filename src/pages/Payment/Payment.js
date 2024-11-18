@@ -7,14 +7,12 @@ import './Payment.css';
 
 const Payment = () => {
     
-    const { customerInfo, billingAddress, orderInfo } = useSelector(selectCheckout);
+    const { customerInfo, orderInfo } = useSelector(selectCheckout);
 
     return (
         <div className="payments-page">
             <header className="payments-header">
                 <h1>Payment</h1>
-                <p>info@bettybakes.com</p>
-                <p>Returning customer? <a href="/login">Click here to login</a></p>
             </header>
 
             <section className="payments-details">
@@ -24,7 +22,7 @@ const Payment = () => {
                 <tbody>
                     <tr>
                     <td>Email</td>
-                    <td>{customerInfo.email}</td>
+                    <td>{customerInfo.emailAddress}</td>
                     <td><a href="/checkout">Change</a></td>
                     </tr>
                     <tr>

@@ -9,13 +9,14 @@ import './Checkout.css';
 const Checkout = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-  const checkoutData = useSelector(selectCheckout);
+  const { customerInfo, orderInfo } = useSelector(selectCheckout);
+  console.log('customerInfo from Checkout', customerInfo)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name in checkoutData.customerInfo) {
+    if (name in customerInfo) {
       dispatch(updateCustomerInfo({ [name]: value }));
-    } else if (name in checkoutData.orderInfo) {
+    } else if (name in orderInfo) {
       dispatch(updateOrderInfo({ [name]: value }));
     }
   };
@@ -41,8 +42,8 @@ const Checkout = () => {
               <input
                 type="email"
                 id="email"
-                name="email"
-                value={checkoutData.customerInfo.email}
+                name="emailAddress"
+                value={customerInfo.emailAddress}
                 onChange={handleInputChange}
                 placeholder="Email"
                 required
@@ -65,7 +66,7 @@ const Checkout = () => {
               <input
                 type="date"
                 name="pickupDate"
-                value={checkoutData.orderInfo.pickupDate}
+                value={orderInfo.pickupDate}
                 onChange={handleInputChange}
                 required
               />
@@ -76,7 +77,7 @@ const Checkout = () => {
               <input
                 type="time"
                 name="pickupTime"
-                value={checkoutData.orderInfo.pickupTime}
+                value={orderInfo.pickupTime}
                 onChange={handleInputChange}
                 required
               />
@@ -90,7 +91,7 @@ const Checkout = () => {
                 name="firstName"
                 placeholder="John"
                 required
-                value={checkoutData.customerInfo.firstName}
+                value={customerInfo.firstName}
                 onChange={handleInputChange}
               />
               <label>First Name *</label>
@@ -102,7 +103,7 @@ const Checkout = () => {
                 name="lastName"
                 placeholder="Doe"
                 required
-                value={checkoutData.customerInfo.lastName}
+                value={customerInfo.lastName}
                 onChange={handleInputChange}
               />
               <label>Last Name *</label>
@@ -114,7 +115,7 @@ const Checkout = () => {
                 name="address"
                 placeholder="Street Address"
                 required
-                value={checkoutData.customerInfo.address}
+                value={customerInfo.address}
                 onChange={handleInputChange}
               />
               <label>Street Address *</label>
@@ -126,7 +127,7 @@ const Checkout = () => {
                 name="city" 
                 placeholder="City" 
                 required
-                value={checkoutData.customerInfo.city} 
+                value={customerInfo.city} 
                 onChange={handleInputChange} />
                 <label>Town / City *</label>
             </div> 
@@ -137,13 +138,13 @@ const Checkout = () => {
                 name="zipcode" 
                 placeholder="zipcode" 
                 required
-                value={checkoutData.customerInfo.zipcode} 
+                value={customerInfo.zipcode} 
                 onChange={handleInputChange} />
                 <label>Zip Code *</label>
             </div>
 
             <div className="input-container">
-                <select name="state" required value={checkoutData.customerInfo.state} onChange={handleInputChange} >
+                <select name="state" required value={customerInfo.state} onChange={handleInputChange} >
                         <option value="" disabled>Select State *</option>
                                 <option value="WI" selected>Wisconsin</option>
                                 <option value="AL">Alabama</option>
@@ -200,7 +201,7 @@ const Checkout = () => {
             </div>
 
             <div className="input-container">
-                <select name="country" required value={checkoutData.customerInfo.country} onChange={handleInputChange} >
+                <select name="country" required value={customerInfo.country} onChange={handleInputChange} >
                     <option value="" disabled>Select Country *</option>
                     <option value="US">United States</option>
                 </select>
@@ -213,7 +214,7 @@ const Checkout = () => {
                 name="phone" 
                 placeholder="phone" 
                 required
-                value={checkoutData.customerInfo.phone} 
+                value={customerInfo.phone} 
                 onChange={handleInputChange} />
                 <label>Phone *</label>
             </div>                     

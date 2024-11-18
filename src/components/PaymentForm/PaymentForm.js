@@ -4,14 +4,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startPayment, paymentSuccess, paymentFailure } from '../../features/paymentForm/paymentFormSlice';
 import { selectCart } from '../../features/cart/cartSlice';
+import { selectCheckout } from '../../features/checkout/checkoutSlice';
 
 
-const PaymentForm = ({customerInfo}) => {
+const PaymentForm = () => {
  
   const appId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_APPLICATION_ID;
   const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
 
   const cart = useSelector(selectCart);
+  const { customerInfo } = useSelector(selectCheckout);
+  console.log('customerInfo', customerInfo)
 
   const [card, setCard] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState('');
@@ -132,7 +135,7 @@ const PaymentForm = ({customerInfo}) => {
         addressLines: [customerInfo.address, ''],
         familyName: customerInfo.lastName,
         givenName: customerInfo.firstName,
-        email: customerInfo.email,
+        emailAddress: customerInfo.emailAddress,
         country: customerInfo.country,
         phone: customerInfo.phone,
         region: '',
@@ -158,6 +161,7 @@ const PaymentForm = ({customerInfo}) => {
 }
 
   const createCustomer = async (token, customerInfo) => {
+    console.log('email address in createCustomer',customerInfo.emailAddress)
     const bodyParameters = {
       address: {
         address: customerInfo.address,
@@ -168,7 +172,7 @@ const PaymentForm = ({customerInfo}) => {
       },
       givenName: customerInfo.firstName,  
       familyName: customerInfo.lastName,  
-      emailAddress: customerInfo.email, 
+      emailAddress: customerInfo.emailAddress, 
       idempotency_key: window.crypto.randomUUID()
     };
 
