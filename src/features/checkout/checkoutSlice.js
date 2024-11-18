@@ -8,7 +8,7 @@ const loadFromLocalStorage = () => {
       const serializedState = localStorage.getItem('checkout');
       return serializedState ? JSON.parse(serializedState) : {
         customerInfo: {
-          email: '',
+          emailAddress: '',
           firstName: '',
           lastName: '',
           phone: '',
@@ -44,7 +44,7 @@ const loadFromLocalStorage = () => {
     const savedState = loadFromLocalStorage();
     return savedState || {
       customerInfo: {
-        email: '',
+        emailAddress: '',
         firstName: '',
         lastName: '',
         phone: '',
