@@ -6,7 +6,8 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
     try {
-      const response = await axios.get('https://buzzysweets.com/wp-json/custom/v1/productdata');
+      const response = await axios.get('wp-json/custom/v1/productdata');
+      console.log(response)
       return response.data;
     } catch (error) {
       console.log('error fetchProducts')

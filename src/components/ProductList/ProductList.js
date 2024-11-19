@@ -12,59 +12,95 @@ import {
 import { showOrderForm } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
 import './ProductList.css';  // Import the external CSS file
 
-const ProductList = ({category}) => {
+const ProductList = ({ category }) => {
   const dispatch = useDispatch();
-  const products = useSelector(selectFilteredProducts); //define products even though this will return an empty array
+
+  // Redux state
   const status = useSelector(selectProductsStatus);
   const error = useSelector(selectProductsError);
+  const products = useSelector(selectFilteredProducts);
 
+  // Local state
   const [productsWithImages, setProductsWithImages] = useState([]);
-
-  const handleCustomizeClick = (product) => {
-    console.log(product)
-    dispatch(showOrderForm(product));
-  };
+  const [hasFetchedImages, setHasFetchedImages] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch products if status is idle
       if (status === 'idle') {
-        await dispatch(fetchProducts()); // Wait until fetchProducts is done
-        dispatch(setCategoryFilter(category)); // Now dispatch setCategoryFilter after fetching
+        await dispatch(fetchProducts());
       }
-
-      // Fetch images for products once products are fetched
-      if (status === 'succeeded' && products.length > 0) {
-        fetchImages(products);
+      if (status === 'succeeded') {
+        dispatch(setCategoryFilter(category));
       }
     };
 
     fetchData();
-  }, [status, dispatch, category, products]); // products as a dependency to trigger image fetching when products are available
+  }, [dispatch, status, category]);
 
-  //fetch Images executes after useEffect executes the first time
+  useEffect(() => {
+    const fetchImagesForProducts = async () => {
+      if (status === 'succeeded' && products.length > 0) {
+        console.log(products)
+        const productsWithImagesData = await fetchImages(products);
+        console.log(productsWithImagesData)
+        setProductsWithImages(productsWithImagesData);
+      }
+    };
+
+    fetchImagesForProducts();
+  }, [products, status]);
+
+  useEffect(() => {
+    const fetchImagesForProducts = async () => {
+      if (status === 'succeeded' && products.length > 0 && !hasFetchedImages) {
+        setHasFetchedImages(true); // Ensure this only runs once for this set of products
+  
+        const productsWithImagesData = await fetchImages(products); 
+        setProductsWithImages(productsWithImagesData);
+      }
+    };
+  
+    fetchImagesForProducts();
+  }, [products, status, hasFetchedImages]);
+
   const fetchImages = async (products) => {
-    const productsWithImageUrls = await Promise.all(
-      products.map(async (product) => {
-        try {
-          const response = await fetch(product.url); // Assuming each product has a 'url' field
-          if (!response.ok) throw new Error('Network response was not ok');
+    try {
+      // Map product fetches and resolve them using Promise.all
+      const productsWithImages = await Promise.all(
+        products.map(async (product) => {
+          try {
+            const response = await fetch(product.url); // Assuming 'url' exists on each product object
+            if (!response.ok) throw new Error('Network response was not ok');
   
-          const imageBlob = await response.blob();
-          const imageUrl = URL.createObjectURL(imageBlob);
+            const imageBlob = await response.blob();
+            const imageUrl = URL.createObjectURL(imageBlob);
   
-          return { ...product, image: imageUrl };
-        } catch (error) {
-          console.error('Error fetching image:', error);
-          return { ...product, image: null }; // Handle failed image loading
-        }
-      })
-    );
-    setProductsWithImages(productsWithImageUrls); // Set the filtered products with their images
+            return { ...product, image: imageUrl }; // Add the resolved image URL to the product object
+          } catch (error) {
+            console.error('Error fetching image:', error);
+            return { ...product, image: null }; // Handle failed image fetching
+          }
+        })
+      );
+      return productsWithImages; // Return the fully resolved product array
+    } catch (error) {
+      console.error('Error in fetchImages:', error);
+      return []; // Handle a global failure gracefully
+    }
+  };
+   
+
+  const handleCustomizeClick = (product) => {
+    dispatch(showOrderForm(product));
   };
 
-  if (status === 'loading') return <p>Loading...</p>;
-  if (status === 'rejected') return <p>Error: {error}</p>;
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   
   return (
       <div className="product-list">

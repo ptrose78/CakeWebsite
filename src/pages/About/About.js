@@ -9,7 +9,7 @@ const About = () => {
           <section className="about-story">
             <h2>Our Story</h2>
             <p>
-              At <strong>Betty Bakes</strong>, we’re passionate about bringing joy through baked goods.
+              At <strong>Buzzy Sweets</strong>, we’re passionate about bringing joy through baked goods.
               Started by <strong>Beth Rose</strong> - a lifelong baker and resident of Oak Creek.
             </p>
           </section>
