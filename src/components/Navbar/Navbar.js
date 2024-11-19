@@ -22,9 +22,8 @@ const Navbar = () => {
         <div className="header-right">
           <div className="cart-container">
             <div className="cart-info">
-              <div className="cart-item-count">{items.totalQuantity}</div>
-              <div className="cart-total-price">
-                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(items.totalPrice)}
+              <div className="cart-totals">
+              {items.totalQuantity} {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(items.totalPrice)}
               </div>
             </div>
             <Link className="cart-link" to={ROUTES.cartRoute()}><CartIcon /></Link>

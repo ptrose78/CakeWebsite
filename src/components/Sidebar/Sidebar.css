@@ -8,7 +8,7 @@
     cursor: pointer;
     position: fixed;
     top: 15px;
-    right: 7px;
+    right: 17px;
     z-index: 1000;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .sidebar-menu a:hover {
-    color: #D9663D; /* Highlighted orange on hover */
+    color: #fff; /* Highlighted orange on hover */
 }
 
 .sidebar-label {

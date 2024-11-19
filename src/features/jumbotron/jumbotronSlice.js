@@ -16,7 +16,7 @@ export const jumbotronSlice = createSlice({
   name: 'jumbotron',
   initialState: {
     jumbotronImage: null,
-    headline: "Welcome to Betty's Bakes!",
+    headline: "Welcome to Buzzy Sweets!",
     subtext: "Delicious cakes made with love, for every occasion!",
   },
   reducers: {

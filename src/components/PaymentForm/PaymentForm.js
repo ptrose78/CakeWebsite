@@ -276,7 +276,7 @@ return (
         <section className="terms-conditions">
           <input type="checkbox" id="terms" required />
             <label htmlFor="terms">
-              I agree that I will pick up my order in person in Oak Creek, Wisconsin. I understand that Betty's Bakes does not issue refunds for erroneously placed orders. *
+              I agree that I will pick up my order in person in Oak Creek, Wisconsin. I understand that Buzzy Sweets does not issue refunds for erroneously placed orders. *
             </label>
         </section>
                 
