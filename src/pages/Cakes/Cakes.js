@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProductList from '../../components/ProductList/ProductList.js';
 import CakeOrderForm from '../../components/CakeOrderForm/CakeOrderForm.js';
 import { selectOrderFormVisibility, selectSelectedProduct, hideOrderForm } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
+import "./Cakes.css"
 
 const Cakes = () => {
     const dispatch = useDispatch();
@@ -10,9 +11,9 @@ const Cakes = () => {
     const selectedProduct = useSelector(selectSelectedProduct);
 
     return(
-        <div>   
-            <h1>Cakes</h1>
-            <p>Welcome to our Cakes page! Explore our delicious cake offerings here.</p>
+        <div className="cakes-section">   
+            <h1 className="cakes-title">Cakes</h1>
+            <p className="cakes-description">Welcome to our Cakes page! Explore our delicious cake offerings here.</p>
             <ProductList category="Cake" />
             {showOrderForm && (
                 <CakeOrderForm 

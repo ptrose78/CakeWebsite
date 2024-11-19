@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Load initial state from localStorage, or fall back to defaults
 const loadFromLocalStorage = () => {
     try {
-      //localStorage.clear();
+      localStorage.clear();
   
       const serializedState = localStorage.getItem('checkout');
       return serializedState ? JSON.parse(serializedState) : {

@@ -1,6 +1,6 @@
 import React from 'react';
 import ROUTES from "../../app/routes";
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'; 
 import { useDispatch, useSelector } from "react-redux";
 import { updateCustomerInfo, updateOrderInfo, toggleAccountCreation, selectCheckout } from '../../features/checkout/checkoutSlice';
 import { selectCart } from '../../features/cart/cartSlice';
@@ -9,6 +9,8 @@ import './Checkout.css';
 const Checkout = () => {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
+  const navigate = useNavigate();
+  
   const { customerInfo, orderInfo } = useSelector(selectCheckout);
   console.log('customerInfo from Checkout', customerInfo)
 
@@ -21,6 +23,19 @@ const Checkout = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    
+    const form = e.target;
+    if (!form.checkValidity()) {
+      form.reportValidity(); // Trigger native validation
+      return;
+    }
+
+    // Navigate to payment route after validation passes
+    navigate(ROUTES.paymentRoute());
+  };
+
 //   const handleAccountCreation = () => {
 //     dispatch(toggleAccountCreation());
 //   };
@@ -29,15 +44,13 @@ const Checkout = () => {
     <div className="checkout-page">
       <div className="checkout-header">
         <h1>Checkout</h1>
-        <p>info@bettybakes.com</p>
-        <p>Returning customer? <a href="/login">Click here to login</a></p>
       </div>
 
       <div className="checkout-content">
         {/* Customer Information Form - First Column */}
         <div className="checkout-form">
           <h2>Customer Information</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="input-container email">
               <input
                 type="email"
@@ -146,7 +159,7 @@ const Checkout = () => {
             <div className="input-container">
                 <select name="state" required value={customerInfo.state} onChange={handleInputChange} >
                         <option value="" disabled>Select State *</option>
-                                <option value="WI" selected>Wisconsin</option>
+                                <option value="WI">Wisconsin</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
                                 <option value="AZ">Arizona</option>
@@ -217,12 +230,9 @@ const Checkout = () => {
                 value={customerInfo.phone} 
                 onChange={handleInputChange} />
                 <label>Phone *</label>
-            </div>                     
+            </div>    
+              <button type="submit" className="checkout-link continue-btn">Continue to Payment →</button>
           </form>
-
-          <Link className="checkout-link" to={ROUTES.paymentRoute()}>
-            <button className="continue-btn">Continue to Payment →</button>
-          </Link>
         </div>
         {/* Order Summary Section - Second Column */}
         <div className="order-summary">

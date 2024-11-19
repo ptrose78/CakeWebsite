@@ -9,7 +9,8 @@ import {
     setId,
     setLayerSize, 
     setFlavor, 
-    setButtercreamColor, 
+    setButtercreamColor,
+    setAlcohol, 
     setCakeMessage, 
     setNotes,
     setQuantity,
@@ -44,11 +45,19 @@ const CakeOrderForm = ({ product, onClose }) => {
         if (e && e.preventDefault) {
             e.preventDefault(); // Prevent default only if `e` is an event
         }
+
+        const form = e.target;
+        if (!form.checkValidity()) {
+          form.reportValidity(); // Trigger native validation
+          return;
+        }
         
+        const action = e.nativeEvent.submitter.value; // Retrieve the button's `value`
+
         dispatch(setId(uuidv4()));
         dispatch(addItem({items, newItem: item})); 
 
-        if (button === "buy") {
+        if (action === "buy") {
             navigate(ROUTES.cartRoute()); // Navigate to cart
         }
 
@@ -72,11 +81,11 @@ const CakeOrderForm = ({ product, onClose }) => {
                     <h2>{product?.name} Order</h2>
                 </div>
 
-                <form id="payment-form" onSubmit={handleAddToCart}>        
+                <form id="payment-form" onSubmit={(e) => handleAddToCart(e)}>        
                 <div className="form-group">
                     <label>Layer Cake Size:</label>
-                    <select onChange={(e) => dispatch(setLayerSize(e.target.value))}>
-                        <option value="">Select size</option>
+                    <select required onChange={(e) => dispatch(setLayerSize(e.target.value))}>
+                        <option value="" disabled selected>Select size</option>
                         <option value="4-inch">4" (serves 1-4)</option>
                         <option value="6-inch">6" (serves 8-10)</option>
                         <option value="8-inch">8" (serves 12-16)</option>
@@ -86,8 +95,8 @@ const CakeOrderForm = ({ product, onClose }) => {
 
                 <div className="form-group">
                     <label>Cake Flavor:</label>
-                    <select onChange={(e) => dispatch(setFlavor(e.target.value))}>
-                        <option value="">Select flavor</option>
+                    <select required onChange={(e) => dispatch(setFlavor(e.target.value))}>
+                        <option value="" disabled selected>Select flavor</option>
                         <option value="chocolate">Chocolate</option>
                         <option value="vanilla">Vanilla</option>
                         <option value="red-velvet">Red Velvet</option>
@@ -100,8 +109,8 @@ const CakeOrderForm = ({ product, onClose }) => {
 
                 <div className="form-group">
                     <label>Base Buttercream Color:</label>
-                    <select onChange={(e) => dispatch(setButtercreamColor(e.target.value))}>
-                        <option value="">Select color</option>
+                    <select required onChange={(e) => dispatch(setButtercreamColor(e.target.value))}>
+                        <option value="" disabled selected>Select color</option>
                         <option value="as-pictured">As pictured</option>
                         <option value="blue">Blue</option>
                         <option value="chocolate">Chocolate</option>
@@ -113,6 +122,18 @@ const CakeOrderForm = ({ product, onClose }) => {
                         <option value="tan">Tan</option>
                         <option value="white">White</option>
                         <option value="yellow">Yellow</option>
+                    </select>
+                </div>
+
+                <div className="form-group">
+                    <label>Alcohol Flavor:</label>
+                    <select required onChange={(e) => dispatch(setButtercreamColor(e.target.value))}>
+                        <option value="" disabled selected>Select alcohol flavor</option>
+                        <option value="none">None</option>
+                        <option value="margarita">Margarita</option>
+                        <option value="brandy-old-fashioned">Brand Old Fashioned</option>
+                        <option value="pina-colata">Piña Colada</option>
+                        <option value="irish-car-bomb">Irish Car Bomb</option>                        
                     </select>
                 </div>
 
@@ -148,8 +169,8 @@ const CakeOrderForm = ({ product, onClose }) => {
                 </div>
 
                 <div className="button-group">
-                    <button onClick={(e) => {handleAddToCart(e)}} className="add-to-cart">Add to Cart</button>
-                    <button onClick={(e) => {handleAddToCart(e, "buy")}} className="buy-now">Buy Now</button>
+                    <button type="submit" value="add" className="add-to-cart">Add to Cart</button>
+                    <button  type="submit" value="buy" className="buy-now">Buy Now</button>
                 </div>
                 </form>
             </div>

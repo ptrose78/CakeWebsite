@@ -8,6 +8,7 @@ const initialState =
         layerSize: "",
         flavor: "",
         buttercreamColor: "",
+        alcohol: "",
         cakeMessage: "",
         notes: "",
         quantity: 1,
@@ -25,6 +26,7 @@ const cakeOrderFormSlice = createSlice({
         setFlavor: (state, action) => { state.flavor = action.payload; },
         setButtercreamColor: (state, action) => { state.buttercreamColor = action.payload; },
         setCakeMessage: (state, action) => { state.cakeMessage = action.payload; },
+        setAlcohol: (state, action) => {state.alcohol = action.payload},
         setNotes: (state, action) => { state.notes = action.payload; },
         setQuantity: (state, action) => { state.quantity = action.payload; },
         setPrice: (state, action) => { state.price = action.payload; },
@@ -32,7 +34,7 @@ const cakeOrderFormSlice = createSlice({
     },
 });
 
-export const { setName, setImage, setId, setLayerSize, setFlavor, setButtercreamColor, setCakeMessage, setNotes, setQuantity, setPrice, clearOrder } = cakeOrderFormSlice.actions;
+export const { setName, setImage, setId, setLayerSize, setFlavor, setButtercreamColor, setAlcohol, setCakeMessage, setNotes, setQuantity, setPrice, clearOrder } = cakeOrderFormSlice.actions;
 
 export const selectCakeOrderForm = (state) => state.cakeOrderForm;
 

@@ -9,6 +9,7 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
+    margin-bottom: 150px;
   }
   
   /* Form heading to match page styles */
