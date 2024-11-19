@@ -50,7 +50,7 @@ const Cart = () => {
 
             {/* Second Column: Details */}
             <div className="cart-column details">
-              <p><span className="label-detail">Layer Size:</span> {item.layerSize}</p>
+              {item.layerSize && <p><span className="label-detail">Layer Size:</span> {item.layerSize}</p>}
               <p><span className="label-detail">Flavor:</span> {item.flavor}</p>
               <p><span className="label-detail">Buttercream Color:</span> {item.buttercreamColor}</p>
               {item.cakeMessage && <p><span className="label-detail">Cake Message:</span> {item.cakeMessage}</p>}

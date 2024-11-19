@@ -243,7 +243,7 @@ const Checkout = () => {
               <div key={item.id} className="order-item">
                 <div className="item-name">{item.name}</div>
                 <div className="item-details">
-                  <p>Layer Cake Size: {item.layerSize} ({item.servingSize})</p>
+                  {item.cakeMessage &&<p>Layer Cake Size: {item.layerSize} ({item.servingSize})</p>}
                   <p>Cake Flavor: {item.flavor}</p>
                   <p>Base Buttercream Color: {item.buttercreamColor}</p>
                   {item.cakeMessage && <p>Cake Message: {item.cakeMessage}</p>}

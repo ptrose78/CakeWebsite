@@ -11,26 +11,26 @@ import {
     setFlavor, 
     setButtercreamColor,
     setAlcohol, 
-    setCakeMessage, 
+    setCupcakeMessage, 
     setNotes,
     setQuantity,
     setPrice,
     clearItems, 
-    selectCakeOrderForm, 
-} from '../../features/cakeOrderForm/cakeOrderFormSlice.js';
+    selectCupcakeOrderForm, 
+} from '../../features/cupcakeOrderForm/cupcakeOrderFormSlice.js';
 import { addItem, selectCart, removeItem, clearCart } from  "../../features/cart/cartSlice.js"
-import {  hideOrderForm, selectOrderFormVisibility } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
-import ROUTES from "../../app/routes";
+import {  hideOrderForm, selectOrderFormVisibility } from '../../features/orderFormVisibility/orderFormVisibilitySlice.js';
+import ROUTES from "../../app/routes.js";
 import {Link} from "react-router-dom";
-import './CakeOrderForm.css';
+import './CupcakeOrderForm.css';
 
 
-const CakeOrderForm = ({ product, onClose }) => {
+const CupcakeOrderForm = ({ product, onClose }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate(); 
     
     const items = useSelector(selectCart);
-    const item = useSelector(selectCakeOrderForm);
+    const item = useSelector(selectCupcakeOrderForm);
     const hideOrderForm = useSelector(selectOrderFormVisibility);
     console.log(items)
     
@@ -65,9 +65,9 @@ const CakeOrderForm = ({ product, onClose }) => {
     };
 
     return (
-        <div className="cake-order-container">
+        <div className="cupcake-order-container">
 
-            <div className={`cake-order-form ${product ? 'visible' : ''}`}>
+            <div className={`cupcake-order-form ${product ? 'visible' : ''}`}>
                 <button className="button-close" onClick={() => { 
                     onClose(); 
                  }}>✕</button>
@@ -81,20 +81,10 @@ const CakeOrderForm = ({ product, onClose }) => {
                     <h2>{product?.name} Order</h2>
                 </div>
 
-                <form id="payment-form" onSubmit={(e) => handleAddToCart(e)}>        
-                <div className="form-group">
-                    <label>Layer Cake Size:</label>
-                    <select required onChange={(e) => dispatch(setLayerSize(e.target.value))}>
-                        <option value="" disabled selected>Select size</option>
-                        <option value="4-inch">4" (serves 1-4)</option>
-                        <option value="6-inch">6" (serves 8-10)</option>
-                        <option value="8-inch">8" (serves 12-16)</option>
-                        <option value="10-inch">10" (serves 18-24)</option>
-                    </select>
-                </div>
+                <form id="payment-form" onSubmit={(e) => handleAddToCart(e)}>              
 
                 <div className="form-group">
-                    <label>Cake Flavor:</label>
+                    <label>Cupcake Flavor:</label>
                     <select required onChange={(e) => dispatch(setFlavor(e.target.value))}>
                         <option value="" disabled selected>Select flavor</option>
                         <option value="chocolate">Chocolate</option>
@@ -137,14 +127,6 @@ const CakeOrderForm = ({ product, onClose }) => {
                     </select>
                 </div>
 
-                <div className="form-group">
-                    <label>Add a Cake Message ($5 Fee):</label>
-                    <input 
-                        type="text" 
-                        placeholder="Enter your message" 
-                        onChange={(e) => dispatch(setCakeMessage(e.target.value))} 
-                    />
-                </div>
 
                 <div className="form-group">
                     <label>Additional Notes:</label>
@@ -161,7 +143,7 @@ const CakeOrderForm = ({ product, onClose }) => {
                         id="quantity"
                         name="quantity"
                         min="1" 
-                        max="100" 
+                        max="1000" 
                         step="1"
                         onChange={(e) => dispatch(setQuantity(Number(e.target.value)))}
                         required 
@@ -178,4 +160,4 @@ const CakeOrderForm = ({ product, onClose }) => {
     );
 };
 
-export default CakeOrderForm;
+export default CupcakeOrderForm;

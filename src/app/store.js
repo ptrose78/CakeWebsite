@@ -6,6 +6,7 @@ import productReducer from '../features/productList/productListSlice';
 import logoReducer from '../features/logo/logoSlice';
 import dropdownMenuReducer from '../features/dropdownMenu/dropdownMenuSlice';
 import cakeOrderFormReducer from '../features/cakeOrderForm/cakeOrderFormSlice';
+import cupcakeOrderFormReducer from '../features/cupcakeOrderForm/cupcakeOrderFormSlice';
 import orderFormVisibilityReducer from '../features/orderFormVisibility/orderFormVisibilitySlice';
 import paymentFormReducer from '../features/paymentForm/paymentFormSlice';
 import cartReducer from '../features/cart/cartSlice';
@@ -20,6 +21,7 @@ export const store = configureStore({
     logo: logoReducer,
     dropdownMenu: dropdownMenuReducer,
     cakeOrderForm: cakeOrderFormReducer,
+    cupcakeOrderForm: cupcakeOrderFormReducer,
     orderFormVisibility: orderFormVisibilityReducer,
     paymentForm: paymentFormReducer,
     cart: cartReducer,
