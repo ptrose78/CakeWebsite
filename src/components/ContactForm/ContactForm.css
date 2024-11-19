@@ -41,7 +41,7 @@ form {
   }
   
   /* Submit Button */
-  button,
+  .submit-button-contact,
   input[type="submit"] {
     background-color: #45a049;
     color: white;
@@ -53,7 +53,7 @@ form {
     transition: background-color 0.3s ease;
   }
   
-  button:hover,
+  .submit-button-contact:hover,
   input[type="submit"]:hover {
     background-color: #357a39;
   }

@@ -137,7 +137,7 @@ const ContactForm = () => {
       </label>
 
       {contact.isSubmitVisible && (
-        <button type="submit">Submit</button>
+        <button className="submit-button-contact" type="submit">Submit</button>
       )}
 
       {contact.submissionResult && (
