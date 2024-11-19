@@ -28,7 +28,7 @@
     height: 85px;
     background-color: #448d3b; /* Darker beige for emphasis */
     color: #ffffff; /* White text */
-    font-size: 1.5em;
+    font-size:    1.5em;
     font-weight: bold;
     padding: 0px 0px;
     border-radius: 5px; /* Rounded corners */
@@ -85,12 +85,12 @@
 
 .menu3 {
     display: inline-block;
-    margin-top: -20px;
+    margin-top: -3px;
     z-index: 1000;
     width: 100%
 }
 .menu3 + .dropdown-content {
-    position: absolute;
+   
     color: white;
 }
 

@@ -20,6 +20,8 @@
     padding: 0;
     margin: 0;
     width: 100%; /* Ensures the list spans full container */
+    margin-bottom: 100px;
+    margin-top: 25px;
   }
   
   .product-list li {

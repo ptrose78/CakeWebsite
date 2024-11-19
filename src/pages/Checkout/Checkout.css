@@ -13,16 +13,19 @@ h3 {
     justify-content: space-between;
     gap: 20px;
     margin-top: 20px;
+    margin-bottom: 100px;
 }
 
 /* Styling for the form section */
 .checkout-form {
     flex: 1;
     max-width: 100%;
+    margin-bottom: 20px;
 }
 
 form {
     margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 /* Styling for the order summary section */
@@ -142,6 +145,7 @@ form {
 
 .order-summary {
     width: 100%;
+    height: 80%;
     background-color: #f9f9f9; /* Light gray background for contrast */
     border: 1px solid #ddd; /* Subtle border */
     border-radius: 8px; /* Rounded corners */

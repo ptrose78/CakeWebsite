@@ -6,10 +6,9 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
     try {
-      const response = await axios.get('https://buzzysweets.com/wp-json/custom/v1/productdata');
+      const response = await axios.get('wp-json/custom/v1/productdata');
       return response.data;
     } catch (error) {
-      console.log('error fetchProducts')
       throw Error ('Error fetching the product prices');
     } 
   }
