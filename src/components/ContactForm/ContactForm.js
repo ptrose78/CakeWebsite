@@ -1,14 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateField, checkHuman, resetForm, selectContactForm } from '../../features/contactForm/contactFormSlice';
-import { postContactForm } from '../../features/contactForm/contactFormSlice.js'
+import { updateField, checkHuman, resetForm, selectContactForm, postContactForm } from '../../features/contactForm/contactFormSlice';
 import './ContactForm.css'
 
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contact = useSelector(selectContactForm);
-
-  console.log(JSON.stringify(contact) )
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,11 +18,17 @@ const ContactForm = () => {
   };
 
   const handleSubmit = (contact) => {
-    console.log(contact)
-    console.log(JSON.stringify(contact) )
-    dispatch(postContactForm(contact));
   
+    const handleForm = async() =>{
+      await dispatch(postContactForm(contact));
+    }
+    
+    handleForm();
   };
+
+  const clearForm = () => {
+    dispatch(resetForm());
+  }
 
   return (
     <form onSubmit={(e) => {
@@ -137,7 +140,10 @@ const ContactForm = () => {
       </label>
 
       {contact.isSubmitVisible && (
+      <> 
+        <button className="clearForm-button-contact" onClick={(e) => clearForm(e)}>Clear Form</button>
         <button className="submit-button-contact" type="submit">Submit</button>
+      </>
       )}
 
       {contact.submissionResult && (
