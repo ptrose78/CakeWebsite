@@ -1,5 +1,5 @@
-/* src/pages/CupcakeOrder/CupcakeOrder.css */
-.cupcake-order-container {
+/* src/pages/OptionsOrderForm/OptionsOrderForm.css */
+.options-order-container {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
@@ -8,7 +8,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cupcake-order-form {
+.options-order-form {
     position: fixed;
     margin: auto;
     margin-bottom: 20px; 
@@ -23,7 +23,27 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.cupcake-order-form.visible {
+.Cupcake.layer-size, .Cookie.layer-size {
+    display: none;
+}
+
+.Cupcake.buttercream, .Cookie.buttercream {
+    display: none;
+}
+
+.Cookie.flavor {
+    display: none;
+}
+
+ .Cake.filling, .Cookie.filling {
+    display: none;
+}
+
+.Cupcake.message, .Cookie.message {
+    display: none;
+}
+
+.options-order-form.visible {
     transform: translateY(0);
 }
 

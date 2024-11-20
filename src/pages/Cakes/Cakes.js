@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductList from '../../components/ProductList/ProductList.js';
-import CakeOrderForm from '../../components/CakeOrderForm/CakeOrderForm.js';
+import OptionsOrderForm from '../../components/OptionsOrderForm/OptionsOrderForm.js';
 import { selectOrderFormVisibility, selectSelectedProduct, hideOrderForm } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
 import "./Cakes.css"
 
@@ -16,7 +16,7 @@ const Cakes = () => {
             <p className="cakes-description">Welcome to our Cakes page! Explore our delicious cake offerings here.</p>
             <ProductList category="Cake" />
             {showOrderForm && (
-                <CakeOrderForm 
+                <OptionsOrderForm 
                     product={selectedProduct} 
                     onClose={() => dispatch(hideOrderForm())} 
                 />

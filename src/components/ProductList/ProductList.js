@@ -101,13 +101,17 @@ const ProductList = ({ category }) => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  function checkCookie(product) {
+    return product.category === "Cookie"; 
+  }
   
   return (
       <div className="product-list">
       {productsWithImages.map((product) => (
         <li key={product.id}>
           <h2>{product.name}</h2>
-          <p>Price: ${product.price}</p>
+          <p>Price: ${product.price} {checkCookie(product) && "per dozen"}</p>
           {product.image ? (
             <img src={product.image} alt={product.name} width="200" height="200" />
           ) : (

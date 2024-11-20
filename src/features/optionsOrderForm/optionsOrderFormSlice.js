@@ -1,4 +1,4 @@
-// src/features/cakeOrder/cakeOrderSlice.js
+// src/features/optionsOrder/optionsOrderSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = 
@@ -8,21 +8,26 @@ const initialState =
         layerSize: "",
         flavor: "",
         buttercreamColor: "",
+        filling: "",
         alcohol: "",
+        cakeMessage: "",
         notes: "",
         quantity: 1,
         price: ""
     }
 
-const cupcakeOrderFormSlice = createSlice({
-    name: 'cupcakeOrderForm',
+const optionsOrderFormSlice = createSlice({
+    name: 'optionsOrderForm',
     initialState,
     reducers: {
         setName: (state, action) => {state.name = action.payload},
         setImage: (state, action) => {state.image = action.payload},
         setId: (state, action) => { state.id = action.payload; },
+        setLayerSize: (state, action) => { state.layerSize = action.payload; },
         setFlavor: (state, action) => { state.flavor = action.payload; },
         setButtercreamColor: (state, action) => { state.buttercreamColor = action.payload; },
+        setFilling: (state, action) => { state.filling = action.payload; },
+        setCakeMessage: (state, action) => { state.cakeMessage = action.payload; },
         setAlcohol: (state, action) => {state.alcohol = action.payload},
         setNotes: (state, action) => { state.notes = action.payload; },
         setQuantity: (state, action) => { state.quantity = action.payload; },
@@ -31,8 +36,8 @@ const cupcakeOrderFormSlice = createSlice({
     },
 });
 
-export const { setName, setImage, setId, setLayerSize, setFlavor, setButtercreamColor, setAlcohol, setCakeMessage, setNotes, setQuantity, setPrice, clearOrder } = cupcakeOrderFormSlice.actions;
+export const { setName, setImage, setId, setLayerSize, setFlavor, setButtercreamColor, setFilling, setAlcohol, setCakeMessage, setNotes, setQuantity, setPrice, clearOrder } = optionsOrderFormSlice.actions;
 
-export const selectCupcakeOrderForm = (state) => state.cupcakeOrderForm;
+export const selectOptionsOrderForm = (state) => state.optionsOrderForm;
 
-export default cupcakeOrderFormSlice.reducer;
+export default optionsOrderFormSlice.reducer;
