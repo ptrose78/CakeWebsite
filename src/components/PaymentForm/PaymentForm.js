@@ -3,18 +3,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startPayment, paymentSuccess, paymentFailure } from '../../features/paymentForm/paymentFormSlice';
-import { selectCart } from '../../features/cart/cartSlice';
-import { selectCheckout } from '../../features/checkout/checkoutSlice';
+import { resetCart, selectCart } from '../../features/cart/cartSlice';
+import { resetCheckout, selectCheckout } from '../../features/checkout/checkoutSlice';
+import './PaymentForm.css'
 
 
 const PaymentForm = () => {
+
+  const dispatch = useDispatch();
  
   const appId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_APPLICATION_ID;
   const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
 
   const cart = useSelector(selectCart);
   const { customerInfo } = useSelector(selectCheckout);
-  console.log('customerInfo', customerInfo)
 
   const [card, setCard] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState('');
@@ -62,43 +64,46 @@ const PaymentForm = () => {
 
           ////create the order
           const orderResults = await createOrder(tokenResult.token, locationId, cart);
-          console.log(orderResults)
-          console.log(orderResults.order.order.id)
 
           // if (orderResults.success === true) {
           //   setPaymentStatus('SUCCESS Ordered');
           // } else {
           //   setPaymentStatus('FAILURE Ordered');
           // }
-
-
+         
           //create the payment
           
           //const verificationToken = await verifyBuyer(payments, tokenResult.token, customerInfo, 'CHARGE');
 
           const paymentResults = await createPayment(tokenResult.token, customerResults, orderResults);
-          console.log(paymentResults)
+        
           if (paymentResults.success === true) {
-            setPaymentStatus('SUCCESS Charged');
+            setPaymentStatus('SUCCESS Charge');
+            const clearStorage = async() => {
+              await dispatch(resetCheckout());
+              await dispatch(resetCart());
+              
+            }
+            clearStorage();
           } else {
-            setPaymentStatus('FAILURE Charged');
+            setPaymentStatus('FAILURE Charge');
           }
 
           //Optionally store the card
           if (shouldStoreCard) {
             const verificationToken = await verifyBuyer(payments, tokenResult.token, customerInfo, 'STORE');        
-            console.log(verificationToken)
+           
             const cardResults = await storeCard(tokenResult.token, customerResults, verificationToken);
           
             if (cardResults.success === true) {
-              setPaymentStatus('SUCCESS Stored');
+              setPaymentStatus('SUCCESS Store');
             } else {
-              setPaymentStatus('FAILURE Stored');
+              setPaymentStatus('FAILURE Store');
             }
           }
         } 
      } catch (err) {
-          setPaymentStatus('FAILURE');
+          setPaymentStatus('FAILED to process. Try Again.');
       }
   };
 
@@ -116,7 +121,6 @@ const PaymentForm = () => {
       }
     })
 
-    console.log(customerResults.customer.id)
     const response = await fetch('http://localhost:3000/payment', {
       method: 'POST',
       headers: {
@@ -124,12 +128,12 @@ const PaymentForm = () => {
       },
       body
     });
-    console.log('completed payment')
+ 
     return response.json();
   };
  
   const verifyBuyer = async (payments, token, customerInfo, intent) => {
-    console.log('verifybuyer starts')
+
     const verificationDetails = {
       billingContact: {
         addressLines: [customerInfo.address, ''],
@@ -145,15 +149,15 @@ const PaymentForm = () => {
     };
 
     try {
-      console.log('startver')
+   
       const verificationResults = await payments.verifyBuyer(token, verificationDetails);
-      console.log('verRes:', verificationResults)
+    
   
       if (!verificationResults || !verificationResults.token) {
         throw new Error('Buyer verification failed: No token received.');
       }
 
-      console.log(verificationResults.token)
+     
       return verificationResults.token; // Return the verification token
     } catch (error) {
       throw new Error('Buyer verification failed.');
@@ -161,7 +165,7 @@ const PaymentForm = () => {
 }
 
   const createCustomer = async (token, customerInfo) => {
-    console.log('email address in createCustomer',customerInfo.emailAddress)
+    
     const bodyParameters = {
       address: {
         address: customerInfo.address,
@@ -198,7 +202,6 @@ const PaymentForm = () => {
 
 const createOrder = async (token, locationId, cart) => {
   
-  console.log('createOrder function')
   const lineItems = cart.items.map((item) => {
     return {
       name: item.name,
@@ -220,7 +223,6 @@ const createOrder = async (token, locationId, cart) => {
   }
 
   const body = JSON.stringify(bodyParameters);
-  console.log('payload:', body)
   
   const orderResponse = await fetch('http://localhost:3000/order', {
     method: 'POST',
@@ -296,9 +298,10 @@ return (
     {paymentStatus && (
       <div
         id="payment-status-container"
-        className={paymentStatus === 'SUCCESS' ? 'is-success' : 'is-failure'}
+        className={paymentStatus === 'SUCCESS Charge' ? 'is-success' : 'is-failure'}
       >
-        Payment {paymentStatus}
+      {paymentStatus === 'SUCCESS Charge' && <p>You successfully paid. Your receipt has been emailed to you. Check your spam folder if necessary.</p>}
+      {paymentStatus === 'FAILURE Charge' && <p>Sorry, your payment did not process. Review your credit card information and try again.</p>}
       </div>
     )}
   </div>

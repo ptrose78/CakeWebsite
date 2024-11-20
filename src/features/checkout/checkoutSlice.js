@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 // Load initial state from localStorage, or fall back to defaults
 const loadFromLocalStorage = () => {
     try {
-      localStorage.clear();
   
       const serializedState = localStorage.getItem('checkout');
       return serializedState ? JSON.parse(serializedState) : {
@@ -63,7 +62,6 @@ const loadFromLocalStorage = () => {
     };
   };
 
-  console.log(getInitialState())
 const checkoutSlice = createSlice({
   name: 'checkout',
   initialState: getInitialState(),
@@ -81,9 +79,29 @@ const checkoutSlice = createSlice({
       saveToLocalStorage(state); // Persist state after update
     },
     resetCheckout: (state) => {
-        Object.assign(state, getInitialState()); // Reset to initial state
-        saveToLocalStorage(state); // Persist state after update
-     },
+      state.customerInfo = {
+        emailAddress: '',
+        firstName: '',
+        lastName: '',
+        phone: '',
+        address: '',
+        city: '',
+        state: 'WI', // Default to Wisconsin
+        zipcode: '',
+        country: 'US', // Default to United States
+      };
+      
+      state.orderInfo = {
+        pickupDate: '',
+        pickupTime: '',
+        deliveryMethod: 'Store Pickup', // Default Pickup
+      };
+    
+      state.accountCreation = false;
+    
+      console.log("State of checkout:", state.customerInfo);
+      saveToLocalStorage({ checkout: state }); // Save only the checkout part of the state
+   },
   }
 });
 

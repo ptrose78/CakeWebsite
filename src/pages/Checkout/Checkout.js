@@ -243,11 +243,13 @@ const Checkout = () => {
               <div key={item.id} className="order-item">
                 <div className="item-name">{item.name}</div>
                 <div className="item-details">
-                  {item.cakeMessage &&<p>Layer Cake Size: {item.layerSize} ({item.servingSize})</p>}
-                  <p>Cake Flavor: {item.flavor}</p>
-                  <p>Base Buttercream Color: {item.buttercreamColor}</p>
-                  {item.cakeMessage && <p>Cake Message: {item.cakeMessage}</p>}
-                  {item.notes && <p>Notes: {item.notes}</p>}
+                {item.layerSize && <p><span className="label-detail">Layer Size:</span> {item.layerSize}</p>}
+              {item.flavor && <p><span className="label-detail">Flavor:</span> {item.flavor}</p>}
+              {item.buttercreamColor && <p><span className="label-detail">Buttercream Color:</span> {item.buttercreamColor}</p>}
+              {item.filling && <p><span className="label-detail">Filling:</span> {item.filling}</p>}
+              <p><span className="label-detail">Alcohol Flavor:</span> {item.alcohol}</p>
+              {item.cakeMessage && <p><span className="label-detail">Cake Message:</span> {item.cakeMessage}</p>}
+              {item.notes && <p><span className="label-detail">Notes:</span> {item.notes}</p>}
                 </div>
                 <div className="item-total">
                   <strong>

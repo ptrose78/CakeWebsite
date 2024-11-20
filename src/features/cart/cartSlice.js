@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // Load initial state from localStorage, or fall back to defaults
-const loadFromLocalStorage = () => {
+export const loadFromLocalStorage = () => {
   try {
-    //localStorage.clear();
-
     const serializedState = localStorage.getItem('cart');
     return serializedState ? JSON.parse(serializedState) : { items: [], totalQuantity: 0, totalPrice: 0 };
   } catch (e) {
@@ -23,6 +21,7 @@ const saveToLocalStorage = (state) => {
 };
 
 const initialState = loadFromLocalStorage();
+
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -77,17 +76,17 @@ const cartSlice = createSlice({
       }
       saveToLocalStorage(state); // Persist state after update
     },
-    clearCart: (state) => {
+    resetCart: (state) => {
       state.items = [];
       state.totalQuantity = 0;
       state.totalPrice = 0;
-
-      saveToLocalStorage(state); // Persist cleared state
+      console.log("state of cart", state.cart)
+      saveToLocalStorage({ cart: state }); // Save only the checkout part of the state
     },
   },
 });
 
-export const { addItem, removeItem, updateTotalQuantityAndTotalPrice, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, updateTotalQuantityAndTotalPrice, resetCart } = cartSlice.actions;
 
 export const selectCart = (state) => state.cart;
 

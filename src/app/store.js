@@ -8,9 +8,14 @@ import dropdownMenuReducer from '../features/dropdownMenu/dropdownMenuSlice';
 import optionsOrderFormReducer from '../features/optionsOrderForm/optionsOrderFormSlice';
 import orderFormVisibilityReducer from '../features/orderFormVisibility/orderFormVisibilitySlice';
 import paymentFormReducer from '../features/paymentForm/paymentFormSlice';
-import cartReducer from '../features/cart/cartSlice';
 import checkoutReducer from '../features/checkout/checkoutSlice';
 import contactFormReducer from '../features/contactForm/contactFormSlice';
+import cartReducer, { loadFromLocalStorage } from '../features/cart/cartSlice';
+
+
+const preloadedState = {
+  cart: loadFromLocalStorage(),
+};
 
 export const store = configureStore({
   reducer: {
@@ -26,4 +31,5 @@ export const store = configureStore({
     checkout: checkoutReducer,
     contactForm: contactFormReducer
   },
+  preloadedState,
 });
