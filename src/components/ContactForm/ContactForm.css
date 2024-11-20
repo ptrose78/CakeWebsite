@@ -42,8 +42,9 @@ form {
   }
   
   /* Submit Button */
-  .submit-button-contact,
-  input[type="submit"] {
+  .submit-button-contact, 
+  input[type="submit"],
+  .clearForm-button-contact {
     background-color: #45a049;
     color: white;
     border: none;
@@ -54,9 +55,19 @@ form {
     transition: background-color 0.3s ease;
   }
   
+  .clearForm-button-contact {
+    background-color: #457fa0;
+    margin-right: 50px;
+  }
+
   .submit-button-contact:hover,
   input[type="submit"]:hover {
     background-color: #357a39;
+  }
+
+  .clearForm-button-contact:hover,
+  input[type="submit"]:hover {
+    background-color: #36617a;
   }
   
   /* Disabled state for button */

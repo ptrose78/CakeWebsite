@@ -11,7 +11,6 @@ import './Navbar.css';
 
 const Navbar = () => {
   const items = useSelector(selectCart);
-  console.log(items)
 
   return (
     <>

@@ -55,8 +55,18 @@ const contactFormSlice = createSlice({
       state.isSubmitVisible = state.humanCheck.trim() === '2'; // Correct answer for 1+1
     },
     resetForm(state) {
-      return initialState; // Reset to initial state
-    },
+      {
+      state.name = { first: '', last: '' };
+      state.email = '';
+      state.address = {street: '', addressLine2: '', city: '', state: '', zip: ''};
+      state.phone = '';
+      state.message = '';
+      state.humanCheck = '';
+      state.isSubmitVisible = false; // Determines visibility of the submit button
+      state.submissionResult = '';
+    }
+    console.log("state:", state.name)
+    }
   },
   extraReducers: (builder) => {
     builder
