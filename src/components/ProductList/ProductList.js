@@ -18,11 +18,11 @@ const ProductList = ({ category }) => {
   // Redux state
   const status = useSelector(selectProductsStatus);
   const error = useSelector(selectProductsError);
-  const products = useSelector(selectFilteredProducts);
+  const products = useSelector(selectFilteredProducts); //provides global access to products from its productListSlice.js
 
   // Local state
-  const [productsWithImages, setProductsWithImages] = useState([]);
-  const [hasFetchedImages, setHasFetchedImages] = useState(false);
+  const [productsWithImages, setProductsWithImages] = useState([]); //productsWithImages is used locally
+  const [hasFetchedImages, setHasFetchedImages] = useState(false); //hasFetchedImages is used locally
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,19 +37,7 @@ const ProductList = ({ category }) => {
     fetchData();
   }, [dispatch, status, category]);
 
-  useEffect(() => {
-    const fetchImagesForProducts = async () => {
-      if (status === 'succeeded' && products.length > 0) {
-        console.log(products)
-        const productsWithImagesData = await fetchImages(products);
-        console.log(productsWithImagesData)
-        setProductsWithImages(productsWithImagesData);
-      }
-    };
-
-    fetchImagesForProducts();
-  }, [products, status]);
-
+ 
   useEffect(() => {
     const fetchImagesForProducts = async () => {
       if (status === 'succeeded' && products.length > 0 && !hasFetchedImages) {
@@ -63,26 +51,18 @@ const ProductList = ({ category }) => {
     fetchImagesForProducts();
   }, [products, status, hasFetchedImages]);
 
+
   const fetchImages = async (products) => {
     try {
-      // Map product fetches and resolve them using Promise.all
-      const productsWithImages = await Promise.all(
-        products.map(async (product) => {
-          try {
-            const response = await fetch(product.url); // Assuming 'url' exists on each product object
-            if (!response.ok) throw new Error('Network response was not ok');
-  
-            const imageBlob = await response.blob();
-            const imageUrl = URL.createObjectURL(imageBlob);
-  
-            return { ...product, image: imageUrl }; // Add the resolved image URL to the product object
-          } catch (error) {
-            console.error('Error fetching image:', error);
-            return { ...product, image: null }; // Handle failed image fetching
-          }
-        })
-      );
-      return productsWithImages; // Return the fully resolved product array
+      // Return products as is if the URL is valid
+      const productsWithImages = products.map((product) => {
+        if (product.url) {
+          return { ...product, image: product.url }; // Use the existing URL directly
+        } else {
+          return { ...product, image: null }; // Handle missing URLs gracefully
+        }
+      });
+      return productsWithImages;
     } catch (error) {
       console.error('Error in fetchImages:', error);
       return []; // Handle a global failure gracefully
