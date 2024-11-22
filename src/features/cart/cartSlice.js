@@ -22,7 +22,6 @@ const saveToLocalStorage = (state) => {
 
 const initialState = loadFromLocalStorage();
 
-
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -81,7 +80,8 @@ const cartSlice = createSlice({
       state.totalQuantity = 0;
       state.totalPrice = 0;
       console.log("state of cart", state.cart)
-      saveToLocalStorage({ cart: state }); // Save only the checkout part of the state
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem('cart', serializedState);
     },
   },
 });

@@ -8,7 +8,7 @@
     cursor: pointer;
     position: fixed;
     top: 15px;
-    right: 7px;
+    right: 30px;
     z-index: 1000;
 }
 
@@ -16,11 +16,11 @@
 .sidebar-menu {
     position: fixed;
     top: 70px;
-    right: -250px;
-    height: 100%;
+    right: -290px;
+    height: 400px;
     width: 250px;
     background-color: #e4cd4d;
-    overflow-y: auto; /* Allow scrolling if content overflows */
+    overflow-y: hidden; /* Allow scrolling if content overflows */
     color: #5A3E36;
     transition: transform 0.3s ease;
     z-index: 999;
@@ -28,6 +28,13 @@
 
 .sidebar-menu.open {
     transform: translateX(-250px);
+    /* transform: translateY(250px); */
+}
+
+.sidebar-menu.open {
+    /* If the menu is open, the sidebar can be expanded */
+    height: auto; /* Allow the content to push down */
+    display: absolute;
 }
 
 /* Basic dropdown links */
@@ -45,11 +52,18 @@
 }
 
 .sidebar-menu a:hover {
-    color: #fff; /* Highlighted orange on hover */
+    color: #D9663D; /* Highlighted orange on hover */
 }
 
 .sidebar-label {
     font-size: 1.5em;
     margin-top: 10px;
     color: #B24A2F;
+}
+
+.logo {
+    height: 90px;
+    width: 90px;
+    border-radius: 40px;
+    margin: auto;
 }

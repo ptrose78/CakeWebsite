@@ -12,6 +12,7 @@ import Checkout from './pages/Checkout/Checkout.js';
 import Payment from './pages/Payment/Payment.js';
 import Navbar from './components/Navbar/Navbar.js';
 import Footer from './components/Footer/Footer.js';
+import SignIn from './pages/SignIn/SignIn.js';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/signin" element={<SignIn />} />
           </Routes>
           </div>
         <Footer />

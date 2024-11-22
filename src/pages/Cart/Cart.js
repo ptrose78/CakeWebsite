@@ -21,7 +21,7 @@ const Cart = () => {
 
   return (
     <div className="item-summary">
-      <h2>Cart Summary</h2>
+      <h1 className="cart-title">Cart Summary</h1>
       <div className="cart-items">
         {/* Headings for each column */}
         <div className="cart-header">

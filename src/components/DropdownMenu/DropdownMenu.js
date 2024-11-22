@@ -17,10 +17,12 @@ const DropdownMenu = ({ className, header, menuId }) => {
             <button className={`dropdown-menu ${className}`} onClick={handleToggle}>
                 {header} <span className={`caret ${isOpen ? 'open' : ''}`}>▼</span>
             </button>
-            <div className={`dropdown-content ${isOpen ? 'show' : ''}`}>
+            <div className="drowdown-container">
+                <div className={`dropdown-content ${isOpen ? 'show' : ''}`}>
                 <a href="/cakes">Cakes</a>
                 <a href="/cupcakes">Cupcakes</a>
                 <a href="/cookies">Cookies</a>
+                </div>
             </div>
         </div>
     );

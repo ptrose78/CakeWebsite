@@ -5,6 +5,7 @@ const ROUTES = {
     cartRoute: () => '/cart',
     checkoutRoute: () => '/checkout',
     paymentRoute: () =>"/payment",
+    signInRoute: () =>"/signin",
 };
   
 export default ROUTES;

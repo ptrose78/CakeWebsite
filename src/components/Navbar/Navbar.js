@@ -17,7 +17,7 @@ const Navbar = () => {
       {/* Header Section */}
       <header className="header">
         <div className="header-left">
-          <Link to={ROUTES.homeRoute()}><Logo className="logo" /></Link>
+          <Link to={ROUTES.homeRoute()}><Logo className="logo" logoImage={0}/></Link>
         </div>
         <div className="header-right">
           <div className="cart-container">
@@ -35,7 +35,7 @@ const Navbar = () => {
       {/* Navbar Section */}
       <nav className="navbar">
         <ul className="navbar-links">
-          <li><DropdownMenu className="menu3" header="Our Treats" menuId="menu3" /></li>
+          <li><DropdownMenu className="navbar-dropdownmenu" header="Our Treats" menuId="menu3" /></li>
           <li className="about"><Link to={ROUTES.aboutRoute()}><a href="/about">About</a></Link></li>
           <li><Link to={ROUTES.contactUsRoute()}><a href="/contactus">Contact Us</a></Link></li>
         </ul>
