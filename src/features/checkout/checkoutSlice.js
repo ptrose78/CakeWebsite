@@ -4,6 +4,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const loadFromLocalStorage = () => {
     try {
   
+      // localStorage.clear();
+
       const serializedState = localStorage.getItem('checkout');
       return serializedState ? JSON.parse(serializedState) : {
         customerInfo: {
@@ -41,6 +43,7 @@ const loadFromLocalStorage = () => {
 
   const getInitialState = () => {
     const savedState = loadFromLocalStorage();
+    console.log('savedState', savedState)
     return savedState || {
       customerInfo: {
         emailAddress: '',
@@ -79,28 +82,25 @@ const checkoutSlice = createSlice({
       saveToLocalStorage(state); // Persist state after update
     },
     resetCheckout: (state) => {
-      state.customerInfo = {
-        emailAddress: '',
-        firstName: '',
-        lastName: '',
-        phone: '',
-        address: '',
-        city: '',
-        state: 'WI', // Default to Wisconsin
-        zipcode: '',
-        country: 'US', // Default to United States
-      };
-      
-      state.orderInfo = {
-        pickupDate: '',
-        pickupTime: '',
-        deliveryMethod: 'Store Pickup', // Default Pickup
-      };
-    
+      state.customerInfo.emailAddress = '';
+      state.customerInfo.firstName = '';
+      state.customerInfo.lastName = '';
+      state.customerInfo.phone = '';
+      state.customerInfo.address = '';
+      state.customerInfo.city = '';
+      state.customerInfo.state = 'WI'; // Default to Wisconsin
+      state.customerInfo.zipcode = '';
+      state.customerInfo.country = 'US'; // Default to United States
+
+      state.orderInfo.pickupDate = '';
+      state.orderInfo.pickupTime = '';
+      state.orderInfo.deliveryMethod = 'Store Pickup'; // Default to Store Pickup
+
       state.accountCreation = false;
     
       console.log("State of checkout:", state.customerInfo);
-      saveToLocalStorage({ checkout: state }); // Save only the checkout part of the state
+      const serializedState = JSON.stringify(state);
+      localStorage.setItem('checkout', serializedState);
    },
   }
 });

@@ -11,11 +11,12 @@ import paymentFormReducer from '../features/paymentForm/paymentFormSlice';
 import checkoutReducer from '../features/checkout/checkoutSlice';
 import contactFormReducer from '../features/contactForm/contactFormSlice';
 import cartReducer, { loadFromLocalStorage } from '../features/cart/cartSlice';
+import authReducer from '../features/auth/authSlice';
 
 
-const preloadedState = {
-  cart: loadFromLocalStorage(),
-};
+// const preloadedState = {
+//   cart: loadFromLocalStorage(),
+// };
 
 export const store = configureStore({
   reducer: {
@@ -29,7 +30,8 @@ export const store = configureStore({
     paymentForm: paymentFormReducer,
     cart: cartReducer,
     checkout: checkoutReducer,
-    contactForm: contactFormReducer
+    contactForm: contactFormReducer,
+    auth: authReducer,
   },
-  preloadedState,
+  // preloadedState,
 });

@@ -20,11 +20,11 @@ const Jumbotron = () => {
     return (
         <div className="jumbotron">
           <div className="jumbotron-content" style={{ display: 'flex', alignItems: 'center' }}>
-              <img src={jumbotronImage} alt="Jumbotron Logo" style={{ marginRight: '2px' }} />
+              <img className="jumbotron-image" src={jumbotronImage} alt="Jumbotron Logo" style={{ marginRight: '2px' }} />
             <h1>{headline}</h1>
           </div>
           <p>{subtext}</p>
-          <DropdownMenu className="jumbotron menu2" header="Shop Now" menuId="menu2" />
+          <DropdownMenu className="jumbotron-menu" header="Shop Now" menuId="menu2" />
         </div>
       );
     };

@@ -4,14 +4,13 @@
   justify-content: flex-start; /* Aligns content closer to the top */
   align-items: center;
   width: 100%;
-  overflow: hidden;
-  padding-top: 10vh;
+  padding-top: 5vh;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); */
   background-color: #f0c289; /* Soft beige */
   color: #5A3E36; /* Warm, dark brown */
   text-align: center;
   box-sizing: border-box;
-  padding-bottom: 10px;
+  height: 650px;
 }
 
 .jumbotron-content {
@@ -22,8 +21,8 @@
   gap: 15px;
 }
 
-.jumbotron img {
-  max-width: 20%;
+.jumbotron .jumbotron-image {
+  width: 20%;
   height: auto;
   margin-right: -25px;
 }
@@ -56,6 +55,10 @@
 
 .order-button:hover {
   background-color: #B24A2F;
+}
+
+.dropdownmenu-container {
+  position: relative;
 }
 
 @media (min-width: 768px) {

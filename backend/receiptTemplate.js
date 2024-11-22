@@ -129,7 +129,7 @@ const receiptTemplate = (order) =>
     <div class="footer">
       <p>Payment Method: ${order.tenders[0].cardDetails.cardBrand} ending in ${order.tenders[0].cardDetails.card.last4}</p>
       <p>Transaction Status: ${order.tenders[0].cardDetails.status}</p>
-      <p>If you have any questions, feel free to contact us at <a href="mailto:buzzysweets1@gmail.com">buzzysweets@gmail.com</a>.</p>
+      <p>If you have any questions, feel free to contact us at <a href="mailto:buzzysweets1@gmail.com">buzzysweets1@gmail.com</a>.</p>
     </div>
     <div class="footer">
       <p>Thank you for choosing Buzzy Sweets!</p>

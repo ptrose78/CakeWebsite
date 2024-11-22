@@ -23,14 +23,14 @@
 }
 
 /* Jumbotron button styling */
-.dropdown-menu.jumbotron {
-    width: 15%;
+.dropdown-menu.jumbotron-menu {
+    width: 50%;
     height: 85px;
     background-color: #448d3b; /* Darker beige for emphasis */
     color: #ffffff; /* White text */
     font-size:    1.5em;
     font-weight: bold;
-    padding: 0px 0px;
+    padding: 10px 0px;
     border-radius: 5px; /* Rounded corners */
     border: 2px solid transparent; /* Border for button style */
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -39,7 +39,7 @@
 }
 
 /* Hover effect for jumbotron button */
-.dropdown-menu.jumbotron:hover {
+.dropdown-menu.jumbotron-menu:hover {
     background-color: #559c39; /* Slightly darker beige */
     color: #ffffff;
 }
@@ -83,38 +83,79 @@
     color: #fff;
 }
 
-.menu3 {
+.sidebar-menu .dropdown-content a:hover {
+    background-color: #D9663D; /* Highlighted orange on hover */
+    color: #fff;
+}
+
+.dropdown-container.jumbotron-menu {
+    position: relative;
+}
+
+.dropdown-container.navbar-dropdownmenu  {
+    position: relative;
+}
+
+.navbar-dropdownmenu {
     display: inline-block;
-    margin-top: -3px;
+    margin-top: -34px;
     z-index: 1000;
     width: 100%
 }
-.menu3 + .dropdown-content {
-   
+
+.jumbotron-menu {
+    display: inline-block;
+    z-index: 1000;
+    width: 100%
+}
+
+.navbar-dropdownmenu + .dropdown-content {
     color: white;
 }
 
-.dropdown-menu.menu3 {
+.dropdown-menu.navbar-dropdownmenu {
     background-color: white;
 }
 
-.navbar-links .dropdown-menu.menu3 a:hover {
-    color: white;
-}
-
-.dropdown-container.menu2 {
+.dropdown-container.jumbotron-menu, .dropdown-container.navbar-dropdownmenu {
     padding-top: 35px;
 }
 
-.dropdown-menu.menu2 {
+.dropdown-menu.jumbotron-menu, .dropdown-menu.navbar-dropdownmenu {
     min-width: 25%;
     min-height: 80px;
     font-size: 115%;
 }
 
-.menu2 + .dropdown-content {
-    width: 25%;
+.jumbotron-menu .dropdown-content, .navbar-dropdownmenu .dropdown-content {
     color: white;
+    position: absolute;
+}
+
+.navbar-dropdownmenu .dropdown-content, .jumbotron-menu .dropdown-content {
+    width: 100%;
+    left: 0px;
+}
+
+.jumbotron-menu .dropdown-content {
+    width: 50%;
+    position: relative;
+    margin: auto;
+}
+
+.navbar-dropdownmenu .dropdown-content a {
+    position: relative;
+    bottom: 15px;
+    background-color: #e2caad; /* Beige color */
+    overflow: visible;
+}
+
+.jumbotron-menu .dropdown-content a {
+    position: relative;
+    overflow: visible;
+    top: 0px;
+    background-color: #e2caad; /* Beige color */
+    width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -123,6 +164,3 @@
     }
 }
 
-@media (max-width: 768px) {
-
-}

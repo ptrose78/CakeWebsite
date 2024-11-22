@@ -17,7 +17,7 @@ export const jumbotronSlice = createSlice({
   initialState: {
     jumbotronImage: null,
     headline: "Welcome to Buzzy Sweets!",
-    subtext: "Delicious cakes made with love, for every occasion!",
+    subtext: "Delicious cakes made with love for every occasion!",
   },
   reducers: {
     updateJumbotron: (state, action) => {
