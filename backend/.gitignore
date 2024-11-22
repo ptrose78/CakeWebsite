@@ -1,0 +1,14 @@
+# do not commit sensitive information to git
+.env*
+!.env.example
+.env
+.env.production
+.env.sandbox
+
+# dependencies
+node_modules/
+
+# dev tools
+.eslintcache
+.nyc_output
+coverage
