@@ -1,5 +1,7 @@
 // src/components/DropdownMenu/DropdownMenu.js
 import React from 'react';
+import { Link } from "react-router-dom";
+import ROUTES from "../../app/routes";
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleMenu, selectMenuState } from '../../features/dropdownMenu/dropdownMenuSlice';
 import './DropdownMenu.css';
@@ -19,9 +21,9 @@ const DropdownMenu = ({ className, header, menuId }) => {
             </button>
             <div className="drowdown-container">
                 <div className={`dropdown-content ${isOpen ? 'show' : ''}`}>
-                <a href="/cakes">Cakes</a>
-                <a href="/cupcakes">Cupcakes</a>
-                <a href="/cookies">Cookies</a>
+                <Link className="cake-link" to={ROUTES.cakesRoute()}>Cakes</Link>
+                <Link className="cupcake-link" to={ROUTES.cupcakesRoute()}>Cupcakes</Link>
+                <Link className="cookie-link" to={ROUTES.cookiesRoute()}>Cookies</Link>
                 </div>
             </div>
         </div>

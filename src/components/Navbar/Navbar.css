@@ -75,6 +75,7 @@
   padding: 10px 0;
   background-color: #ffffff;
   width: 100%;
+  font-size: 18px;
 }
 
 .navbar-links li {
@@ -140,5 +141,18 @@ li a:hover {
 
   .navbar-links {
       display: flex; /* Full navbar links for desktop */
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 140px;
+    padding: 10px 0;
+    background-color: #ffffff;
+    width: 100%;
+    font-size: 24px;
   }
 }

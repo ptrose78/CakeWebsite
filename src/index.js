@@ -10,7 +10,7 @@ import reportWebVitals from './reportWebVitals';
 const loadSquareSDK = () => {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = 'https://sandbox.web.squarecdn.com/v1/square.js';
+    script.src = 'https://web.squarecdn.com/v1/square.js';
     script.onload = resolve;
     script.onerror = reject;
     document.body.appendChild(script);

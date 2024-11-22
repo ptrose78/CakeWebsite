@@ -1,5 +1,8 @@
 const ROUTES = {
     homeRoute: () => "/",
+    cakesRoute: () => '/cakes',
+    cupcakesRoute: () => '/cupcakes',
+    cookiesRoute: () => '/cookies',
     aboutRoute: () => "/about",
     contactUsRoute: () => '/contactus',
     cartRoute: () => '/cart',

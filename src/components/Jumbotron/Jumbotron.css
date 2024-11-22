@@ -66,6 +66,9 @@
   .jumbotron {
     padding-bottom: 100px;
   }
+  .jumbotron-content {
+    margin-top: 100px;
+  }
 
   .jumbotron img {
     max-width: 10%;
@@ -85,4 +88,11 @@
     font-size: 3vw;
     margin-top: 5px;
   }
+}
+
+@media (min-width: 1024px) {
+  .jumbotron {
+    height: 950px;
+  }
+
 }

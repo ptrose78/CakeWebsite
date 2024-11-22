@@ -1,4 +1,6 @@
 import React from "react";
+import ROUTES from "../../app/routes";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import Logo from '../Logo/Logo.js'
 
@@ -8,17 +10,17 @@ const Footer = () => {
         <div className="footer-container">
           {/* Logo Section */}
           <div className="footer-logo">
-            <Logo logoImage={0} alt="Business Logo" />
+            <Link to={ROUTES.homeRoute()}><Logo logoImage={0} alt="Business Logo" /></Link>
           </div>
   
           {/* Navigation Links */}
           <div className="footer-nav">
             <ul className="footer-links">
-              <li><a href="/cakes">Cakes</a></li>
-              <li><a href="/cupcakes">Cupcakes</a></li>
-              <li><a href="/cookies">Cookies</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/contactus">Contact Us</a></li>
+              <li><Link to={ROUTES.cakesRoute()}>Cakes</Link></li>
+              <li><Link to={ROUTES.cupcakesRoute()}>Cupakes</Link></li>
+              <li><Link to={ROUTES.cookiesRoute()}>Cookies</Link></li>
+              <li className="about"><Link to={ROUTES.aboutRoute()}>About</Link></li>
+              <li className="contactus"><Link to={ROUTES.contactUsRoute()}>Contact Us</Link></li>
             </ul>
           </div>
   
