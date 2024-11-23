@@ -1,3 +1,8 @@
+.cart-title {
+  margin-bottom: 25px;
+  font-size: 26px;
+}
+
 .cart-header {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr 1fr 1fr; /* Adjusted width of Details column */
@@ -5,7 +10,7 @@
     text-align: left;
     border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
-    font-size: 18px;
+    font-size: 22px;
   }
   
   .cart-item {
@@ -47,7 +52,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    text-align: left;
+    text-align: center;
   }
   
   .subtotal {
@@ -64,21 +69,28 @@
     object-fit: cover;
   }
   
+  .quantity {
+    display: inline-block;
+  }
   .quantity-btn {
-    background-color: #f0f0f0;
+    background-color: #9ff3bb;
     border: 1px solid #ccc;
     padding: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
   }
   
   .quantity-btn:hover {
-    background-color: #ddd;
+    background-color: #7bd38e;
   }
   
   .quantity-input {
-    width: 50px;
+    width: 35px;
     text-align: center;
+    padding: 4px;
+
+    font-size: 20px;
   }
   
   .remove-btn {
@@ -136,4 +148,162 @@ input[type="number"] {
     background-color: #45a049;
   }
   
+  /* mobile */
+  @media (max-width: 768px) {
+    .cart-column.product {
+      display: none;
+    }
+
+    .cart-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 2fr 1fr; /* Adjusted width of Details column */
+      font-weight: bold;
+      text-align: left;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+      font-size: 18px;
+    }
+    
+    .cart-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 2fr 1fr 2fr 1fr; /* Same as header */
+      gap: 10px;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .cart-column {
+      padding: 10px;
+      text-align: left; /* Ensure all columns are left-aligned */
+    }
+    
+    .product {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .details p {
+      margin: 2px 0;
+      font-size: 14px;
+      color: #666;
+    }
   
+    .label-detail {
+      font-weight: bold;
+    }
+    
+    .price {
+      text-align: left;
+    }
+    
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-align: center;
+    }
+    
+    .subtotal {
+      text-align: left;
+    }
+    
+    .product-image {
+      position: relative;
+      display: inline-block; /* Makes the container adjust to the image size */
+    } 
+  
+    .product-image img {
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    
+    .quantity {
+      display: inline-block;
+    }
+    .quantity-btn {
+      background-color: #9ff3bb;
+      border: 1px solid #ccc;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    .quantity-btn:hover {
+      background-color: #7bd38e;
+    }
+    
+    .quantity-input {
+      width: 35px;
+      text-align: center;
+      padding: 4px;
+  
+      font-size: 20px;
+    }
+    
+    .remove-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(255, 0, 0, 0.692); /* Optional: button background color */
+      color: white; /* Optional: button text color */
+      font-size: 20px; /* Optional: button text size */
+      padding: 5px;
+      border: none;
+      cursor: pointer;
+  }
+  
+  .remove-btn:hover {
+      background-color: rgba(255, 0, 0, 0.89); /* Optional: change color on hover */
+  }
+  
+    /* Remove spinner controls in Chrome, Safari, Edge */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Remove spinner controls in Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  
+  .cart-summary {
+      margin-top: 20px;
+      padding: 15px;
+      border-top: 2px solid #ccc;
+      text-align: center;
+    }
+    
+    .total-price {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .proceed-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    
+    .proceed-button:hover {
+      background-color: #45a049;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .cart-column.details .product-image{
+      display: none;
+    }
+
+
+  }

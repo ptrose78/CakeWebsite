@@ -192,6 +192,11 @@
         font-size: 20px;
     }
 
+    .dropdown-menu.navbar-dropdownmenu {
+        font-size: 22px;
+        padding-bottom: 0px;
+    }
+
     .jumbotron-menu .dropdown-content {
         width: 50%;
         position: relative;
@@ -226,6 +231,9 @@
     .dropdown-menu.jumbotron-menu {
         font-size: 2.5em;
         height: 150px;
+        width: 25%;
+    }
+    .jumbotron-menu .dropdown-content {
         width: 25%;
     }
 
