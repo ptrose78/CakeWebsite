@@ -50,6 +50,13 @@ const Cart = () => {
 
             {/* Second Column: Details */}
             <div className="cart-column details">
+              <div className="product-image">
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} width="100" height="100" />
+                  ) : (
+                    <p>Image not available</p>
+                  )}
+              </div>
               {item.layerSize && <p><span className="label-detail">Layer Size:</span> {item.layerSize}</p>}
               {item.flavor && <p><span className="label-detail">Flavor:</span> {item.flavor}</p>}
               {item.buttercreamColor && <p><span className="label-detail">Buttercream Color:</span> {item.buttercreamColor}</p>}

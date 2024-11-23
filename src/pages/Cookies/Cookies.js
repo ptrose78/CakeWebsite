@@ -13,7 +13,7 @@ const Cookies = () => {
     return(
         <div className="cookies-section">   
             <h1 className="cookies-title">Cookies</h1>
-            <p className="cookies-description">Welcome to our Cookies page! Explore our delicious cake offerings here.</p>
+            <p className="cookies-description">Welcome to our Cookies page! Explore our delicious cookie offerings here.</p>
             <ProductList category="Cookie" />
             {showOrderForm && (
                 <OptionsOrderForm 
