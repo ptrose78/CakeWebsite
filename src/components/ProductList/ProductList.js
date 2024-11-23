@@ -69,7 +69,6 @@ const ProductList = ({ category }) => {
     }
   };
    
-
   const handleCustomizeClick = (product) => {
     dispatch(showOrderForm(product));
   };

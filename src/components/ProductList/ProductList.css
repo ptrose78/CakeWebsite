@@ -14,7 +14,7 @@
   
   .product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr)); /* Forces at least two items per row */
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr)); /* Forces at least two items per row */
     gap: 10px;
     list-style-type: none;
     padding: 0;
@@ -86,7 +86,7 @@
   }
   
   @media (min-width: 768px) {
-    .grid-list {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* More items per row for larger screens */
+    .product-list {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* More items per row for larger screens */
     }
   }
