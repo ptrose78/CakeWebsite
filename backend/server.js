@@ -23,7 +23,7 @@ const { ApiError, client: square } = require('./server/square');
 
 // Import micro-cors
 const cors = require('micro-cors')({
-  origin: 'http://localhost:3001',
+  origin: 'REACT_APP_API_URL_FRONT',
   allowMethods: ['POST', 'GET'],
 });
 
