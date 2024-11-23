@@ -12,8 +12,8 @@ const PaymentForm = () => {
 
   const dispatch = useDispatch();
  
-  const appId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_APPLICATION_ID;
-  const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
+  const appId = process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID;
+  const locationId = process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID;
 
   const cart = useSelector(selectCart);
   const { customerInfo } = useSelector(selectCheckout);
@@ -121,7 +121,7 @@ const PaymentForm = () => {
       }
     })
 
-    const response = await fetch('http://localhost:3000/payment', {
+    const response = await fetch('${process.env.REACT_APP_API_URL}/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ const PaymentForm = () => {
 
   const body = JSON.stringify(bodyParameters);
 
-  const response = await fetch('http://localhost:3000/customer', {
+  const response = await fetch('${process.env.REACT_APP_API_URL}/customer', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -224,7 +224,7 @@ const createOrder = async (token, locationId, cart) => {
 
   const body = JSON.stringify(bodyParameters);
   
-  const orderResponse = await fetch('http://localhost:3000/order', {
+  const orderResponse = await fetch('${process.env.REACT_APP_API_URL}/order', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -253,7 +253,7 @@ const storeCard = async (token, customerResults, verificationToken) => {
 
   const body = JSON.stringify(bodyParameters);
 
-  const paymentResponse = await fetch('http://localhost:3000/card', {
+  const paymentResponse = await fetch('${process.env.REACT_APP_API_URL}/card', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

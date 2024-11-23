@@ -26,10 +26,10 @@ const Sidebar = () => {
                 {isMenuOpen ? '✕' : '☰'}
             </button>
             
-            <div className={`sidebar-menu ${isMenuOpen ? 'open' : ''}`}>          
-                    <DropdownMenu menuId="sidebar-menu" header="Our Treats" />
-                    <Link to={ROUTES.aboutRoute()}>About</Link>
-                    <Link to={ROUTES.contactUsRoute()}>Contact Us</Link>
+            <div  className={`sidebar-menu ${isMenuOpen ? 'open' : ''}`}>          
+                    <DropdownMenu  menuId="sidebar-menu" header="Our Treats" />
+                    <Link onClick={handleMenuToggle} to={ROUTES.aboutRoute()}>About</Link>
+                    <Link onClick={handleMenuToggle} to={ROUTES.contactUsRoute()}>Contact Us</Link>
             </div>   
             
         </div>
