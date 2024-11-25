@@ -12,8 +12,8 @@ const PaymentForm = () => {
 
   const dispatch = useDispatch();
  
-  const appId = process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID;
-  const locationId = process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID;
+  const appId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_APPLICATION_ID;
+  const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
 
   const cart = useSelector(selectCart);
   const { customerInfo } = useSelector(selectCheckout);
@@ -121,14 +121,14 @@ const PaymentForm = () => {
       }
     })
 
-    const response = await fetch('${process.env.REACT_APP_API_URL}/payment', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/payment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body
     });
- 
+    console.log('payment complete')
     return response.json();
   };
  
@@ -165,7 +165,7 @@ const PaymentForm = () => {
 }
 
   const createCustomer = async (token, customerInfo) => {
-    
+    console.log('createCustomer')
     const bodyParameters = {
       address: {
         address: customerInfo.address,
@@ -181,8 +181,9 @@ const PaymentForm = () => {
     };
 
   const body = JSON.stringify(bodyParameters);
+  console.log(process.env.REACT_APP_API_URL_BACK)
 
-  const response = await fetch('${process.env.REACT_APP_API_URL}/customer', {
+  const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/customer`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -224,7 +225,7 @@ const createOrder = async (token, locationId, cart) => {
 
   const body = JSON.stringify(bodyParameters);
   
-  const orderResponse = await fetch('${process.env.REACT_APP_API_URL}/order', {
+  const orderResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -253,7 +254,7 @@ const storeCard = async (token, customerResults, verificationToken) => {
 
   const body = JSON.stringify(bodyParameters);
 
-  const paymentResponse = await fetch('${process.env.REACT_APP_API_URL}/card', {
+  const paymentResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/card`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

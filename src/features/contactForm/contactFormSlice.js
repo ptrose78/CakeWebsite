@@ -3,19 +3,28 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const postContactForm = createAsyncThunk(
   'contactform/postContactForm',
   async (contact) => {
+    console.log('createContact');
+    console.log('Contact payload:', JSON.stringify(contact)); 
     try {
-      const response = await fetch('http://localhost:3000/contactForm', {
+      console.log(process.env.REACT_APP_API_URL_BACK);
+
+      const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/contactForm`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(contact) 
+        body: JSON.stringify(contact)
       })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       console.log(response)
       return response;
     } catch (error) {
-      console.log('Error posting contact form')
-      throw Error ('Error posting the contact form');
+      console.log('Error posting contact form:', error)
+      throw error;
     }
   }
 )

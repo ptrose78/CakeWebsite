@@ -18,7 +18,7 @@ const ContactForm = () => {
   };
 
   const handleSubmit = (contact) => {
-  
+    console.log('handle submit of contact form')
     const handleForm = async() =>{
       await dispatch(postContactForm(contact));
     }
