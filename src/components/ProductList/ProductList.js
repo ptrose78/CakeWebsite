@@ -10,12 +10,15 @@ import {
   selectFilteredProducts,
 } from '../../features/productList/productListSlice';
 import { showOrderForm } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
+import { disableSite, enableSite, toggleSite, selectIsSiteDisabled } from '../../features/siteDisabled/siteDisabledSlice';
+
 import './ProductList.css';  // Import the external CSS file
 
 const ProductList = ({ category }) => {
   const dispatch = useDispatch();
 
   // Redux state
+  const isSiteDisabled = useSelector(selectIsSiteDisabled);
   const status = useSelector(selectProductsStatus);
   const error = useSelector(selectProductsError);
   const products = useSelector(selectFilteredProducts); //provides global access to products from its productListSlice.js
@@ -96,7 +99,7 @@ const ProductList = ({ category }) => {
           ) : (
             <p>Image not available</p>
           )}
-            <button onClick={() => handleCustomizeClick(product)}>Order</button>
+            <button disabled={isSiteDisabled} onClick={() => handleCustomizeClick(product)}>Order</button>
         </li>
         ))}
       </div>

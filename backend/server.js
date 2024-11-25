@@ -369,5 +369,14 @@ const appRouter = router(
 
 const corsWrappedApp = cors(appRouter);
 
+// Ensure Cloud Run PORT is respected (used by micro CLI)
+if (require.main === module) {
+  const PORT = process.env.PORT || 8080; // Cloud Run sets PORT
+  console.log(`Server running on port ${PORT}`);
+  require('http')
+    .createServer(corsWrappedApp)
+    .listen(PORT); // micro won't call this automatically, so we do it here
+}
+
 // Export the wrapped function
 module.exports = corsWrappedApp;

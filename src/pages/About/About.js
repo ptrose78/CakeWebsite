@@ -9,8 +9,9 @@ const About = () => {
           <section className="about-story">
             <h2>Our Story</h2>
             <p>
-              At <strong>Buzzy Sweets</strong>, we’re passionate about bringing joy through baked goods.
-              Started by <strong>Beth Rose</strong> - a lifelong baker and resident of Oak Creek.
+              At <strong>Buzzy Sweets</strong>, we’re passionate about bringing joy through baked goods. 
+              What started as a love for baking has grown into a cherished local business in Oak Creek. 
+              <strong> Our team</strong> works tirelessly to bring you the finest cakes, pastries, and treats, all crafted with care and dedication.
             </p>
           </section>
     
