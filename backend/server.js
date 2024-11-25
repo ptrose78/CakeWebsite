@@ -23,15 +23,18 @@ const { ApiError, client: square } = require('./server/square');
 
 // Import micro-cors
 const cors = require('micro-cors')({
-  origin: 'REACT_APP_API_URL_FRONT',
+  origin: [process.env.REACT_APP_API_URL_FRONT],
   allowMethods: ['POST', 'GET'],
 });
+
+console.log('cors', process.env.REACT_APP_API_URL_FRONT);
 
 // Import the createEmail function
 const { sendTransactionalEmail } = require('./createEmail.js');
 
 // Import template for receipt
 const receiptTemplate = require('./receiptTemplate');
+
 
 //Send email after a payment completes
 const sendEmail = (subject, senderName, senderEmail, htmlContent, recipientEmail) => {
@@ -183,7 +186,7 @@ async function sendReceipt(customerId, orderId) {
 }
 
 async function createCustomer(req, res) {
-
+  console.log('createCustomer')
   const payload = await json(req);
   logger.debug(JSON.stringify(payload));
 
@@ -322,6 +325,7 @@ async function createContact(req, res) {
   try {
     const contact = await json(req);
     logger.debug(JSON.stringify(contact));
+    console.log('Contact data received:', contact);   
 
     const response = await sendEmail(
       "Contact Form Submission",
@@ -347,22 +351,23 @@ async function createContact(req, res) {
   }
 }
 
-// serve static files like index.html and favicon.ico from public/ directory
-async function serveStatic(req, res) {
-  logger.debug('Handling request', req.path);
-  await staticHandler(req, res, {
-    public: 'public',
-  });
-}
+// Health Check Route
+const healthCheck = async (req, res) => {
+  send(res, 200, { status: 'healthy' });
+};
 
-// Export routes wrapped with CORS middleware
-module.exports = cors(
-  router(
-    post('/payment', createPayment),
-    post('/customer', createCustomer),
-    post('/card', storeCard),
-    post('/order', createOrder),
-    post('/contactForm', createContact),
-    get('/*', serveStatic),
-  )
+
+// Define the routes
+const appRouter = router(
+  get('/health', healthCheck),
+  post('/payment', createPayment),
+  post('/customer', createCustomer),
+  post('/card', storeCard),
+  post('/order', createOrder),
+  post('/contactForm', createContact)
 );
+
+const corsWrappedApp = cors(appRouter);
+
+// Export the wrapped function
+module.exports = corsWrappedApp;
