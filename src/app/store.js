@@ -12,6 +12,7 @@ import checkoutReducer from '../features/checkout/checkoutSlice';
 import contactFormReducer from '../features/contactForm/contactFormSlice';
 import cartReducer, { loadFromLocalStorage } from '../features/cart/cartSlice';
 import authReducer from '../features/auth/authSlice';
+import siteDisabledReducer from '../features/siteDisabled/siteDisabledSlice';
 
 
 // const preloadedState = {
@@ -32,6 +33,8 @@ export const store = configureStore({
     checkout: checkoutReducer,
     contactForm: contactFormReducer,
     auth: authReducer,
+    siteDisabled: siteDisabledReducer,
+
   },
   // preloadedState,
 });

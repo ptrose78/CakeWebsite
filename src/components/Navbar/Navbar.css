@@ -1,8 +1,33 @@
 /* Common Navbar Styles */
 
+/* src/App.css */
+.banner {
+  background-color: #f44336; /* Red background for emphasis */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column; /* Ensures a vertical layout */
+}
+
+.main-content {
+  padding: 3rem; /* Space around main content */
+}
+
 .navbar {
   height: 63px;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -62,8 +87,12 @@
   text-decoration: none;
 }
 
-.sidebar-menu {
-  margin-top: -10.5px;
+.main-content .sidebar-container .menu-button {
+  margin-top: 45.5px;
+}
+
+.sidebar-container .menu-button {
+  margin-top: -6.5px;
 }
 
 /* Full-Width Navbar for Desktop View */

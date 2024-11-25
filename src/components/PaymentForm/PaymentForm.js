@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startPayment, paymentSuccess, paymentFailure } from '../../features/paymentForm/paymentFormSlice';
 import { resetCart, selectCart } from '../../features/cart/cartSlice';
 import { resetCheckout, selectCheckout } from '../../features/checkout/checkoutSlice';
+import { disableSite, enableSite, toggleSite, selectIsSiteDisabled } from '../../features/siteDisabled/siteDisabledSlice';
 import './PaymentForm.css'
 
 
@@ -12,8 +13,8 @@ const PaymentForm = () => {
 
   const dispatch = useDispatch();
  
-  const appId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_APPLICATION_ID;
-  const locationId = process.env.REACT_APP_YOUR_SQUARE_SANDBOX_LOCATION_ID;
+  const appId = process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID;
+  const locationId = process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID;
 
   const cart = useSelector(selectCart);
   const { customerInfo } = useSelector(selectCheckout);
@@ -82,7 +83,7 @@ const PaymentForm = () => {
             const clearStorage = async() => {
               await dispatch(resetCheckout());
               await dispatch(resetCart());
-              
+              dispatch(disableSite());
             }
             clearStorage();
           } else {
