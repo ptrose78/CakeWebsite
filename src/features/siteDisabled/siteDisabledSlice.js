@@ -18,11 +18,11 @@ const siteDisabledSlice = createSlice({
     toggleSite: (state) => {
       state.isSiteDisabled = !state.isSiteDisabled;
     },
-  },
+  }
 });
 
 export const { disableSite, enableSite, toggleSite } = siteDisabledSlice.actions;
 
-export const selectIsSiteDisabled  = (state) => state.isSiteDisabled;
+export const selectIsSiteDisabled  = (state) => state.siteDisabled.isSiteDisabled;
 
 export default siteDisabledSlice.reducer;
