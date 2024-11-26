@@ -22,10 +22,25 @@ const {
 const { ApiError, client: square } = require('./server/square');
 
 // Import micro-cors
-const cors = require('micro-cors')({
-  origin: [process.env.REACT_APP_API_URL_FRONT],
-  allowMethods: ['POST', 'GET'],
-});
+const cors = require('micro-cors');
+
+const cors = require('cors');
+
+
+const allowedOrigins = [
+  REACT_APP_API_URL_FRONT_1,
+  REACT_APP_API_URL_FRONT_2
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 console.log('cors', process.env.REACT_APP_API_URL_FRONT);
 

@@ -16,7 +16,7 @@ const Navbar = () => {
 
 
   return (
-      <div>{!isSiteDisabled ? (
+      <div>{isSiteDisabled ? (
         <div className="page-container">
            
           <div className='banner'>

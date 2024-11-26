@@ -41,8 +41,8 @@
 }
 
 .header-left .logo {
-  height: 150px;
-  width: 150px;
+  height: 157px;
+  width: 157px;
   margin-right: 35px;
 }
 
@@ -57,7 +57,7 @@
   text-decoration: none; /* Ensure no underline applied globally */
   position: absolute;
   top: 0px;
-  left: 29vw;
+  left: 28vw;
 }
 
 .cart-info {
