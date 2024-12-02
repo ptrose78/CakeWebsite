@@ -19,6 +19,7 @@
 .env.production.local
 .env
 .env*
+starry-iris-442614-c1-0e8cece52e67.json
 
 npm-debug.log*
 yarn-debug.log*

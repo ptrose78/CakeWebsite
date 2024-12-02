@@ -21,28 +21,16 @@ const {
 // square provides the API client and error types
 const { ApiError, client: square } = require('./server/square');
 
-// Import micro-cors
-const cors = require('micro-cors');
+// Set up CORS
+const corsMiddleware = require('micro-cors')({
+  origin: 
+    process.env.REACT_APP_API_URL_FRONT_1 &&
+    process.env.REACT_APP_API_URL_FRONT_2 &&
+    process.env.REACT_APP_API_URL_FRONT_3
+  , // filter out any undefined or null values
+  allowMethods: ['POST', 'GET']
+});
 
-const cors = require('cors');
-
-
-const allowedOrigins = [
-  REACT_APP_API_URL_FRONT_1,
-  REACT_APP_API_URL_FRONT_2
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
-
-console.log('cors', process.env.REACT_APP_API_URL_FRONT);
 
 // Import the createEmail function
 const { sendTransactionalEmail } = require('./createEmail.js');
@@ -382,7 +370,7 @@ const appRouter = router(
   post('/contactForm', createContact)
 );
 
-const corsWrappedApp = cors(appRouter);
+const corsWrappedApp = corsMiddleware(appRouter);
 
 // Ensure Cloud Run PORT is respected (used by micro CLI)
 if (require.main === module) {

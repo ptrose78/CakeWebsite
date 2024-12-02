@@ -41,36 +41,36 @@ const ProductList = ({ category }) => {
   }, [dispatch, status, category]);
 
  
-  useEffect(() => {
-    const fetchImagesForProducts = async () => {
-      if (status === 'succeeded' && products.length > 0 && !hasFetchedImages) {
-        setHasFetchedImages(true); // Ensure this only runs once for this set of products
+  // useEffect(() => {
+  //   const fetchImagesForProducts = async () => {
+  //     if (status === 'succeeded' && products.length > 0 && !hasFetchedImages) {
+  //       setHasFetchedImages(true); // Ensure this only runs once for this set of products
   
-        const productsWithImagesData = await fetchImages(products); 
-        setProductsWithImages(productsWithImagesData);
-      }
-    };
+  //       const productsWithImagesData = await fetchImages(products); 
+  //       setProductsWithImages(productsWithImagesData);
+  //     }
+  //   };
   
-    fetchImagesForProducts();
-  }, [products, status, hasFetchedImages]);
+  //   fetchImagesForProducts();
+  // }, [products, status, hasFetchedImages]);
 
 
-  const fetchImages = async (products) => {
-    try {
-      // Return products as is if the URL is valid
-      const productsWithImages = products.map((product) => {
-        if (product.url) {
-          return { ...product, image: product.url }; // Use the existing URL directly
-        } else {
-          return { ...product, image: null }; // Handle missing URLs gracefully
-        }
-      });
-      return productsWithImages;
-    } catch (error) {
-      console.error('Error in fetchImages:', error);
-      return []; // Handle a global failure gracefully
-    }
-  };
+  // const fetchImages = async (products) => {
+  //   try {
+  //     // Return products as is if the URL is valid
+  //     const productsWithImages = products.map((product) => {
+  //       if (product.url) {
+  //         return { ...product, image: product.url }; // Use the existing URL directly
+  //       } else {
+  //         return { ...product, image: null }; // Handle missing URLs gracefully
+  //       }
+  //     });
+  //     return productsWithImages;
+  //   } catch (error) {
+  //     console.error('Error in fetchImages:', error);
+  //     return []; // Handle a global failure gracefully
+  //   }
+  // };
    
   const handleCustomizeClick = (product) => {
     dispatch(showOrderForm(product));
@@ -90,7 +90,7 @@ const ProductList = ({ category }) => {
   
   return (
       <div className="product-list">
-      {productsWithImages.map((product) => (
+      {products.map((product) => (
         <li key={product.id}>
           <h2>{product.name}</h2>
           <p>Price: ${product.price} {checkCookie(product) && "per dozen"}</p>

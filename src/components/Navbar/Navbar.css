@@ -57,7 +57,7 @@
   text-decoration: none; /* Ensure no underline applied globally */
   position: absolute;
   top: 0px;
-  left: 28vw;
+  left: 26.5vw;
 }
 
 .cart-info {
@@ -92,7 +92,7 @@
 }
 
 .sidebar-container .menu-button {
-  margin-top: -6.5px;
+  margin-top: -1.5px;
 }
 
 /* Full-Width Navbar for Desktop View */
