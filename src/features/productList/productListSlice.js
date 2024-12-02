@@ -1,18 +1,57 @@
 // src/features/product/productSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    try {
-      const response = await axios.get('wp-json/custom/v1/productdata');
-      return response.data;
-    } catch (error) {
-      throw Error ('Error fetching the product prices');
-    } 
+// Firebase project configuration
+const firebaseConfig = {
+  apiKey: "zaSyDa6fefG9o1U7NNfHs4Ei9LDZomiv19xj8",
+  authDomain: "starry-iris-442614-c1.firebaseapp.com",
+  projectId: "starry-iris-442614-c1",
+  storageBucket: "starry-iris-442614-c1.appspot.com",
+  messagingSenderId: "YOU437525971388",
+  appId: "YOU1:437525971388:ios:c0031a49681fd0bdfeabb9",
+};
+
+console.log("productSlicePage")
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// Create async thunk to fetch products from Firestore
+export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
+  try {
+    console.log('fetchProducts')
+    const snapshot = await getDocs(collection(db, "products")); // Fetch Firestore products collection
+    if (snapshot.empty) {
+      console.log("No matching documents.");
+    } else {
+      console.log("Documents found:", snapshot)
+    }
+    console.log('fetchProducts2')
+    const products = await Promise.all(
+      snapshot.docs.map(async (doc) => {
+        const data = doc.data();
+        const imageRef = ref(storage, data.image); // Reference to the storage object
+        console.log(imageRef)
+        const imageUrl = await getDownloadURL(imageRef); // Generate a public URL for the image
+        console.log(imageUrl)
+
+        return {
+          id: doc.id,
+          ...data,
+          image: imageUrl, // Replace gs:// path with public URL
+        };
+      })
+    );
+    console.log(products)
+    return products;
+  } catch (error) {
+    throw new Error("Error fetching product data");
   }
-);
+});
 
 const productListSlice = createSlice({
   name: 'products',

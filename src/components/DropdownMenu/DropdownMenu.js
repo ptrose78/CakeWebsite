@@ -29,7 +29,7 @@ const DropdownMenu = ({ className, header, menuId }) => {
             <button className={`dropdown-menu ${className}`} onClick={handleDropdownMenuToggle}>
                 {header} <span className={`caret ${isOpen ? 'open' : ''}`}>▼</span>
             </button>
-            <div onClick={handleSidebarMenuToggle}  className="drowdown-container">
+            <div className="drowdown-container">
                 <div onClick={handleDropdownMenuToggle} className={`dropdown-content ${isOpen ? 'show' : ''}`}>
                 <Link className="cake-link" to={ROUTES.cakesRoute()}>Cakes</Link>
                 <Link className="cupcake-link" to={ROUTES.cupcakesRoute()}>Cupcakes</Link>

@@ -1,0 +1,184 @@
+
+
+{
+    "products": {
+      "1": {
+        "name": "Cupcake",
+        "price": 9.99,
+        "description": "",
+        "category": "Cupcake",
+        "type": "Cupcake",
+        "image": "https://firebasestorage.googleapis.com/v0/b/starry-iris-442614-c1.firebasestorage.app/o/cupcake01.jpg?alt=media&token=88b04a5d-60d0-4131-b73d-d0856d895fae"
+      },
+        "2": {
+          "name": "Cupcake",
+          "price": 8.99,
+          "description": "",
+          "category": "Cupcake",
+          "type": "Cupcake",
+          "image": "https://firebasestorage.googleapis.com/v0/b/starry-iris-442614-c1.firebasestorage.app/o/cupcake02.jpg"
+        },
+        "3": {
+          "name": "Easter Cake",
+          "price": 79.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Holiday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake01.jpg"
+        },
+        "4": {
+          "name": "Theme Cake",
+          "price": 89.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake02.jpg"
+        },
+        "5": {
+          "name": "Baseball Cake",
+          "price": 25.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake03.jpg"
+        },
+        "6": {
+          "name": "Theme Cake",
+          "price": 89.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake04.jpg"
+        },
+        "7": {
+          "name": "Lion Cake",
+          "price": 69.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake05.jpg"
+
+        },
+        "8": {
+          "name": "Birthday Cake",
+          "price": 79.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Birthday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake06.jpg"
+        },
+        "9": {
+          "name": "Bumblebee Cake",
+          "price": 89.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Birthday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake07.jpg"
+
+        },
+        "10": {
+          "name": "Birthday Cake",
+          "price": 59.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Birthday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake08.jpg"
+        },
+        "11": {
+          "name": "Watermelon Cake",
+          "price": 69.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Birthday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake09.jpg"
+        },
+        "12": {
+          "name": "Sunflower Cake",
+          "price": 89.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake10.jpg"
+        },
+        "14": {
+          "name": "Halloween Cake",
+          "price": 79.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Holiday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake11.jpg"
+        },
+        "15": {
+          "name": "Elephant Cake",
+          "price": 59.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake12.jpg"
+        },
+        "16": {
+          "name": "Strawberry Cake",
+          "price": 59.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake13.jpg"
+        },
+        "17": {
+          "name": "Gnome Cake",
+          "price": 59.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake14.jpg"
+        },
+        "18": {
+          "name": "Birthday Cake",
+          "price": 69.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Birthday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake15.jpg"
+        },
+        "19": {
+          "name": "Chicken Cake",
+          "price": 59.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake16.jpg"
+        },
+        "20": {
+          "name": "Flamingo Cake",
+          "price": 69.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Birthday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake17.jpg"
+        },
+        "21": {
+          "name": "Birthday Cake",
+          "price": 69.99,
+          "description": "",
+          "category": "Cake",
+          "type": "Theme",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cake18.jpg"
+        },
+        "22": {
+          "name": "Gingerman Cookies",
+          "price": 1.99,
+          "description": "",
+          "category": "Cookie",
+          "type": "Regular",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cookies01.jpg"
+        },
+        "23": {
+          "name": "Christmas Cookies",
+          "price": 10.99,
+          "description": "",
+          "category": "Cookie",
+          "type": "Holiday",
+          "image": "gs://starry-iris-442614-c1.firebasestorage.app/cookies02.jpg"
+        }
+    }
+}

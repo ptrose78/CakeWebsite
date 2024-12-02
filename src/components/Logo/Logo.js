@@ -11,16 +11,12 @@ const Logo = ({logoImage}) => {
 
 
 useEffect(() => {
-    
     const getData = async() => {
         if (!logoImages) {
-            console.log('sdfsdfsdfsdfdsadfsdf')
             await dispatch((fetchLogoImages()))
         }
     }
-
     getData();
-
 }, [dispatch, logoImages])
 
 const placeholderImage = "https://source.unsplash.com/random/150x150";

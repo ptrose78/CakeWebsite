@@ -117,7 +117,7 @@
 }
 
 .dropdown-container.jumbotron-menu, .dropdown-container.navbar-dropdownmenu {
-    padding-top: 35px;
+    padding-top: 34px;
 }
 
 .dropdown-menu.jumbotron-menu {
@@ -129,8 +129,6 @@
     min-height: 80px;
     font-size: 20px;
 }
-
-
 
 .jumbotron-menu .dropdown-content, .navbar-dropdownmenu .dropdown-content {
     color: white;
