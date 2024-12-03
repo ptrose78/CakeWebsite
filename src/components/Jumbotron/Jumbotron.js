@@ -4,23 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchJumbotronImage, selectJumbotron } from '../../features/jumbotron/jumbotronSlice';
 import './Jumbotron.css'; 
 import DropdownMenu from '../DropdownMenu/DropdownMenu.js';
+import { selectImages } from '../../features/logo/logoSlice';
 
 const Jumbotron = () => {
   const dispatch = useDispatch();
-
-  const { jumbotronImage, headline, subtext } = useSelector(selectJumbotron);
-  
-
-  useEffect(() => {
-    if (!jumbotronImage) {
-      dispatch(fetchJumbotronImage());
-    }
-  }, [dispatch]);
+  const {images} = useSelector(selectImages);
+  const { headline, subtext } = useSelector(selectJumbotron);
 
     return (
         <div className="jumbotron">
           <div className="jumbotron-content" style={{ display: 'flex', alignItems: 'center' }}>
-              <img className="jumbotron-image" src={jumbotronImage} alt="Jumbotron Logo" style={{ marginRight: '2px' }} />
+              <img className="jumbotron-image" src={images[1].image} alt="Jumbotron Logo" style={{ marginRight: '2px' }} />
             <h1>{headline}</h1>
           </div>
           <p>{subtext}</p>

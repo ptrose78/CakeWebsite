@@ -1,5 +1,4 @@
 
-
 {
     "products": {
       "1": {
@@ -180,5 +179,5 @@
           "type": "Holiday",
           "image": "gs://starry-iris-442614-c1.firebasestorage.app/cookies02.jpg"
         }
-    }
+    }   
 }

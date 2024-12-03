@@ -13,7 +13,6 @@ const firebaseConfig = {
   appId: "YOU1:437525971388:ios:c0031a49681fd0bdfeabb9",
 };
 
-
 async function loadProducts() {
     return JSON.parse(await readFile('./firestoreImport.json', 'utf-8'));
   }
@@ -26,12 +25,8 @@ const db = getFirestore(app);
 const uploadData = async () => {
     try {
         const products = await loadProducts();
-        console.log(products)
 
         const productEntries = Object.entries(products.products); // Convert to array of [key, value] pairs
-
-
-       
 
         for (const [id, product] of productEntries) {
             const docRef = doc(db, "products", id); // Use the product ID as the document ID

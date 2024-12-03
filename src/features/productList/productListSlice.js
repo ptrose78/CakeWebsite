@@ -14,7 +14,6 @@ const firebaseConfig = {
   appId: "YOU1:437525971388:ios:c0031a49681fd0bdfeabb9",
 };
 
-console.log("productSlicePage")
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -23,14 +22,12 @@ const storage = getStorage(app);
 // Create async thunk to fetch products from Firestore
 export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
   try {
-    console.log('fetchProducts')
     const snapshot = await getDocs(collection(db, "products")); // Fetch Firestore products collection
     if (snapshot.empty) {
       console.log("No matching documents.");
     } else {
       console.log("Documents found:", snapshot)
     }
-    console.log('fetchProducts2')
     const products = await Promise.all(
       snapshot.docs.map(async (doc) => {
         const data = doc.data();
