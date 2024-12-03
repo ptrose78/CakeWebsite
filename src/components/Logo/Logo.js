@@ -10,8 +10,11 @@ const Logo = () => {
     console.log('images', images)
 
 useEffect(() => {
+    console.log('use Effect Logo')
     const getData = async() => {
+        console.log('hsdfjsdl;f')
         if (!images) {
+            console.log('hsdfjsdl;f')
             await dispatch((fetchImageFromStorage()))
         }
     }
