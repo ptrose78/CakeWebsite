@@ -32,11 +32,8 @@ export const fetchImageFromStorage = createAsyncThunk(
 
         const images = await Promise.all(
           snapshot.docs.map(async (doc) => {
-            console.log('logo snapshot')
             const data = doc.data();
-            console.log(data.image)
             const imageRef = ref(storage, data.image); // Reference to the storage object
-            console.log(imageRef)
             const imageURL = await getDownloadURL(imageRef); // Generate a public URL for the image       
             console.log(imageURL)
             return {

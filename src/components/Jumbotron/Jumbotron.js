@@ -10,7 +10,6 @@ const Jumbotron = () => {
   const dispatch = useDispatch();
   const {images} = useSelector(selectImages);
   const { headline, subtext } = useSelector(selectJumbotron);
-  console.log(images)
 
   useEffect(() => {
     const getData = async() => {
