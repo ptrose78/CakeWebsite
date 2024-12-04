@@ -26,7 +26,8 @@ const corsMiddleware = require('micro-cors')({
   origin: 
     process.env.REACT_APP_API_URL_FRONT_1 &&
     process.env.REACT_APP_API_URL_FRONT_2 &&
-    process.env.REACT_APP_API_URL_FRONT_3
+    process.env.REACT_APP_API_URL_FRONT_3 &&
+    process.env.REACT_APP_API_URL_FRONT_4
   , // filter out any undefined or null values
   allowMethods: ['POST', 'GET']
 });
