@@ -18,7 +18,7 @@ const Cakes = () => {
             {showOrderForm && (
                 <OptionsOrderForm 
                     product={selectedProduct} 
-                    onClose={() => dispatch(hideOrderForm())} 
+                    onClose={() => {dispatch(hideOrderForm())}} 
                 />
             )}
         </div>

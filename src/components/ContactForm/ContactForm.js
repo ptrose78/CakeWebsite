@@ -91,14 +91,13 @@ const ContactForm = () => {
           value={contact.address.city}
           onChange={handleChange}
         />
-        <select
+        <input
+          type="text"
           name="address.state"
+          placeholder="State"
           value={contact.address.state}
           onChange={handleChange}
-        >
-          <option value="Wisconsin">Wisconsin</option>
-          {/* Add more states as needed */}
-        </select>
+        />
         <input
           type="text"
           name="address.zip"

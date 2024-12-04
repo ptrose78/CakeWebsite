@@ -57,7 +57,7 @@
   text-decoration: none; /* Ensure no underline applied globally */
   position: absolute;
   top: 0px;
-  left: 26.5vw;
+  left: 22.5vw;
 }
 
 .cart-info {
@@ -141,16 +141,17 @@ li a:hover {
   }
 
   .header-left {
-    height: 20px;
+    height: 25px;
     position: relative;
     left: 0%;
   }
   
   .header-left .logo {
-    height: 60px;
-    width: 60px;
+    height: 65px;
+    width: 65px;
     margin-top: -10px;
     margin-left: -15px;
+    border-radius: 2px;
   }
 }
 

@@ -13,6 +13,7 @@ import Payment from './pages/Payment/Payment.js';
 import Navbar from './components/Navbar/Navbar.js';
 import Footer from './components/Footer/Footer.js';
 import SignIn from './pages/SignIn/SignIn.js';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop.js';
 
 
 function App() {
@@ -22,19 +23,20 @@ function App() {
         <div className="App">
           <div className="content">
           <Navbar />
+          <ScrollToTop />
           {/* Define routes for the pages */}
-          <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path="/cakes" element={<Cakes />} />
-          <Route path="/cupcakes" element={<Cupcakes />} />
-          <Route path="/cookies" element={<Cookies />} />
-          <Route path='/contactus' element={<ContactUs />} />
-          <Route path='/about' element={<About />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/signin" element={<SignIn />} />
-          </Routes>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path="/cakes" element={<Cakes />} />
+              <Route path="/cupcakes" element={<Cupcakes />} />
+              <Route path="/cookies" element={<Cookies />} />
+              <Route path='/contactus' element={<ContactUs />} />
+              <Route path='/about' element={<About />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/signin" element={<SignIn />} />
+            </Routes>
           </div>
         <Footer />
         </div>
