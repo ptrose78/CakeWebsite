@@ -5,7 +5,23 @@
     position: relative;
     top: 5px; /* Moves the info box directly above the cart icon */  
   }
+
+  @media (min-width: 768px) {
+    .cart-icon {
+      font-size: 30px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cart-icon {
+      font-size: 30px;
+    }
+  }
   
- 
+  @media (min-width: 1440px) {
+    .cart-icon {
+      font-size: 30px;
+    }
+  }
   
   

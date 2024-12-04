@@ -24,7 +24,7 @@
 
 /* Jumbotron button styling */
 .dropdown-menu.jumbotron-menu {
-    width: 25%;
+    width: 30%;
     height: 85px;
     background-color: #448d3b; /* Darker beige for emphasis */
     color: #ffffff; /* White text */
@@ -124,7 +124,7 @@
 } 
 
 .dropdown-menu.navbar-dropdownmenu {
-    min-width: 25%;
+    min-width: 30%;
     min-height: 80px;
     font-size: 20px;
 }
@@ -140,7 +140,7 @@
 }
 
 .jumbotron-menu .dropdown-content {
-    width: 25%;
+    width: 30%;
     position: relative;
     margin: auto;
 }
