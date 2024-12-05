@@ -191,6 +191,9 @@ async function sendReceipt(customerId, orderId) {
 
 async function createCustomer(req, res) {
   console.log('createCustomer on backend')
+  console.log('customer req:', req)
+  console.log('customer res:', res)
+
   const payload = await json(req);
   logger.debug(JSON.stringify(payload));
 
@@ -216,8 +219,10 @@ async function createCustomer(req, res) {
         familyName: payload.familyName
       }
 
+        console.log('customerReq:', customerReq)
       const { result, statusCode } = await square.customersApi.createCustomer(customerReq);
-   
+      console.log('customer returned result:', result);
+      console.log('customer returned statusCode:', statusCode)
      
       // Send the success response
       send(res, statusCode, {
