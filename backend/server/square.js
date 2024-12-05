@@ -7,7 +7,7 @@ const { ApiError } = require('square');
 //   try {
 //     // Using the Square API client to list customers
 //     const { result, statusCode } = await client.customersApi.listCustomers();
-//     console.log('Customers retrieved successfully:', result.customers);
+   
 //   } catch (ex) {
 //     // Handle errors
 //     if (ex instanceof ApiError) {
@@ -18,4 +18,4 @@ const { ApiError } = require('square');
 //   }
 // })();
 
-// module.exports = { ApiError: client.ApiError, client };
+module.exports = { ApiError: client.ApiError, client };
