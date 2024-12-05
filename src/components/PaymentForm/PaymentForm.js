@@ -16,6 +16,9 @@ const PaymentForm = () => {
   const appId = process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID;
   const locationId = process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID;
 
+   console.log(process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID);
+   console.log(process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID);
+
   const cart = useSelector(selectCart);
   const { customerInfo } = useSelector(selectCheckout);
 
