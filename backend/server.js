@@ -190,7 +190,7 @@ async function sendReceipt(customerId, orderId) {
 }
 
 async function createCustomer(req, res) {
-  console.log('createCustomer')
+  console.log('createCustomer on backend')
   const payload = await json(req);
   logger.debug(JSON.stringify(payload));
 
@@ -256,6 +256,7 @@ async function createOrder(req, res) {
     };
 
     const { result, statusCode } = await square.ordersApi.createOrder(orderReq);
+    console.log('create order on backend:', result)
 
     const serializedResult = JSON.stringify(result, (key, value) =>
       typeof value === 'bigint' ? value.toString() : value

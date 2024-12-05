@@ -250,7 +250,7 @@
 
 
 
-"start:production": "cross-env NODE_ENV=production PORT=3000 node ../../src/index.js",
+"start:production": "cross-env NODE_ENV=production PORT=3000 micro -l tcp://0.0.0.0:3000",
   
 
 
