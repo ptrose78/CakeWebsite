@@ -15,6 +15,8 @@ const PaymentForm = () => {
  
   const appId = process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID;
   const locationId = process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID;
+  console.log(process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID);
+  console.log(process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID);
 
   const cart = useSelector(selectCart);
   const { customerInfo } = useSelector(selectCheckout);
@@ -79,6 +81,7 @@ const PaymentForm = () => {
           const paymentResults = await createPayment(tokenResult.token, customerResults, orderResults);
         
           if (paymentResults.success === true) {
+            console.log('success charge')
             setPaymentStatus('SUCCESS Charge');
             const clearStorage = async() => {
               await dispatch(resetCheckout());
@@ -87,6 +90,7 @@ const PaymentForm = () => {
             }
             clearStorage();
           } else {
+            console.log('failure charge')
             setPaymentStatus('FAILURE Charge');
           }
 
@@ -192,7 +196,7 @@ const PaymentForm = () => {
     },
     body,
   });
-
+  console.log('customer response:', response)
   const result = await response.json();
 
   if (!response.ok) {
@@ -203,7 +207,7 @@ const PaymentForm = () => {
 };
 
 const createOrder = async (token, locationId, cart) => {
-  
+  console.log('start of create order')
   const lineItems = cart.items.map((item) => {
     return {
       name: item.name,
@@ -234,6 +238,7 @@ const createOrder = async (token, locationId, cart) => {
     body,
   })
 
+  console.log('order created:', orderResponse.ok)
   if (orderResponse.ok) {
     return orderResponse.json();
   }
