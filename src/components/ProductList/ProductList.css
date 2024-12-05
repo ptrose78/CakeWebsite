@@ -85,8 +85,127 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+
   @media (min-width: 768px) {
     .product-list {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* More items per row for larger screens */
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(40%, 4fr)); /* Forces at least two items per row */
+      gap: 10px;
+      list-style-type: none;
+      padding: 40px;
+      margin: 0;
+      width: 100%; /* Ensures the list spans full container */
+      margin-bottom: 100px;
+      margin-top: 25px;
+      position: relative;
+      margin: auto;
+    }
+
+    .product-list button {
+      background-color: #FFC107;
+      color: #3E2723;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
+    }
+    .product-list h2 {
+      color: #5D4037;
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+    .product-list p {
+      color: #27201e;
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
     }
   }
+
+  @media (min-width: 1024px) {
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(25%, 5fr)); /* Forces at least two items per row */
+      gap: 10px;
+      list-style-type: none;
+      padding: 40px;
+      margin: 0;
+      width: 75%; /* Ensures the list spans full container */
+      margin-bottom: 100px;
+      margin-top: 25px;
+      position: relative;
+      margin: auto;
+    }
+
+    .product-list button {
+      background-color: #FFC107;
+      color: #3E2723;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
+    }
+    .product-list h2 {
+      color: #5D4037;
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+    .product-list p {
+      color: #27201e;
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20%, 5fr)); /* Forces at least two items per row */
+      gap: 10px;
+      list-style-type: none;
+      padding: 40px;
+      margin: 0;
+      width: 60%; /* Ensures the list spans full container */
+      margin-bottom: 100px;
+      margin-top: 25px;
+      position: relative;
+      margin: auto;
+    }
+
+    .product-list button {
+      background-color: #FFC107;
+      color: #3E2723;
+      padding: 20px 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 22px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
+    }
+    .product-list h2 {
+      color: #5D4037;
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+    .product-list p {
+      color: #27201e;
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+  }
+

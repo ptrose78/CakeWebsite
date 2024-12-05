@@ -26,7 +26,8 @@ const corsMiddleware = require('micro-cors')({
   origin: 
     process.env.REACT_APP_API_URL_FRONT_1 &&
     process.env.REACT_APP_API_URL_FRONT_2 &&
-    process.env.REACT_APP_API_URL_FRONT_3
+    process.env.REACT_APP_API_URL_FRONT_3 &&
+    process.env.REACT_APP_API_URL_FRONT_4
   , // filter out any undefined or null values
   allowMethods: ['POST', 'GET']
 });
@@ -189,7 +190,7 @@ async function sendReceipt(customerId, orderId) {
 }
 
 async function createCustomer(req, res) {
-  console.log('createCustomer')
+  console.log('createCustomer on backend')
   const payload = await json(req);
   logger.debug(JSON.stringify(payload));
 
@@ -255,6 +256,7 @@ async function createOrder(req, res) {
     };
 
     const { result, statusCode } = await square.ordersApi.createOrder(orderReq);
+    console.log('create order on backend:', result)
 
     const serializedResult = JSON.stringify(result, (key, value) =>
       typeof value === 'bigint' ? value.toString() : value

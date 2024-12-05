@@ -238,6 +238,8 @@ form {
 
 /* Hide Order Summary on mobile devices */
 @media (max-width: 768px) {
+
+
     .order-summary {
         display: none;
     }
@@ -262,7 +264,73 @@ form {
 }
 
 @media (min-width: 1200px) {
+    .checkout-form {
+        flex: 1;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    .checkout-form h2 {
+        font-size: 28px;
+    }
+    
+    form {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        font-size: 20px;
+    }
+
+    .input-container input,
+    .input-container select  {
+        font-size: 22px;
+    }
+
+    /* When input has text, move the label */
+    .input-container input:not(:placeholder-shown) + label,
+    .input-container select:not([value=""]) + label {
+        top: -24px;
+        font-size: 18px;
+        color: #40b446;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .continue-btn {
+        display: block;
+        width: 100%; /* Make it full width */
+        max-width: 350px; /* Limit max width for better responsiveness */
+        margin: 20px auto; /* Center the button and add spacing */
+        padding: 20px 30px; /* Add padding for size */
+        background-color: #4CAF50; /* Primary color */
+        color: #fff; /* White text for contrast */
+        font-size: 24px; /* Adjust font size */
+        font-weight: bold; /* Make text bold */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor for interaction */
+        text-align: center; /* Center text */
+        transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+    }
+
     .order-summary {
-        width: 30%;  /* Increase width to 40% on very large screens */
+        width: 35%;  /* Increase width to 40% on very large screens */
+        margin-right: 100px;
+    }
+
+    .order-summary h2 {
+        font-size: 30px;
+    }
+    .item-name {
+        font-size: 22px;
+    }
+
+    .item-details p {
+        font-size: 20px;
+    }
+
+    .item-total {
+        font-size: 24px;
+    }
+
+    .order-totals .grand-total {
+        font-size: 26px;
     }
 }

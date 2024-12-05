@@ -112,3 +112,54 @@ form {
     text-align: center;
     margin-top: 20px;
   }
+
+  @media (min-width: 1200px) {
+    form label {
+        font-size: 25px;
+    }
+
+    form input {
+        font-size: 20px;
+    }
+
+    /* Submit Button */
+  .submit-button-contact, 
+  input[type="submit"],
+  .clearForm-button-contact {
+    background-color: #45a049;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .clearForm-button-contact {
+    background-color: #457fa0;
+    margin-right: 50px;
+  }
+
+  .submit-button-contact:hover,
+  input[type="submit"]:hover {
+    background-color: #357a39;
+  }
+
+  .clearForm-button-contact:hover,
+  input[type="submit"]:hover {
+    background-color: #36617a;
+  }
+
+  .submission-message {
+    color: green;
+    background-color: #e8f5e9; /* Light green background */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid green;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}

@@ -6,12 +6,12 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 // Firebase project configuration
 const firebaseConfig = {
-  apiKey: "zaSyDa6fefG9o1U7NNfHs4Ei9LDZomiv19xj8",
+  apiKey: process.env.REACT_APP_FIREBASE_CONFIG_API_KEY,
   authDomain: "starry-iris-442614-c1.firebaseapp.com",
   projectId: "starry-iris-442614-c1",
   storageBucket: "starry-iris-442614-c1.appspot.com",
   messagingSenderId: "YOU437525971388",
-  appId: "YOU1:437525971388:ios:c0031a49681fd0bdfeabb9",
+  appId: process.env.REACT_APP_FIREBASE_CONFIG_APPID,
 };
 
 // Initialize Firebase

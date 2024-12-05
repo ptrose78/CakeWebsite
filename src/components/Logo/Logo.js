@@ -7,14 +7,11 @@ import './Logo.css';  // Import the external CSS file
 const Logo = () => {
     const dispatch = useDispatch();
     const {images} = useSelector(selectImages);
-    console.log('images', images)
 
 useEffect(() => {
     console.log('use Effect Logo')
     const getData = async() => {
-        console.log('hsdfjsdl;f')
         if (!images) {
-            console.log('hsdfjsdl;f')
             await dispatch((fetchImageFromStorage()))
         }
     }

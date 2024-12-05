@@ -7,12 +7,12 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 // Firebase project configuration
 const firebaseConfig = {
-  apiKey: "zaSyDa6fefG9o1U7NNfHs4Ei9LDZomiv19xj8",
+  apiKey: process.env.REACT_APP_FIREBASE_CONFIG_API_KEY,
   authDomain: "starry-iris-442614-c1.firebaseapp.com",
   projectId: "starry-iris-442614-c1",
   storageBucket: "starry-iris-442614-c1.appspot.com",
   messagingSenderId: "YOU437525971388",
-  appId: "YOU1:437525971388:ios:c0031a49681fd0bdfeabb9",
+  appId: process.env.REACT_APP_FIREBASE_CONFIG_APPID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -32,11 +32,8 @@ export const fetchImageFromStorage = createAsyncThunk(
 
         const images = await Promise.all(
           snapshot.docs.map(async (doc) => {
-            console.log('logo snapshot')
             const data = doc.data();
-            console.log(data.image)
             const imageRef = ref(storage, data.image); // Reference to the storage object
-            console.log(imageRef)
             const imageURL = await getDownloadURL(imageRef); // Generate a public URL for the image       
             console.log(imageURL)
             return {

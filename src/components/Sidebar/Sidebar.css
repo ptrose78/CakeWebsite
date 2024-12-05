@@ -8,7 +8,7 @@
     cursor: pointer;
     position: fixed;
     top: 15px;
-    right: 30px;
+    right: 20px;
     z-index: 1000;
 }
 
@@ -25,7 +25,7 @@
     overflow-y: hidden; /* Allow scrolling if content overflows */
     color: #5A3E36;
     transition: transform 0.3s ease;
-    z-index: 999;
+    z-index: 2000;
 }
 
 .sidebar-menu.open {

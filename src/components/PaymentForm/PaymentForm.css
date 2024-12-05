@@ -26,3 +26,20 @@
     padding: 0.5rem 0;
   }
   
+  @media (min-width: 1200px) {
+    
+    #payment-status-container.is-success {
+      background-color: #d4edda; /* Light green */
+      color: #155724; /* Dark green text */
+      border: 1px solid #c3e6cb; /* Green border */
+      font-size: 20px;
+    }
+    
+    #payment-status-container.is-failure {
+      background-color: #f8d7da; /* Light red */
+      color: #721c24; /* Dark red text */
+      border: 1px solid #f5c6cb; /* Red border */
+      font-size: 20px;
+    }
+    
+  }

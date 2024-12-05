@@ -240,7 +240,6 @@ input[type="number"] {
       width: 35px;
       text-align: center;
       padding: 4px;
-  
       font-size: 20px;
     }
     
@@ -304,6 +303,39 @@ input[type="number"] {
     .cart-column.details .product-image{
       display: none;
     }
+  }
 
+  @media (min-width: 1024px) {
+    .proceed-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.5em;
+    }
 
+    .product-name {
+      font-size: 20px;
+    }
+
+    .details p {
+      margin: 2px 0;
+      font-size: 20px;
+      color: #666;
+    }
+
+    .cart-item .price {
+      font-size: 20px;
+    }
+    
+    .cart-item .subtotal {
+      font-size: 20px;;
+      text-align: left;
+    }
+
+    .total-price {
+      font-size: 25px;
+    }
   }
