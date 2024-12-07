@@ -233,7 +233,7 @@
 
 
 
-"start:sandbox": "cross-env NODE_ENV=sandbox PORT=8080 micro -l tcp://0.0.0.0:8080",
+"start:sandbox": "cross-env NODE_ENV=sandbox PORT=3000 micro -l tcp://0.0.0.0:3000",
   
 
 
