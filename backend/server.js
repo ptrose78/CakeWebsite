@@ -191,9 +191,10 @@ async function sendReceipt(customerId, orderId) {
 
 async function createCustomer(req, res) {
   console.log('createCustomer on backend')
-  console.log(process.env.SQUARE_ACCESS_TOKEN)
+ 
+
   console.log(process.env.REACT_APP_API_URL_FRONT)
-  console.log(process.env.YOUR_API_V3_KEY)
+
 
   const payload = await json(req);
   logger.debug(JSON.stringify(payload));
