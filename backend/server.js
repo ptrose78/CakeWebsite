@@ -24,15 +24,15 @@ const { ApiError, client: square } = require('./server/square');
 // Set up CORS
 const corsMiddleware = require('micro-cors')({
   origin: 
-    process.env.REACT_APP_API_URL_FRONT_1 &&
-    process.env.REACT_APP_API_URL_FRONT_2 &&
-    process.env.REACT_APP_API_URL_FRONT_3 &&
+    process.env.REACT_APP_API_URL_FRONT &&
     process.env.REACT_APP_API_URL_FRONT_4
   , // filter out any undefined or null values
-  allowMethods: ['POST', 'GET']
+  allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowCredentials: true
 });
 
-
+console.log('front:',process.env.REACT_APP_API_URL_FRONT)
 // Import the createEmail function
 const { sendTransactionalEmail } = require('./createEmail.js');
 
@@ -189,10 +189,14 @@ async function sendReceipt(customerId, orderId) {
       responseCustomer.result.customer.emailAddress)
 }
 
+
+
 async function createCustomer(req, res) {
   console.log('createCustomer on backend')
-  console.log('customer req:', req)
-  console.log('customer res:', res)
+ 
+
+  console.log(process.env.REACT_APP_API_URL_FRONT)
+
 
   const payload = await json(req);
   logger.debug(JSON.stringify(payload));
@@ -214,7 +218,7 @@ async function createCustomer(req, res) {
           country: payload.address.country,
           postalCode: payload.address.zipCode
         },
-        emailAddress: payload.emailAddress,
+        emailAddress: payload.emailAddress,  
         idempotencyKey: payload.idempotency_key,
         familyName: payload.familyName
       }
