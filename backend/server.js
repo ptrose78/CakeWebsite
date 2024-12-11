@@ -23,13 +23,10 @@ const { ApiError, client: square } = require('./server/square');
 
 // Set up CORS
 const corsMiddleware = require('micro-cors')({
-  origin: 
-    process.env.REACT_APP_API_URL_FRONT &&
-    process.env.REACT_APP_API_URL_FRONT_4
+  origin: '*'
   , // filter out any undefined or null values
   allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  allowCredentials: true
 });
 
 console.log('front:',process.env.REACT_APP_API_URL_FRONT)
