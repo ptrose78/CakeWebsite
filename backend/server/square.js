@@ -18,4 +18,4 @@ const { ApiError } = require('square');
 //   }
 // })();
 
-module.exports = { ApiError: client.ApiError, client };
+module.exports = { ApiError, client };

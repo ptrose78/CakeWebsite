@@ -8,7 +8,7 @@ export const postContactForm = createAsyncThunk(
     try {
       console.log(process.env.REACT_APP_API_URL_BACK);
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/contactForm`, {
+      const response = await fetch(`https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/createContact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

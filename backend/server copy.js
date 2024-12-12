@@ -1,60 +1,41 @@
 
-require('dotenv').config();
+// Now you can use the `square` client to interact with the Square API in your routes
 
+require('dotenv').config();
 // micro provides http helpers
 const { createError, json, send } = require('micro');
-
+// microrouter provides http server routing
+const { router, get, post } = require('microrouter');
+// serve-handler serves static assets
+const staticHandler = require('serve-handler');
 // async-retry will retry failed API requests
 const retry = require('async-retry');
 
 // logger gives us insight into what's happening
-const logger = require('../server/logger.js');
+const logger = require('./server/logger');
 // schema validates incoming requests
 const {
   validatePaymentPayload,
   validateCreateCardPayload,
-} = require('../server/schema.js');
+} = require('./server/schema');
+// square provides the API client and error types
+const { ApiError, client: square } = require('./server/square');
 
-const admin = require('firebase-admin');
-const functions = require('firebase-functions');
-
-admin.initializeApp()
-
-// require('dotenv').config();
-const cors = require('cors')
-const express = require('express');
-// const { json } = require('micro');
-const bodyParser = require('body-parser');
-const { Client, ApiError } = require('square');
-const app = express();
-
-app.use(cors({ origin: true }));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-// Set up the Square API client dynamically based on the environment
-const client = new Client({
-  environment: "sandbox",
-  accessToken: 'EAAAl_JrfxJ5bgMFUHZ9u2q7zQnZ0UIO3-TL5Ia7Mmsi-fNKB2FkphQvI_B3jNoQ', // Square Access Token from environment
+// Set up CORS
+const corsMiddleware = require('micro-cors')({
+  origin: '*'
+  , // filter out any undefined or null values
+  allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 });
 
-// Utility to handle BigInt serialization
-function handleBigInt(obj) {
-    return JSON.parse(
-      JSON.stringify(obj, (key, value) =>
-        typeof value === 'bigint' ? value.toString() : value
-      )
-    );
-  }
-
-
+console.log('front:',process.env.REACT_APP_API_URL_FRONT)
 // Import the createEmail function
-const { sendTransactionalEmail } = require('../createEmail.js');
+const { sendTransactionalEmail } = require('./createEmail.js');
 
 // Import template for receipt
-const receiptTemplate = require('../receiptTemplate.js');
+const receiptTemplate = require('./receiptTemplate');
+
 
 //Send email after a payment completes
 const sendEmail = (subject, senderName, senderEmail, htmlContent, recipientEmail) => {
@@ -67,7 +48,7 @@ const sendEmail = (subject, senderName, senderEmail, htmlContent, recipientEmail
     });
     }
    
-app.get('/createPayment', async (req, res) => {
+async function createPayment(req, res) {
   const payload = await json(req);
   logger.debug(JSON.stringify(payload));
   
@@ -119,7 +100,7 @@ app.get('/createPayment', async (req, res) => {
       // Function to handle payment creation
         const sendPayment = async () => {
           try {
-            const { result, statusCode } = await client.paymentsApi.createPayment(payment);
+            const { result, statusCode } = await square.paymentsApi.createPayment(payment);
             logger.info('Payment succeeded!', { result, statusCode });
 
             if (statusCode === 200) {
@@ -188,11 +169,11 @@ app.get('/createPayment', async (req, res) => {
       });
     }
   }
-})
+}
 
 async function sendReceipt(customerId, orderId) {
-  const responseCustomer = await client.customersApi.retrieveCustomer(customerId);
-  const responseOrder = await client.ordersApi.retrieveOrder(orderId);
+  const responseCustomer = await square.customersApi.retrieveCustomer(customerId);
+  const responseOrder = await square.ordersApi.retrieveOrder(orderId);
 
   // Assume `order` is the JSON object from your API
   const htmlContent = receiptTemplate(responseOrder.result.order);
@@ -205,49 +186,71 @@ async function sendReceipt(customerId, orderId) {
       responseCustomer.result.customer.emailAddress)
 }
 
-app.get('/createCustomer', async (req, res) => {  
-   
-    console.log('post /')
 
-    const customersApi = client.customersApi;
-    const customerReq = {
+
+async function createCustomer(req, res) {
+  console.log('createCustomer on backend')
+ 
+
+  console.log(process.env.REACT_APP_API_URL_FRONT)
+
+
+  const payload = await json(req);
+  logger.debug(JSON.stringify(payload));
+
+  // if (!validateCreateCustomerPayload(payload)) {
+  //   console.log('error')
+  //   throw createError(400, 'Bad Request');
+  // }
+
+  await retry(async (bail, attempt) => {
+    try {
+      logger.debug('Creating customer', { attempt });
+
+      const customerReq = {
         address: {
-            addressLine1: '8021 S WARING DR',
-            locality: 'US',
-            postalCode: '53154',
-            firstName: 'Paul',
-            lastName: 'Rose'
-          },
-          idempotencyKey: '17bd8bd1-7c6a-4088-b135-ffaf0eb62fc7',
-          familyName: 'Rose',
-          emailAddress: 'prose100@hotmail.com',
+          addressLine1: payload.address.address,
+          firstName: payload.address.firstName,
+          lastName: payload.address.lastName,
+          country: payload.address.country,
+          postalCode: payload.address.zipCode
+        },
+        emailAddress: payload.emailAddress,  
+        idempotencyKey: payload.idempotency_key,
+        familyName: payload.familyName
       }
 
-    try {
-        console.log("Square before")
-        const response = await customersApi.createCustomer(customerReq);
-          // Use the utility to handle BigInt values
-        const safeResponse = handleBigInt(response.result);
-        console.log(safeResponse)
-        res.status(200).json(safeResponse);
+      console.log('customerReq:', customerReq)
+      const response = await square.customersApi.createCustomer(customerReq);
+      const safeResponse = handleBigInt(response.result);
+      res.status(200).json(safeResponse);
+      return;
+     
+      // Send the success response
+      send(res, statusCode, {
+        success: true,
+        customer: {
+          id: result.customer.id,
+          status: result.customer.status,
+        },
+      });
+     
 
-    } catch (error) {
-        let errorResult = null;
-        if (error instanceof ApiError) {
-            console.log("error instanceof ApiError")
-            errorResult = error.errors;
-        } else {
-            console.log("error NOT instanceof ApiError")
-            errorResult = error;
-        }
-        res.status(500).json({
-            'title': 'Payment Failure',
-            'result': errorResult,
-        });
+    } catch (ex) {
+      // Handle API errors separately
+      if (ex instanceof ApiError) {
+        logger.error("API Error:", ex.errors);
+        bail(ex);  // Prevent retrying if it's a valid error (e.g., invalid request)
+      } else {
+        // For unexpected errors (like network issues), retry the operation
+        logger.error(`Error creating card-on-file on attempt ${attempt}: ${ex}`);
+        throw ex; // This will trigger a retry in the retry logic.
+      }
     }
-});
+  });
+}
 
-app.get('/createOrder', async (req, res) => {
+async function createOrder(req, res) {
   try {
     const payload = await json(req);
     const orderReq = {
@@ -259,7 +262,7 @@ app.get('/createOrder', async (req, res) => {
       idempotencyKey: payload.idempotencyKey,
     };
 
-    const { result, statusCode } = await client.ordersApi.createOrder(orderReq);
+    const { result, statusCode } = await square.ordersApi.createOrder(orderReq);
     console.log('create order on backend:', result)
 
     const serializedResult = JSON.stringify(result, (key, value) =>
@@ -279,9 +282,10 @@ app.get('/createOrder', async (req, res) => {
       throw ex;
     }
   }
-});
+}
 
-app.get('/storeCard', async (req, res) => {
+
+async function storeCard(req, res) {
   const payload = await json(req);
 
   if (!validateCreateCardPayload(payload)) {
@@ -300,7 +304,7 @@ app.get('/storeCard', async (req, res) => {
         },
       };
   
-      const { result, statusCode } = await client.cardsApi.createCard(cardReq);
+      const { result, statusCode } = await square.cardsApi.createCard(cardReq);
   
       // Process the result here
       result.card.expMonth = result.card.expMonth.toString();
@@ -327,9 +331,9 @@ app.get('/storeCard', async (req, res) => {
       }
     }
   });
-});
+}
 
-app.get('/createContact', async (req, res) => {
+async function createContact(req, res) {
   try {
     const contact = await json(req);
     logger.debug(JSON.stringify(contact));
@@ -357,14 +361,34 @@ app.get('/createContact', async (req, res) => {
     res.writeHead(500, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ success: false, error: 'Failed to send email' }));
   }
-})
+}
 
 // Health Check Route
-app.get('/healthCheck', async (req, res) => { 
+const healthCheck = async (req, res) => {
   send(res, 200, { status: 'healthy' });
-});
+};
 
 
-// Expose Express API as a single Cloud Function:
-exports.api  = functions.https.onRequest(app);
+// Define the routes
+const appRouter = router(
+  get('/health', healthCheck),
+  post('/payment', createPayment),
+  post('/customer', createCustomer),
+  post('/card', storeCard),
+  post('/order', createOrder),
+  post('/contactForm', createContact)
+);
 
+const corsWrappedApp = corsMiddleware(appRouter);
+
+// Ensure Cloud Run PORT is respected (used by micro CLI)
+if (require.main === module) {
+  const PORT = process.env.PORT || 8080; // Cloud Run sets PORT
+  console.log(`Server running on port ${PORT}`);
+  require('http')
+    .createServer(corsWrappedApp)
+    .listen(PORT); // micro won't call this automatically, so we do it here
+}
+
+// Export the wrapped function
+module.exports = corsWrappedApp;

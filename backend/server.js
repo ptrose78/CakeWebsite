@@ -19,15 +19,27 @@ const {
   validateCreateCardPayload,
 } = require('./server/schema');
 // square provides the API client and error types
-const { ApiError, client: square } = require('./server/square');
+const { Client, ApiError } = require('square');
 
 // Set up CORS
 const corsMiddleware = require('micro-cors')({
-  origin: '*'
-  , // filter out any undefined or null values
-  allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: true
 });
+
+// Set up the Square API client dynamically based on the environment
+const client = new Client({
+    environment: "sandbox",
+    accessToken: 'EAAAl_JrfxJ5bgMFUHZ9u2q7zQnZ0UIO3-TL5Ia7Mmsi-fNKB2FkphQvI_B3jNoQ', // Square Access Token from environment
+  });
+  
+  // Utility to handle BigInt serialization
+  function handleBigInt(obj) {
+      return JSON.parse(
+        JSON.stringify(obj, (key, value) =>
+          typeof value === 'bigint' ? value.toString() : value
+        )
+      );
+    }
 
 console.log('front:',process.env.REACT_APP_API_URL_FRONT)
 // Import the createEmail function
@@ -189,66 +201,47 @@ async function sendReceipt(customerId, orderId) {
 
 
 async function createCustomer(req, res) {
-  console.log('createCustomer on backend')
+    
+     console.log('post /')
  
-
-  console.log(process.env.REACT_APP_API_URL_FRONT)
-
-
-  const payload = await json(req);
-  logger.debug(JSON.stringify(payload));
-
-  // if (!validateCreateCustomerPayload(payload)) {
-  //   console.log('error')
-  //   throw createError(400, 'Bad Request');
-  // }
-
-  await retry(async (bail, attempt) => {
-    try {
-      logger.debug('Creating customer', { attempt });
-
-      const customerReq = {
-        address: {
-          addressLine1: payload.address.address,
-          firstName: payload.address.firstName,
-          lastName: payload.address.lastName,
-          country: payload.address.country,
-          postalCode: payload.address.zipCode
-        },
-        emailAddress: payload.emailAddress,  
-        idempotencyKey: payload.idempotency_key,
-        familyName: payload.familyName
-      }
-
-      console.log('customerReq:', customerReq)
-      const response = await square.customersApi.createCustomer(customerReq);
-      const safeResponse = handleBigInt(response.result);
-      res.status(200).json(safeResponse);
-      return;
-     
-      // Send the success response
-      send(res, statusCode, {
-        success: true,
-        customer: {
-          id: result.customer.id,
-          status: result.customer.status,
-        },
-      });
-     
-
-    } catch (ex) {
-      // Handle API errors separately
-      if (ex instanceof ApiError) {
-        logger.error("API Error:", ex.errors);
-        bail(ex);  // Prevent retrying if it's a valid error (e.g., invalid request)
-      } else {
-        // For unexpected errors (like network issues), retry the operation
-        logger.error(`Error creating card-on-file on attempt ${attempt}: ${ex}`);
-        throw ex; // This will trigger a retry in the retry logic.
-      }
-    }
-  });
-}
+     const customersApi = client.customersApi;
+     const customerReq = {
+         address: {
+             addressLine1: '8021 S WARING DR',
+             locality: 'US',
+             postalCode: '53154',
+             firstName: 'Paul',
+             lastName: 'Rose'
+           },
+           idempotencyKey: '280b5bfa-98bb-4183-9ee3-17081f156505',
+           familyName: 'Rose',
+           emailAddress: 'prose100@hotmail.com',
+       }
+ 
+     try {
+         console.log("Square before")
+         const response = await customersApi.createCustomer(customerReq);
+           // Use the utility to handle BigInt values
+         const safeResponse = handleBigInt(response.result);
+         console.log(safeResponse)
+         res.status(200).json(safeResponse);
+ 
+     } catch (error) {
+         let errorResult = null;
+         if (error instanceof ApiError) {
+             console.log("error instanceof ApiError")
+             errorResult = error.errors;
+         } else {
+             console.log("error NOT instanceof ApiError")
+             errorResult = error;
+         }
+         res.status(500).json({
+             'title': 'Payment Failure',
+             'result': errorResult,
+         });
+     }
+ };
+ 
 
 async function createOrder(req, res) {
   try {
