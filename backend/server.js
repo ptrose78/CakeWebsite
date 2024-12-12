@@ -23,7 +23,7 @@ const { Client, ApiError } = require('square');
 
 // Set up CORS
 const corsMiddleware = require('micro-cors')({
-  origin: true
+  origin: 'no-cors'
 });
 
 // Set up the Square API client dynamically based on the environment
