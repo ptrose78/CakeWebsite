@@ -23,13 +23,10 @@ const { ApiError, client: square } = require('./server/square');
 
 // Set up CORS
 const corsMiddleware = require('micro-cors')({
-  origin: 
-    process.env.REACT_APP_API_URL_FRONT &&
-    process.env.REACT_APP_API_URL_FRONT_4
+  origin: '*'
   , // filter out any undefined or null values
   allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  allowCredentials: true
 });
 
 console.log('front:',process.env.REACT_APP_API_URL_FRONT)
@@ -223,10 +220,11 @@ async function createCustomer(req, res) {
         familyName: payload.familyName
       }
 
-        console.log('customerReq:', customerReq)
-      const { result, statusCode } = await square.customersApi.createCustomer(customerReq);
-      console.log('customer returned result:', result);
-      console.log('customer returned statusCode:', statusCode)
+      console.log('customerReq:', customerReq)
+      const response = await square.customersApi.createCustomer(customerReq);
+      const safeResponse = handleBigInt(response.result);
+      res.status(200).json(safeResponse);
+      return;
      
       // Send the success response
       send(res, statusCode, {
@@ -236,7 +234,7 @@ async function createCustomer(req, res) {
           status: result.customer.status,
         },
       });
-      return;
+     
 
     } catch (ex) {
       // Handle API errors separately
