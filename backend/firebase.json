@@ -3,7 +3,7 @@
     {
       "source": "functions",
       "runtime": "nodejs22",
-      "timeoutSeconds": 80,
+      "timeoutSeconds": 300,
       "codebase": "default",
       "ignore": [
         "node_modules",
