@@ -1,12 +1,14 @@
 // src/pages/ProductList.js
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaFilter } from 'react-icons/fa'; 
 import { selectProductsStatus, selectProductsError } from '../../features/productList/productListSlice';
 import {
   fetchProducts,
   setCategoryFilter,
   setPriceFilter,
   setTypeFilter,
+  sortPriceFilter,
   selectFilteredProducts,
 } from '../../features/productList/productListSlice';
 import { showOrderForm } from '../../features/orderFormVisibility/orderFormVisibilitySlice';
@@ -24,8 +26,7 @@ const ProductList = ({ category }) => {
   const products = useSelector(selectFilteredProducts); //provides global access to products from its productListSlice.js
 
   // Local state
-  const [productsWithImages, setProductsWithImages] = useState([]); //productsWithImages is used locally
-  const [hasFetchedImages, setHasFetchedImages] = useState(false); //hasFetchedImages is used locally
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +34,8 @@ const ProductList = ({ category }) => {
         await dispatch(fetchProducts());
       }
       if (status === 'succeeded') {
-        dispatch(setCategoryFilter(category));
+        await dispatch(setCategoryFilter(category));
+        await dispatch(sortPriceFilter('highToLow'));
       }
     };
 
@@ -71,6 +73,20 @@ const ProductList = ({ category }) => {
   //     return []; // Handle a global failure gracefully
   //   }
   // };
+
+  const handleSortPrice = (order) => {
+    const sortPrice = async () => {
+      if (order === 'lowToHigh') {
+        await dispatch(sortPriceFilter('lowToHigh'))
+      }
+       else if (order === 'highToLow') {
+        await dispatch(sortPriceFilter('highToLow'))
+      }
+      return 0;
+    }
+    sortPrice();
+  }
+  
    
   const handleCustomizeClick = (product) => {
     dispatch(showOrderForm(product));
@@ -89,20 +105,39 @@ const ProductList = ({ category }) => {
   }
   
   return (
-      <div className="product-list">
-      {products.map((product) => (
-        <li key={product.id}>
-          <h2>{product.name}</h2>
-          <p>Price: ${product.price} {checkCookie(product) && "per dozen"}</p>
-          {product.image ? (
-            <img src={product.image} alt={product.name} width="200" height="200" />
-          ) : (
-            <p>Image not available</p>
-          )}
-            <button disabled={isSiteDisabled} onClick={() => handleCustomizeClick(product)}>Order</button>
-        </li>
-        ))}
-      </div>
+        
+      <div className="product-container">
+          <div className="filter-container">
+            <button
+              className="filter-icon"
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              aria-label="Filter options"
+            >
+              <FaFilter size={24} />
+            </button>
+
+            {isMenuOpen && (
+              <div className="filter-menu">
+                <button onClick={() => handleSortPrice('lowToHigh')}>Low-to-High</button>
+                <button onClick={() => handleSortPrice('highToLow')}>High-to-Low</button>
+              </div>
+            )}
+          </div>
+          <div className="product-list">
+            {products.map((product) => (
+              <li key={product.id}>
+                <h2>{product.name}</h2>
+                <p>Price: ${product.price} {checkCookie(product) && "per dozen"}</p>
+                {product.image ? (
+                  <img src={product.image} alt={product.name} width="200" height="200" />
+                ) : (
+                  <p>Image not available</p>
+                )}
+                  <button disabled={isSiteDisabled} onClick={() => handleCustomizeClick(product)}>Order</button>
+              </li>
+              ))}
+          </div>
+    </div>
   );
 };
 
