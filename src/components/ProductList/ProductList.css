@@ -11,17 +11,20 @@
   .home-page p {
     color: #3E2723;
   }
+
+    
+ div.product-list {
+  padding: 0px; 
+ }
   
-  .product-list {
+ .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(45%, 1fr)); /* Forces at least two items per row */
     gap: 10px;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
+    padding: 0px; 
     width: 100%; /* Ensures the list spans full container */
     margin-bottom: 100px;
-    margin-top: 25px;
   }
   
   .product-list li {
@@ -42,6 +45,7 @@
   
   .product-list p {
     color: #3E2723;
+    font-weight: bold;
   }
   
   .product-list button {
@@ -84,8 +88,64 @@
     transform: translateY(0);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
 
+ 
+/* Filter container styles */
+.filter-container {
+  position: relative;
+  display: block;
+  text-align: left;
+
+  padding: 10px 0;
+}
+
+.filter-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  color: #5D4037; /* Matches home-page text color */
+  position: relative;
+  margin-top: -100px;
+}
+
+.filter-icon svg {
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  left: 12px;
+  bottom: 8px;
+}
+
+/* Ensuring the dropdown aligns properly */
+.filter-menu {
+  position: absolute;
+  background-color: #FFF7E6; /* Matches page background */
+  border: 1px solid #d2b48c; /* Matches subtle styling */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-menu button {
+  padding: 10px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px; /* Adjust button text size */
+  color: #5D4037;
+}
+  
+.filter-menu button:hover {
+  background-color: #d2691e;
+  color:#f6f5f4
+}
+  
+  
   @media (min-width: 768px) {
     .product-list {
       display: grid;
@@ -166,7 +226,67 @@
       margin-bottom: 8px;
       font-weight: bold;
     }
+
+     /* Filter container styles */
+.filter-container {
+  position: relative;
+  display: block;
+  text-align: left;
+
+  padding: 10px 0;
+}
+
+.filter-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  color: #5D4037; /* Matches home-page text color */
+  position: relative;
+  margin-top: -100px;
+  margin-left: 100px;
+}
+
+.filter-icon svg {
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  left: 12px;
+  bottom: 8px;
+  
+}
+
+/* Ensuring the dropdown aligns properly */
+.filter-menu {
+  position: absolute;
+  background-color: #FFF7E6; /* Matches page background */
+  border: 1px solid #d2b48c; /* Matches subtle styling */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+}
+
+.filter-menu button {
+  padding: 10px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px; /* Adjust button text size */
+  color: #5D4037;
+}
+  
+.filter-menu button:hover {
+  background-color: #d2691e;
+  color:#f6f5f4
+}
   }
+
+ 
 
   @media (min-width: 1440px) {
     .product-list {
@@ -207,5 +327,29 @@
       margin-bottom: 8px;
       font-weight: bold;
     }
+
+    .filter-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      color: #5D4037; /* Matches home-page text color */
+      position: relative;
+      margin-top: -100px;
+      margin-left: 300px;
+    }
+    /* Ensuring the dropdown aligns properly */
+.filter-menu {
+  position: absolute;
+  background-color: #FFF7E6; /* Matches page background */
+  border: 1px solid #d2b48c; /* Matches subtle styling */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px;
+}
   }
 

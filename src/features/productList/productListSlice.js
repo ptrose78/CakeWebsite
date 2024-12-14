@@ -85,6 +85,13 @@ const productListSlice = createSlice({
         product.type === action.payload
       );
     },
+    sortPriceFilter: (state, action) => {
+      if (action.payload==='highToLow') {
+        state.filteredItems = state.filteredItems.sort((a, b) => b.price - a.price);
+      } else {
+          state.filteredItems = state.filteredItems.sort((a, b) => a.price - b.price);
+        }
+    },
     resetFilters: (state) => {
       state.filters = { category: null, price: null, type: null };
       state.filteredItems = state.items;
@@ -111,7 +118,7 @@ const productListSlice = createSlice({
 export const selectProductsStatus = (state) => state.products.status;
 export const selectProductsError = (state) => state.products.error;
 
-export const { setCategoryFilter, setPriceFilter, setTypeFilter, resetFilters } = productListSlice.actions;
+export const { setCategoryFilter, setPriceFilter, setTypeFilter, sortPriceFilter, resetFilters } = productListSlice.actions;
 
 export const selectFilteredProducts = (state) => state.products.filteredItems;
 

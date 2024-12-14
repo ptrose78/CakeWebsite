@@ -104,7 +104,7 @@
 .jumbotron-menu {
     display: inline-block;
   
-    width: 100%;
+    width: 120%;
 }
 
 .navbar-dropdownmenu + .dropdown-content {
@@ -195,7 +195,7 @@
     }
 
     .jumbotron-menu .dropdown-content {
-        width: 50%;
+        width: 30%;
         position: relative;
         margin: auto;
     }
