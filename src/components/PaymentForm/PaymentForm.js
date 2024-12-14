@@ -127,7 +127,7 @@ const PaymentForm = () => {
       }
     })
 
-    const response = await fetch(`https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/createPayment`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/payment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -231,7 +231,7 @@ const createOrder = async (token, locationId, cart) => {
 
   const body = JSON.stringify(bodyParameters);
   
-  const orderResponse = await fetch(`https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/createOrder`, {
+  const orderResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -261,7 +261,7 @@ const storeCard = async (token, customerResults, verificationToken) => {
 
   const body = JSON.stringify(bodyParameters);
 
-  const paymentResponse = await fetch(`https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/storeCard`, {
+  const paymentResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/card`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
