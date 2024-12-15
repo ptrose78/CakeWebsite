@@ -42,6 +42,7 @@ const client = new Client({
     }
 
 console.log('front:',process.env.REACT_APP_API_URL_FRONT)
+
 // Import the createEmail function
 const { sendTransactionalEmail } = require('./createEmail.js');
 
