@@ -95,4 +95,8 @@
     height: 800px;
   }
 
+@media (min-width: 1440px) {
+  .jumbotron {
+    height: 1050px;
+  }
 }

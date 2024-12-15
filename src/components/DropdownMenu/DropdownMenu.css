@@ -204,6 +204,15 @@
         background-color: #D9663D; /* Highlighted orange on hover */
         color: #fff;
     }
+
+    .jumbotron-menu .dropdown-content a {
+        position: relative;
+        overflow: visible;
+        top: 0px;
+        background-color: #e2caad; /* Beige color */
+        width: 100%;
+        font-size: 28px;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -280,3 +289,13 @@
     }
 }
 
+@media (min-width: 1440px) {
+    .jumbotron-menu .dropdown-content a {
+        position: relative;
+        overflow: visible;
+        top: 0px;
+        background-color: #e2caad; /* Beige color */
+        width: 100%;
+        font-size: 34px;
+    }
+  }
