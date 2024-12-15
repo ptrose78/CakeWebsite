@@ -16,9 +16,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { Client, Environment, ApiError } = require('square');
+
 const client = new Client({
-  environment: Environment.Production,
-  accessToken: process.env.SQUARE_ACCESS_TOKEN,
+  bearerAuthCredentials: {
+     accessToken: process.env.SQUARE_ACCESS_TOKEN
+  },
+  environment: Environment.Sandbox,
+  httpClientOptions: {
+    timeout: 10000,
+    retryConfig: {
+      maxNumberOfRetries: 3,
+      maximumRetryWaitTime: 100000,
+    }
+  }
 });
 
 const app = express();
