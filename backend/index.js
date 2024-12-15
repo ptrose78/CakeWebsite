@@ -189,38 +189,23 @@ app.post('/createPayment', async (req, res) => {
   }
 })
 
-async function sendReceipt(customerId, orderId) {
-  const responseCustomer = await client.customersApi.retrieveCustomer(customerId);
-  const responseOrder = await client.ordersApi.retrieveOrder(orderId);
-
-  // Assume `order` is the JSON object from your API
-  const htmlContent = receiptTemplate(responseOrder.result.order);
-
-    sendEmail(
-      "Receipt from Buzzy Sweets",
-      "Paul",
-      process.env.EMAIL,
-      htmlContent,
-      responseCustomer.result.customer.emailAddress)
-}
-
 app.post('/createCustomer', async (req, res) => {  
    
     console.log('post /')
 
     const customersApi = client.customersApi;
     const customerReq = {
-        address: {
-            addressLine1: '8021 S WARING DR',
-            locality: 'US',
-            postalCode: '53154',
-            firstName: 'Paul',
-            lastName: 'Rose'
-          },
-          idempotencyKey: '17bd8bd1-7c6a-4088-b135-ffaf0eb62fc7',
-          familyName: 'Rose',
-          emailAddress: 'prose100@hotmail.com',
-      }
+      address: {
+        addressLine1: payload.address.address,
+        firstName: payload.address.firstName,
+        lastName: payload.address.lastName,
+        country: payload.address.country,
+        postalCode: payload.address.zipCode
+      },
+      emailAddress: payload.emailAddress,
+      idempotencyKey: payload.idempotency_key,
+      familyName: payload.familyName
+    }
 
     try {
         console.log("Square before")

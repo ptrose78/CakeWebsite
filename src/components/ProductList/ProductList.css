@@ -95,8 +95,9 @@
   position: relative;
   display: block;
   text-align: left;
-
+  margin-top: 10px;
   padding: 10px 0;
+  margin-bottom: -10px;
 }
 
 .filter-icon {
@@ -136,7 +137,7 @@
   border: none;
   background: none;
   cursor: pointer;
-  font-size: 14px; /* Adjust button text size */
+  font-size: 16px; /* Adjust button text size */
   color: #5D4037;
 }
   
@@ -245,7 +246,7 @@
   color: #5D4037; /* Matches home-page text color */
   position: relative;
   margin-top: -100px;
-  margin-left: 100px;
+  margin-left: 130px;
 }
 
 .filter-icon svg {
@@ -254,7 +255,7 @@
   position: absolute;
   left: 12px;
   bottom: 8px;
-  
+  margin-top: -170px;
 }
 
 /* Ensuring the dropdown aligns properly */
@@ -267,7 +268,7 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
+  margin-left: 130px;
 }
 
 .filter-menu button {
@@ -276,7 +277,7 @@
   border: none;
   background: none;
   cursor: pointer;
-  font-size: 14px; /* Adjust button text size */
+  font-size: 18px; /* Adjust button text size */
   color: #5D4037;
 }
   
@@ -336,8 +337,8 @@
       width: 40px;
       color: #5D4037; /* Matches home-page text color */
       position: relative;
-      margin-top: -100px;
-      margin-left: 300px;
+      margin-top: -150px;
+      margin-left: 290px;
     }
     /* Ensuring the dropdown aligns properly */
 .filter-menu {
@@ -349,7 +350,73 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  margin-left: 300px;
+  margin-left: 290px;
 }
   }
+
+  @media (min-width: 1800px) {
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20%, 5fr)); /* Forces at least two items per row */
+      gap: 10px;
+      list-style-type: none;
+      padding: 40px;
+      margin: 0;
+      width: 60%; /* Ensures the list spans full container */
+      margin-bottom: 100px;
+      margin-top: 25px;
+      position: relative;
+      margin: auto;
+    }
+
+    .product-list button {
+      background-color: #FFC107;
+      color: #3E2723;
+      padding: 20px 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 22px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
+    }
+    .product-list h2 {
+      color: #5D4037;
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+    .product-list p {
+      color: #27201e;
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .filter-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      color: #5D4037; /* Matches home-page text color */
+      position: relative;
+      margin-top: -100px;
+      margin-left: 475px;
+    }
+    /* Ensuring the dropdown aligns properly */
+.filter-menu {
+  position: absolute;
+  background-color: #FFF7E6; /* Matches page background */
+  border: 1px solid #d2b48c; /* Matches subtle styling */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  margin-left: 475px;
+}
+  }
+
 
