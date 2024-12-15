@@ -198,8 +198,6 @@ async function sendReceipt(customerId, orderId) {
       responseCustomer.result.customer.emailAddress)
 }
 
-
-
 async function createCustomer(req, res) {
     
      console.log('post /')
