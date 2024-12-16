@@ -105,14 +105,15 @@
   background-color: #ffffff;
   width: 100%;
   font-size: 18px;
+  margin-left: 5px;
 }
 
 .navbar-links li {
-  margin: 0 20px;
+  margin: 0 50px;
 }
 
 .navbar-links li.about {
-  margin-left: 4px;
+  margin-left: 10px;
 }
 
 .navbar-links li a {
@@ -215,8 +216,13 @@ li a:hover {
     background-color: #ffffff;
     width: 100%;
     font-size: 24px;
+    margin-left: 35px;
   }
-}
+
+  .navbar-links li {
+    margin-right: 100px;
+  }
+} 
 
 @media (min-width: 1440px) {
   .header-right {

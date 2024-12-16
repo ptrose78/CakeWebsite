@@ -3,7 +3,7 @@
     font-size: 24px;
     text-align: center;
     position: relative;
-    top: 9px; /* Moves the info box directly above the cart icon */  
+    top: 13px; /* Moves the info box directly above the cart icon */  
   }
 
   @media (min-width: 768px) {
