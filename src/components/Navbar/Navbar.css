@@ -47,17 +47,17 @@
 }
 
 .header-right {
+  display: inline-block;
   min-width: 10px;      
   height: 100%;   
-  position: relative;      
+  position: relative;
 }
 
 /* Cart Container */
 .cart-container {
   text-decoration: none; /* Ensure no underline applied globally */
   position: absolute;
-  top: 0px;
-  left: 24.5vw;
+  right: 15px;
 }
 
 .cart-info {

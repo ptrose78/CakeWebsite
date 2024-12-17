@@ -7,7 +7,7 @@
     color: #5A3E36;
     cursor: pointer;
     position: fixed;
-    top: 15px;
+    top: 22px;
     right: 20px;
     z-index: 1000;
 }
@@ -17,7 +17,7 @@
     position: fixed;
     padding-right: 35px;
     padding-top: 10px;
-    top: 70px;
+    top: 65px;
     right: -290px;
     height: 400px;
     width: 180px;

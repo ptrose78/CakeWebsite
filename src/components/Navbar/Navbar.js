@@ -37,9 +37,11 @@ const Navbar = () => {
                     </div>
                   </div>
                   <Link className="cart-link" to={ROUTES.cartRoute()}><CartIcon /></Link>
+                  <Sidebar className="sidebar sidebar-site-disabled" />
                 </div>
+                
               </div>
-              <Sidebar className="sidebar sidebar-site-disabled" />
+              
             </header>
           </div>
         </div>
@@ -56,16 +58,17 @@ const Navbar = () => {
                   </div>
                 </div>
                 <Link className="cart-link" to={ROUTES.cartRoute()}><CartIcon /></Link>
+                <Sidebar className="sidebar" />
               </div>
             </div>
-            <Sidebar className="sidebar" />
+            
           </header>
         )}
 
           {/* Navbar Section */}
           <nav className="navbar">
             <ul className="navbar-links">
-              <li><DropdownMenu className="navbar-dropdownmenu" header="Our Treats" menuId="menu3" /></li>
+              <li><DropdownMenu  className="treats" className="navbar-dropdownmenu" header="Our Treats" menuId="menu3" /></li>
               <li className="about"><Link to={ROUTES.aboutRoute()}>About</Link></li>
               <li><Link to={ROUTES.contactUsRoute()}>Contact Us</Link></li>
             </ul>
