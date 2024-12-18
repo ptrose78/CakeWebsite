@@ -214,7 +214,7 @@
 
 
 
-"start": "firebase serve --only functions",
+ "start": "python3 server.py",
   
 
 
