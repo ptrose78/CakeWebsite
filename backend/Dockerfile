@@ -1,32 +1,33 @@
-# Use the official python image as the base image
+# Use a Python base image
 FROM python:3.10-slim
 
-# Install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-pip
+# Install Node.js and npm (if needed for frontend)
+RUN apt-get update && apt-get install -y \
+    curl \
+    && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs
 
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json for npm dependencies
 COPY package*.json ./
 
-# Install Node.js dependencies
+# Install Node.js dependencies (this will also install any npm packages)
 RUN npm install
 
 # Copy the Python requirements file
-COPY requirements.txt ./
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip3 install -r requirements.txt
 
-# Set the PORT environment variable
-ENV PORT=8080
-
 # Copy the rest of the app files
 COPY . .
 
-# Expose the port that your app will run on
+# Expose the port
 EXPOSE 8080
 
-# Start the app
-CMD ["python3", "server.py"]
+# Command to run the app (this will call `npm start`, which runs `python3 server.py`)
+CMD ["npm", "start"]
+
