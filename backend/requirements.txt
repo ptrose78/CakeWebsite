@@ -1,1 +1,1 @@
-flask==2.3.2  # Use the version you need
+flask==2.2.5  # Use the version you need

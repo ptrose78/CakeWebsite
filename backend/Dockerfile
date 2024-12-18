@@ -1,5 +1,5 @@
-# Use the official Node.js image as the base image
-FROM node:16
+# Use the official python image as the base image
+FROM python:3.10-slim
 
 # Install Python and pip
 RUN apt-get update && apt-get install -y python3 python3-pip
@@ -29,4 +29,4 @@ COPY . .
 EXPOSE 8080
 
 # Start the app
-CMD ["npm", "start"]
+CMD ["python3", "server.py"]
