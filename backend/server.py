@@ -26,6 +26,7 @@ client = Client(
 def home():
     return "Welcome to the API. Use the appropriate endpoints to interact.", 200
 
+# Create Customer
 @app.route('/create-customer', methods=['POST'])
 def create_customer():
     try:
