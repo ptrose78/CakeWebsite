@@ -175,15 +175,15 @@ const PaymentForm = () => {
     console.log('createCustomer')
     const bodyParameters = {
       address: {
-        address: customerInfo.address,
+        address_line_1: customerInfo.address,
         country: customerInfo.country,
-        firstName: customerInfo.firstName,
-        lastName: customerInfo.lastName,
-        zipCode: customerInfo.zipcode
+        first_name: customerInfo.firstName,
+        last_name: customerInfo.lastName,
+        postal_code: customerInfo.zipcode
       },
-      givenName: customerInfo.firstName,  
-      familyName: customerInfo.lastName,  
-      emailAddress: customerInfo.emailAddress, 
+      given_name: customerInfo.firstName,  
+      family_name: customerInfo.lastName,  
+      email_address: customerInfo.emailAddress, 
       idempotency_key: window.crypto.randomUUID()
     };
 
