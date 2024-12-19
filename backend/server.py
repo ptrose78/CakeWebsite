@@ -22,6 +22,10 @@ client = Client(
     environment='sandbox'  # Use 'production' for a live account
 )
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Welcome to the API. Use the appropriate endpoints to interact.", 200
+
 @app.route('/create-customer', methods=['POST'])
 def create_customer():
     try:
