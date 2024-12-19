@@ -1,3 +1,4 @@
 flask==2.2.5  # Use the version you need
+flask_cors
 python-dotenv==1.0.0
 squareup
