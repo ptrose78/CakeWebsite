@@ -6,7 +6,8 @@ import { startPayment, paymentSuccess, paymentFailure } from '../../features/pay
 import { resetCart, selectCart } from '../../features/cart/cartSlice';
 import { resetCheckout, selectCheckout } from '../../features/checkout/checkoutSlice';
 import { disableSite, enableSite, toggleSite, selectIsSiteDisabled } from '../../features/siteDisabled/siteDisabledSlice';
-import './PaymentForm.css'
+import './PaymentForm.css';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const PaymentForm = () => {
@@ -127,7 +128,7 @@ const PaymentForm = () => {
       }
     })
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/payment`, {
+    const response = await fetch('https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/createPayment/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -220,10 +221,12 @@ const createOrder = async (token, locationId, cart) => {
     };
   });
   
+  const myUUID = uuidv4(); //Generates a random UUID
+
   const bodyParameters = {
     order: {
       locationId: locationId,
-      referenceId: 'my-order-001',
+      referenceId: myUUID,
       lineItems: lineItems,
     },
     idempotencyKey: window.crypto.randomUUID()
@@ -231,7 +234,7 @@ const createOrder = async (token, locationId, cart) => {
 
   const body = JSON.stringify(bodyParameters);
   
-  const orderResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/order`, {
+  const orderResponse = await fetch('https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/createOrder/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -261,7 +264,7 @@ const storeCard = async (token, customerResults, verificationToken) => {
 
   const body = JSON.stringify(bodyParameters);
 
-  const paymentResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/card`, {
+  const paymentResponse = await fetch('https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/storeCard/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
