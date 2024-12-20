@@ -65,9 +65,11 @@ const PaymentForm = () => {
           
           //create the customer
           const customerResults = await createCustomer(tokenResult.token, customerInfo);
+          console.log('customerResults on frontend:', customerResults)
 
           ////create the order
           const orderResults = await createOrder(tokenResult.token, locationId, cart);
+          console.log('orderResults on frontend:', orderResults)
 
           // if (orderResults.success === true) {
           //   setPaymentStatus('SUCCESS Ordered');
@@ -118,7 +120,7 @@ const PaymentForm = () => {
     console.log(token);
     console.log(window.crypto.randomUUID());
     console.log(customerResults.customer.id);
-    console.log(orderResults.order.order.id);
+    console.log(orderResults.order.id);
     console.log('cart total price:', cart.totalPrice);
 
    const bodyParameters = {
