@@ -79,7 +79,7 @@ const PaymentForm = () => {
           
           //const verificationToken = await verifyBuyer(payments, tokenResult.token, customerInfo, 'CHARGE');
 
-          const paymentResults = await createPayment(tokenResult.token, customerResults, orderResults);
+          const paymentResults = await createPayment(tokenResult.token, customerResults, orderResults, cart);
         
           if (paymentResults.success === true) {
             console.log('success charge')
@@ -113,10 +113,10 @@ const PaymentForm = () => {
       }
   };
 
-  const createPayment = async (token, customerResults, orderResults) => {
+  const createPayment = async (token, customerResults, orderResults, cart) => {
     console.log('create Payment started on front end')
 
-    const body = JSON.stringify({
+   const bodyParameters = {
       source_id: token,
       idempotency_key: window.crypto.randomUUID(),
       customer_id: customerResults.customer.id,
@@ -125,7 +125,9 @@ const PaymentForm = () => {
         amount: cart.totalPrice,
         currency: 'USD'
       }
-    })
+    }
+
+   const body = JSON.stringify(bodyParameters);
 
     console.log("body parameters of payment:", body)
     
