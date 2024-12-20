@@ -148,13 +148,14 @@ const PaymentForm = () => {
     });
     console.log('payment complete on front end')
 
+    console.log('payment response:', response)
     const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(`Failed to create payment: ${result.errors[0].detail}`);
+      throw new Error(`Failed to create customer: ${result.errors[0].detail}`);
     }
 
-    return response.json();
+  return result;
 };
  
 const verifyBuyer = async (payments, token, customerInfo, intent) => {
@@ -216,6 +217,7 @@ const verifyBuyer = async (payments, token, customerInfo, intent) => {
     },
     body,
   });
+  
   console.log('customer response:', response)
   const result = await response.json();
 
@@ -223,7 +225,7 @@ const verifyBuyer = async (payments, token, customerInfo, intent) => {
     throw new Error(`Failed to create customer: ${result.errors[0].detail}`);
   }
 
-  return result;
+  return result.data;
 };
 
 const createOrder = async (token, locationId, cart) => {
@@ -252,7 +254,7 @@ const createOrder = async (token, locationId, cart) => {
 
   const body = JSON.stringify(bodyParameters);
   
-  const orderResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/create-order`, {
+  const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/create-order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -260,13 +262,14 @@ const createOrder = async (token, locationId, cart) => {
     body,
   })
 
-  console.log('order created:', orderResponse.ok)
-  if (orderResponse.ok) {
-    return orderResponse.json();
+  console.log('order response:', response)
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(`Failed to create customer: ${result.errors[0].detail}`);
   }
 
-  const errorBody = await orderResponse.text();
-    throw new Error(errorBody);
+  return result.data;
 }
 
 
