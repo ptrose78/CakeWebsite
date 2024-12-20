@@ -121,7 +121,7 @@ const PaymentForm = () => {
     console.log(window.crypto.randomUUID());
     console.log(customerResults.customer.id);
     console.log(orderResults.order.id);
-    console.log('cart total price:', cart.totalPrice);
+    console.log('cart total price:', Math.round(cart.totalPrice*100));
 
    const bodyParameters = {
       source_id: token,
@@ -129,7 +129,7 @@ const PaymentForm = () => {
       customer_id: customerResults.customer.id,
       order_id: orderResults.order.id,
       amount_money: {
-        amount: cart.totalPrice,
+        amount: Math.round(cart.totalPrice*100),
         currency: "USD"
       }
     }
