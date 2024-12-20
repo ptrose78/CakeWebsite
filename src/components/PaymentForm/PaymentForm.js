@@ -127,7 +127,7 @@ const PaymentForm = () => {
       source_id: token,
       idempotency_key: window.crypto.randomUUID(),
       customer_id: customerResults.customer.id,
-      order_id: orderResults.order.order.id,
+      order_id: orderResults.order.id,
       amount_money: {
         amount: cart.totalPrice,
         currency: "USD"
