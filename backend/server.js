@@ -23,13 +23,13 @@ const { Client, ApiError } = require('square');
 
 // Set up CORS
 const corsMiddleware = require('micro-cors')({
-  origin: 'no-cors'
+  origin: '*'
 });
 
 // Set up the Square API client dynamically based on the environment
 const client = new Client({
-    environment: "sandbox",
-    accessToken: 'EAAAl_JrfxJ5bgMFUHZ9u2q7zQnZ0UIO3-TL5Ia7Mmsi-fNKB2FkphQvI_B3jNoQ', // Square Access Token from environment
+    environment: 'production',
+    accessToken: 'SQUARE_ACCESS_TOKEN', // Square Access Token from environment
   });
   
   // Utility to handle BigInt serialization

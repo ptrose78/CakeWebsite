@@ -117,18 +117,17 @@ const PaymentForm = () => {
   const createPayment = async (token, customerResults, orderResults) => {
 
     const body = JSON.stringify({
-      locationId,
-      sourceId: token,
-      idempotencyKey: window.crypto.randomUUID(),
-      customerId: customerResults.customer.id,
-      orderId: orderResults.order.order.id,
-      amountMoney: {
+      source_id: token,
+      idempotency_key: window.crypto.randomUUID(),
+      customer_id: customerResults.customer.id,
+      order_id: orderResults.order.order.id,
+      amount_money: {
         amount: cart.totalPrice,
         currency: 'USD'
       }
     })
 
-    const response = await fetch('https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/createPayment/', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/process-payment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -210,11 +209,11 @@ const PaymentForm = () => {
 
 const createOrder = async (token, locationId, cart) => {
   console.log('start of create order')
-  const lineItems = cart.items.map((item) => {
+  const line_items = cart.items.map((item) => {
     return {
       name: item.name,
       quantity: item.quantity.toString(),
-      basePriceMoney: {
+      base_price_money: {
         amount:  Math.round(item.price * 100),
         currency: 'USD'
       }
@@ -225,16 +224,16 @@ const createOrder = async (token, locationId, cart) => {
 
   const bodyParameters = {
     order: {
-      locationId: locationId,
-      referenceId: myUUID,
-      lineItems: lineItems,
+      location_id: locationId,
+      reference_id: myUUID,
+      line_items: line_items,
     },
-    idempotencyKey: window.crypto.randomUUID()
+    idempotency_key: window.crypto.randomUUID()
   }
 
   const body = JSON.stringify(bodyParameters);
   
-  const orderResponse = await fetch('https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/createOrder/', {
+  const orderResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/create-order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -255,16 +254,17 @@ const createOrder = async (token, locationId, cart) => {
 const storeCard = async (token, customerResults, verificationToken) => {
  
   const bodyParameters = {
-    locationId,
-    sourceId: 'cnon:card-nonce-ok',
-    verificationToken,
-    idempotencyKey: window.crypto.randomUUID(),
-    customerId: customerResults.customer.id,
+    source_id: token,
+    verification_token: verificationToken,
+    idempotency_key: window.crypto.randomUUID(),
+    card: {
+      customer_id: customerResults.customer.id,
+    }
   };
 
   const body = JSON.stringify(bodyParameters);
 
-  const paymentResponse = await fetch('https://us-central1-starry-iris-442614-c1.cloudfunctions.net/api/storeCard/', {
+  const paymentResponse = await fetch(`${process.env.REACT_APP_API_URL_BACK}/store-card`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

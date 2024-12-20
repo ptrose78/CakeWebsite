@@ -57,6 +57,46 @@ def create_customer():
         logger.error("Error in create_customer: %s", str(e))
         return jsonify({"success": False, "error": str(e)}), 500
 
+# Create Order
+@app.route('/create-order', methods=['POST'])
+def create_order():
+    try:
+        order_data = request.json
+        logger.debug("Received order data: %s", order_data)
+
+        # Call the Square API to create an order
+        result = client.orders.create_order(body=order_data)
+
+        if result.is_success():
+            logger.info("Order created successfully: %s", result.body)
+            return jsonify({"success": True, "data": result.body}), 200
+        else:
+            logger.warning("Error creating order: %s", result.errors)
+            return jsonify({"success": False, "errors": result.errors}), 400
+    except Exception as e:
+        logger.error("Error in create_order: %s", str(e))
+        return jsonify({"success": False, "error": str(e)}), 500
+
+# Process Payment
+@app.route('/process-payment', methods=['POST'])
+def process_payment():
+    try:
+        payment_data = request.json
+        logger.debug("Received payment data: %s", payment_data)
+
+        # Call the Square API to process a payment
+        result = client.payments.create_payment(body=payment_data)
+
+        if result.is_success():
+            logger.info("Payment processed successfully: %s", result.body)
+            return jsonify({"success": True, "data": result.body}), 200
+        else:
+            logger.warning("Error processing payment: %s", result.errors)
+            return jsonify({"success": False, "errors": result.errors}), 400
+    except Exception as e:
+        logger.error("Error in process_payment: %s", str(e))
+        return jsonify({"success": False, "error": str(e)}), 500
+
 if __name__ == "__main__":
     # Use the environment variable PORT, default to 8080 if not set
     port = os.getenv('PORT', 8080)
