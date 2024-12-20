@@ -117,7 +117,6 @@ const PaymentForm = () => {
   const createPayment = async (token, customerResults, orderResults) => {
 
     const body = JSON.stringify({
-      location_id,
       source_id: token,
       idempotency_key: window.crypto.randomUUID(),
       customer_id: customerResults.customer.id,
@@ -255,9 +254,8 @@ const createOrder = async (token, locationId, cart) => {
 const storeCard = async (token, customerResults, verificationToken) => {
  
   const bodyParameters = {
-    location_id,
-    source_id: 'cnon:card-nonce-ok',
-    verification_token,
+    source_id: token,
+    verification_token: verificationToken,
     idempotency_key: window.crypto.randomUUID(),
     card: {
       customer_id: customerResults.customer.id,
