@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startPayment, paymentSuccess, paymentFailure } from '../../features/paymentForm/paymentFormSlice';
 import { resetCart, selectCart } from '../../features/cart/cartSlice';
 import { resetCheckout, selectCheckout } from '../../features/checkout/checkoutSlice';
-import { disableSite, enableSite, toggleSite, selectIsSiteDisabled } from '../../features/siteDisabled/siteDisabledSlice';
+import { disableSite } from '../../features/siteDisabled/siteDisabledSlice';
 import './PaymentForm.css';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -115,6 +114,7 @@ const PaymentForm = () => {
   };
 
   const createPayment = async (token, customerResults, orderResults) => {
+    console.log('create Payment started on front end')
 
     const body = JSON.stringify({
       source_id: token,
@@ -127,6 +127,9 @@ const PaymentForm = () => {
       }
     })
 
+    console.log("body parameters of payment:", body)
+    
+
     const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/process-payment`, {
       method: 'POST',
       headers: {
@@ -134,40 +137,47 @@ const PaymentForm = () => {
       },
       body
     });
-    console.log('payment complete')
-    return response.json();
-  };
- 
-  const verifyBuyer = async (payments, token, customerInfo, intent) => {
+    console.log('payment complete on front end')
 
-    const verificationDetails = {
-      billingContact: {
-        addressLines: [customerInfo.address, ''],
-        familyName: customerInfo.lastName,
-        givenName: customerInfo.firstName,
-        emailAddress: customerInfo.emailAddress,
-        country: customerInfo.country,
-        phone: customerInfo.phone,
-        region: '',
-        city: customerInfo.city,
-      },
-      intent: intent
-    };
+    const result = await response.json();
 
-    try {
-   
-      const verificationResults = await payments.verifyBuyer(token, verificationDetails);
-    
-  
-      if (!verificationResults || !verificationResults.token) {
-        throw new Error('Buyer verification failed: No token received.');
-      }
-
-     
-      return verificationResults.token; // Return the verification token
-    } catch (error) {
-      throw new Error('Buyer verification failed.');
+    if (!response.ok) {
+      throw new Error(`Failed to create payment: ${result.errors[0].detail}`);
     }
+
+    return response.json();
+};
+ 
+const verifyBuyer = async (payments, token, customerInfo, intent) => {
+
+  const verificationDetails = {
+    billingContact: {
+      addressLines: [customerInfo.address, ''],
+      familyName: customerInfo.lastName,
+      givenName: customerInfo.firstName,
+      emailAddress: customerInfo.emailAddress,
+      country: customerInfo.country,
+      phone: customerInfo.phone,
+      region: '',
+      city: customerInfo.city,
+    },
+    intent: intent
+  };
+
+  try {
+ 
+    const verificationResults = await payments.verifyBuyer(token, verificationDetails);
+  
+
+    if (!verificationResults || !verificationResults.token) {
+      throw new Error('Buyer verification failed: No token received.');
+    }
+
+   
+    return verificationResults.token; // Return the verification token
+  } catch (error) {
+    throw new Error('Buyer verification failed.');
+  }  
 }
 
   const createCustomer = async (token, customerInfo) => {
@@ -311,8 +321,8 @@ return (
         id="payment-status-container"
         className={paymentStatus === 'SUCCESS Charge' ? 'is-success' : 'is-failure'}
       >
-      {paymentStatus === 'SUCCESS Charge' && <p>You successfully paid. Your receipt has been emailed to you. Check your spam folder if necessary.</p>}
-      {paymentStatus === 'FAILURE Charge' && <p>Sorry, your payment did not process. Review your credit card information and try again.</p>}
+      {paymentStatus === 'SUCCESS Charge' ? <p>You successfully paid. Your receipt has been emailed to you. Check your spam folder if necessary.</p>
+      : <p>Sorry, your payment did not process. Review your credit card information and try again.</p>}
       </div>
     )}
   </div>
