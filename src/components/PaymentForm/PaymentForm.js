@@ -115,6 +115,11 @@ const PaymentForm = () => {
 
   const createPayment = async (token, customerResults, orderResults, cart) => {
     console.log('create Payment started on front end')
+    console.log(token);
+    console.log(window.crypto.randomUUID());
+    console.log(customerResults.customer.id);
+    console.log(orderResults.order.order.id);
+    console.log('cart total price:', cart.totalPrice);
 
    const bodyParameters = {
       source_id: token,
@@ -123,13 +128,13 @@ const PaymentForm = () => {
       order_id: orderResults.order.order.id,
       amount_money: {
         amount: cart.totalPrice,
-        currency: 'USD'
+        currency: "USD"
       }
     }
-
+    console.log("body parameters of payment:", bodyParameters)
    const body = JSON.stringify(bodyParameters);
 
-    console.log("body parameters of payment:", body)
+    console.log("body of payment:", body)
     
 
     const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/process-payment`, {
