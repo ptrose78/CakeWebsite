@@ -1,7 +1,9 @@
 from datetime import datetime
+from jinja2 import Template
 
 def receipt_template(order):
-    html_content = f"""
+    # Jinja2 template with proper syntax
+    template = """
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -77,17 +79,18 @@ def receipt_template(order):
         <table class="details">
           <tr>
             <th>Order ID:</th>
-            <td>{order['id']}</td>
+            <td>{{ order['id'] }}</td>
           </tr>
           <tr>
             <th>Order Date:</th>
-            <td>{datetime.strptime(order['createdAt'], '%Y-%m-%dT%H:%M:%SZ').strftime('%Y-%m-%d')}</td>
+            <td>{{ order['createdAt'] | datetime('%Y-%m-%dT%H:%M:%SZ') | strftime('%Y-%m-%d') }}</td>
           </tr>
           <tr>
             <th>Reference ID:</th>
-            <td>{order['referenceId']}</td>
+            <td>{{ order['referenceId'] }}</td>
           </tr>
         </table>
+
         <h2>Order Details</h2>
         <table>
           <thead>
@@ -98,12 +101,13 @@ def receipt_template(order):
             </tr>
           </thead>
           <tbody>
-            {''.join(f"""
+            {% for item in order['lineItems'] %}
             <tr>
-              <td>{item['name']}</td>
-              <td>{item['quantity']}</td>
-              <td>${float(item['totalMoney']['amount']) / 100:.2f}</td>
-            </tr>""" for item in order['lineItems'])}
+              <td>{{ item['name'] }}</td>
+              <td>{{ item['quantity'] }}</td>
+              <td>${{ (item['totalMoney']['amount'] / 100) | float | format("%.2f") }}</td>
+            </tr>
+            {% endfor %}
           </tbody>
         </table>
 
@@ -111,21 +115,21 @@ def receipt_template(order):
         <table class="totals">
           <tr>
             <th>Subtotal:</th>
-            <td>${float(order['netAmounts']['totalMoney']['amount']) / 100:.2f}</td>
+            <td>${{ (order['netAmounts']['totalMoney']['amount'] / 100) | float | format("%.2f") }}</td>
           </tr>
           <tr>
             <th>Tax:</th>
-            <td>${float(order['totalTaxMoney']['amount']) / 100:.2f}</td>
+            <td>${{ (order['totalTaxMoney']['amount'] / 100) | float | format("%.2f") }}</td>
           </tr>
           <tr>
             <th>Total:</th>
-            <td>${float(order['totalMoney']['amount']) / 100:.2f}</td>
+            <td>${{ (order['totalMoney']['amount'] / 100) | float | format("%.2f") }}</td>
           </tr>
         </table>
 
         <div class="footer">
-          <p>Payment Method: {order['tenders'][0]['cardDetails']['cardBrand']} ending in {order['tenders'][0]['cardDetails']['card']['last4']}</p>
-          <p>Transaction Status: {order['tenders'][0]['cardDetails']['status']}</p>
+          <p>Payment Method: {{ order['tenders'][0]['cardDetails']['cardBrand'] }} ending in {{ order['tenders'][0]['cardDetails']['card']['last4'] }}</p>
+          <p>Transaction Status: {{ order['tenders'][0]['cardDetails']['status'] }}</p>
           <p>If you have any questions, feel free to contact us at <a href="mailto:buzzysweets1@gmail.com">buzzysweets1@gmail.com</a>.</p>
         </div>
         <div class="footer">
@@ -135,4 +139,7 @@ def receipt_template(order):
     </body>
     </html>
     """
-    return html_content
+    
+    # Create Jinja2 template and render it with the order data
+    jinja_template = Template(template)
+    return jinja_template.render(order=order)

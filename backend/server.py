@@ -56,7 +56,7 @@ async def send_receipt(customer_id, order_id):
     order = response_order.body.get('order', {})
 
     # Generate HTML content for the receipt
-    html_content = receipt_template(order)
+    html_content = await receipt_template(order)
 
     # Send the receipt email
     recipient_email = customer.get('email_address')
@@ -71,14 +71,14 @@ async def send_receipt(customer_id, order_id):
 
 # Create Customer
 @app.route('/create-customer', methods=['POST'])
-def create_customer():
+async def create_customer():
     try:
           # Get the JSON body from the frontend
         customer_data = request.json
         logger.debug("Received customer data: %s", customer_data)
 
         # Call the Square API to create a customer
-        result = client.customers.create_customer(body=customer_data)
+        result = await client.customers.create_customer(body=customer_data)
 
         if result.is_success():
             logger.info("Customer created successfully: %s", result.body)
@@ -92,13 +92,13 @@ def create_customer():
 
 # Create Order
 @app.route('/create-order', methods=['POST'])
-def create_order():
+async def create_order():
     try:
         order_data = request.json
         logger.debug("Received order data: %s", order_data)
 
         # Call the Square API to create an order
-        result = client.orders.create_order(body=order_data)
+        result = await client.orders.create_order(body=order_data)
 
         if result.is_success():
             logger.info("Order created successfully: %s", result.body)
@@ -112,13 +112,13 @@ def create_order():
 
 # Process Payment
 @app.route('/process-payment', methods=['POST'])
-def process_payment():
+async def process_payment():
     try:
         payment_data = request.json
         logger.debug("Received payment data: %s", payment_data)
 
         # Call the Square API to process a payment
-        result = client.payments.create_payment(body=payment_data)
+        result = await client.payments.create_payment(body=payment_data)
 
         if result.is_success():
             logger.info("Payment succeeded: %s", result.body)
@@ -128,7 +128,7 @@ def process_payment():
 
             # Send a confirmation email
             try:
-                send_transactional_email(
+                await send_transactional_email(
                     subject="Order Placed!",
                     sender_name="Paul",
                     sender_email="paultrose1@gmail.com",
@@ -141,7 +141,7 @@ def process_payment():
 
             # Send the receipt
             try:
-                send_receipt(customer_id, order_id)
+                await send_receipt(customer_id, order_id)
                 logger.info("Receipt sent successfully to customer ID: %s", customer_id)
             except Exception as receipt_error:
                 logger.error("Error sending receipt: %s", receipt_error)

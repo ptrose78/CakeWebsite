@@ -2,3 +2,7 @@ flask==2.2.5  # Use the version you need
 flask_cors
 python-dotenv==1.0.0
 squareup
+quart==0.18.3
+quart-cors
+werkzeug==2.3.7
+sib_api_v3_sdk
