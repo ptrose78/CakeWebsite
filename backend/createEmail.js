@@ -7,7 +7,7 @@ apiKey.apiKey = process.env.YOUR_API_V3_KEY;
 
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-async function sendTransactionalEmail(subject, senderName, senderEmail, htmlContent, recipientEmail) {
+async function send_transactional_email(subject, senderName, senderEmail, htmlContent, recipientEmail) {
     const email = {
         sender: { name: senderName, email: senderEmail },
         to: [{ email: recipientEmail }], // Correct format
@@ -25,4 +25,4 @@ async function sendTransactionalEmail(subject, senderName, senderEmail, htmlCont
     }
 }
 
-module.exports = { sendTransactionalEmail };
+module.exports = { send_transactional_email };
