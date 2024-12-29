@@ -1,10 +1,14 @@
 import os
+from dotenv import load_dotenv
 import asyncio
 from sib_api_v3_sdk import ApiClient, TransactionalEmailsApi
 from sib_api_v3_sdk import Configuration
+import logging
+
+load_dotenv()
 
 # Configure API key
-api_key = os.getenv("YOUR_API_V3_KEY")
+api_key = os.environ.get("YOUR_API_V3_KEY")
 configuration = Configuration()
 configuration.api_key['api-key'] = api_key
 

@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from quart import Quart, request, jsonify
+from quart_cors import cors
 from dotenv import load_dotenv
 from square.client import Client
 from square.http.auth.o_auth_2 import BearerAuthCredentials
@@ -10,10 +10,10 @@ import asyncio
 from createEmail import send_transactional_email
 from receiptTemplate import receipt_template
 
-app = Flask(__name__)
+app = Quart(__name__)
 
-# Enable CORS for all routes
-CORS(app)
+# Enable CORS for the app
+app = cors(app, allow_origin="*")
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)  # You can change this to INFO or ERROR depending on your needs
@@ -35,10 +35,9 @@ client = Client(
     environment='production'  # Use 'production' for a live account
 )
 
-@app.route('/', methods=['GET'])
-def home():
-    logger.info("Home route accessed")
-    return "Welcome to the API. Use the appropriate endpoints to interact.", 200
+@app.route("/", methods=["GET"])
+async def home():
+    return "Welcome to the Quart app!", 200
 
 async def send_email(subject, sender_name, sender_email, html_content, recipient_email):
     try:
@@ -164,13 +163,13 @@ def process_payment():
         }), 500
     
 @app.route('/create-contact', methods=['POST'])
-def create_contact():
+async def create_contact():
     try:
-        contact = request.get_json()  # Get JSON data asynchronously
+        contact = await request.get_json()  # Get JSON data asynchronously
         logger.debug("Contact data received: %s", contact)
 
         # Send email asynchronously
-        response = send_transactional_email(
+        response = await send_transactional_email(
             "Contact Form Submission",
             "Paul",
             "your-email@example.com",
@@ -192,6 +191,8 @@ def create_contact():
 
 if __name__ == "__main__":
     # Use the environment variable PORT, default to 8080 if not set
-    port = os.getenv('PORT', 8080)
-    logger.info("Starting Flask app on port %s", port)
-    app.run(host='0.0.0.0', port=port)
+    port = int(os.getenv("PORT", 8080))
+    logger.info("Starting Quart app on port %s", port)
+
+    # Start Quart with asyncio
+    asyncio.run(app.run_task(host="0.0.0.0", port=port))
