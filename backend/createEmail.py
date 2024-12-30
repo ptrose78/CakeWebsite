@@ -8,7 +8,7 @@ import logging
 load_dotenv()
 
 # Configure API key
-api_key = os.environ.get("YOUR_API_V3_KEY")
+api_key = os.environ.get("BREVO_API_V3_KEY")
 configuration = Configuration()
 configuration.api_key['api-key'] = api_key
 

@@ -49,11 +49,12 @@ async def send_email(subject, sender_name, sender_email, html_content, recipient
 
 async def send_receipt(customer_id, order_id):
     # Retrieve customer information
-    response_customer = await client.customers.retrieve_customer(customer_id)
+
+    response_customer = await asyncio.to_thread(client.customers.retrieve_customer, customer_id)
     customer = response_customer.body.get('customer', {})
 
     # Retrieve order information
-    response_order = await client.orders.retrieve_order(order_id)
+    response_order = await asyncio.to_thread(client.orders.retrieve_order, order_id)
     order = response_order.body.get('order', {})
 
     # Generate HTML content for the receipt
@@ -99,7 +100,7 @@ async def create_order():
         logger.debug("Received order data: %s", order_data)
 
         # Call the Square API to create an order
-        result = await client.orders.create_order(body=order_data)
+        result = await asyncio.to_thread(client.orders.create_order, body=order_data)
 
         if result.is_success():
             logger.info("Order created successfully: %s", result.body)
@@ -119,7 +120,8 @@ async def process_payment():
         logger.debug("Received payment data: %s", payment_data)
 
         # Call the Square API to process a payment
-        result = await client.payments.create_payment(body=payment_data)
+        result = await asyncio.to_thread(client.payments.create_payment, body=payment_data)
+
 
         if result.is_success():
             logger.info("Payment succeeded: %s", result.body)
