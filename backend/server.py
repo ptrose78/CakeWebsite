@@ -35,9 +35,10 @@ client = Client(
     environment='production'  # Use 'production' for a live account
 )
 
-@app.route("/", methods=["GET"])
-async def home():
-    return "Welcome to the Quart app!", 200
+@app.route("/")
+def home():
+    api_key = os.environ.get("API_KEY", "No API Key Found")
+    return f"API Key: {api_key}"
 
 async def send_email(subject, sender_name, sender_email, html_content, recipient_email):
     try:
@@ -74,7 +75,7 @@ async def send_receipt(customer_id, order_id):
 async def create_customer():
     try:
           # Get the JSON body from the frontend
-        customer_data = request.json
+        customer_data = await request.json
         logger.debug("Received customer data: %s", customer_data)
 
         # Call the Square API to create a customer
@@ -94,7 +95,7 @@ async def create_customer():
 @app.route('/create-order', methods=['POST'])
 async def create_order():
     try:
-        order_data = request.json
+        order_data = await request.json
         logger.debug("Received order data: %s", order_data)
 
         # Call the Square API to create an order
@@ -114,7 +115,7 @@ async def create_order():
 @app.route('/process-payment', methods=['POST'])
 async def process_payment():
     try:
-        payment_data = request.json
+        payment_data = await request.json
         logger.debug("Received payment data: %s", payment_data)
 
         # Call the Square API to process a payment
@@ -165,7 +166,7 @@ async def process_payment():
 @app.route('/create-contact', methods=['POST'])
 async def create_contact():
     try:
-        contact = await request.get_json()  # Get JSON data asynchronously
+        contact = await request.json  # Get JSON data asynchronously
         logger.debug("Contact data received: %s", contact)
 
         # Send email asynchronously

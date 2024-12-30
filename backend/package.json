@@ -248,7 +248,7 @@
 
 
 
-"start:production": "cross-env NODE_ENV=production PORT=3000 micro -l tcp://0.0.0.0:3000",
+"start:production": "python3 server.py",
   
 
 
