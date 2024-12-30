@@ -7,7 +7,11 @@ import os
 import logging
 import asyncio
 
-from createEmail import send_transactional_email
+from sib_api_v3_sdk import ApiClient, TransactionalEmailsApi
+from sib_api_v3_sdk import Configuration
+
+load_dotenv()
+
 from receiptTemplate import receipt_template
 
 app = Quart(__name__)
@@ -35,10 +39,37 @@ client = Client(
     environment='production'  # Use 'production' for a live account
 )
 
+# Configure Brevo API key
+api_key = os.environ.get("BREVO_API_V3_KEY")
+configuration = Configuration()
+configuration.api_key['api-key'] = api_key
+
+# Create an Brevo API instance
+api_instance = TransactionalEmailsApi(ApiClient(configuration))
+
+# Environmental Variable Check
 @app.route("/")
 def home():
     api_key = os.environ.get("API_KEY", "No API Key Found")
     return f"API Key: {api_key}"
+
+# Send email using Brevo API
+async def send_transactional_email(subject, sender_name, sender_email, html_content, recipient_email):
+    email = {
+        "sender": {"name": sender_name, "email": sender_email},
+        "to": [{"email": recipient_email}],  # Correct format for Sendinblue API
+        "subject": subject,
+        "htmlContent": html_content,
+    }
+
+    try:
+        # Run send_transac_email in a separate thread
+        response = await asyncio.to_thread(api_instance.send_transac_email, email)
+        print("Email sent successfully:", response)
+        return response
+    except Exception as error:
+        print("Error sending email:", error)
+        raise error
 
 async def send_email(subject, sender_name, sender_email, html_content, recipient_email):
     try:
