@@ -79,7 +79,7 @@ async def create_customer():
         logger.debug("Received customer data: %s", customer_data)
 
         # Call the Square API to create a customer synchronously in a separate thread
-        result = await asyncio.to_thread(client.customers.create_customer(body=customer_data))
+        result = await asyncio.to_thread(client.customers.create_customer, body=customer_data))
 
         if result.is_success():
             logger.info("Customer created successfully: %s", result.body)
