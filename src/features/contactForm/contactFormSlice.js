@@ -12,7 +12,7 @@ export const postContactForm = createAsyncThunk(
         method: 'POST',            
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`  // Pass token for authorization if needed
+          'Authorization': `Bearer`  // Pass token for authorization if needed
         },
         body: JSON.stringify(contact)
       })

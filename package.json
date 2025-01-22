@@ -50,6 +50,7 @@
   },
   "proxy": "http://website-605cd4d9.nqt.euu.temporary.site",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
     "postcss": "^8.5.1",
