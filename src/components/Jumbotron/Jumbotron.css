@@ -1,30 +1,39 @@
 .jumbotron {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Aligns content closer to the top */
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   padding-top: 5vh;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); */
-  background-color: #f0c289; /* Soft beige */
-  color: #5A3E36; /* Warm, dark brown */
+  background-color: #70d5ee;
+  color: #5A3E36;
   text-align: center;
   box-sizing: border-box;
   height: 475px;
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards;
 }
 
 .jumbotron-content {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
+  text-align: center;
+  animation: slideIn 1.5s ease-out forwards;
+  opacity: 0;
 }
 
-.jumbotron .jumbotron-image {
-  width: 20%;
-  height: auto;
-  margin-right: -25px;
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .jumbotron h1 {
@@ -38,6 +47,22 @@
   font-family: 'Open Sans', sans-serif;
   font-size: 3.7vw;
   margin-top: 5px;
+}
+
+.jumbotron-menu {
+  animation: zoomIn 4s ease forwards;
+  
+}
+
+@keyframes zoomIn {
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }
 
 .order-button {
@@ -70,12 +95,6 @@
     margin-top: 100px;
   }
 
-  .jumbotron img {
-    max-width: 10%;
-    height: auto;
-    margin-right: -25px;
-  }
-
   .jumbotron h1 {
     font-family: 'Pacifico', cursive;
     font-size: 5vw;
@@ -99,5 +118,14 @@
 @media (min-width: 1440px) {
   .jumbotron {
     height: 1050px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

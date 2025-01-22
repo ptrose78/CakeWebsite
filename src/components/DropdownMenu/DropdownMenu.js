@@ -7,7 +7,7 @@ import { selectIsMenuOpen, openMenu, closeMenu } from '../../features/sidebar/si
 import { toggleMenu, selectMenuState } from '../../features/dropdownMenu/dropdownMenuSlice';
 import './DropdownMenu.css';
 
-const DropdownMenu = ({ className, header, menuId }) => {
+const DropdownMenu = ({ className, header, img, menuId }) => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state) => selectMenuState(state, menuId));
     const isMenuOpen = useSelector(selectIsMenuOpen);
@@ -27,7 +27,7 @@ const DropdownMenu = ({ className, header, menuId }) => {
     return (
         <div className={`dropdown-container ${className}`}>
             <button className={`dropdown-menu ${className}`} onClick={handleDropdownMenuToggle}>
-                {header} <span className={`caret ${isOpen ? 'open' : ''}`}>▼</span>
+            {img ? <img className="baker-image" src={img}/>: ""} {header} <span className={`caret ${isOpen ? 'open' : ''}`}>▼</span>
             </button>
             <div className="drowdown-container">
                 <div onClick={handleDropdownMenuToggle} className={`dropdown-content ${isOpen ? 'show' : ''}`}>

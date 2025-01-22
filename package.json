@@ -50,7 +50,10 @@
   },
   "proxy": "http://website-605cd4d9.nqt.euu.temporary.site",
   "devDependencies": {
+    "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
-    "react-app-rewired": "^2.2.1"
+    "postcss": "^8.5.1",
+    "react-app-rewired": "^2.2.1",
+    "tailwindcss": "^3.4.17"
   }
 }

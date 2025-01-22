@@ -32,7 +32,7 @@ const Footer = () => {
   
         {/* Copyright Statement */}
         <div className="footer-copyright">
-          <p>Copyright © 2024 Buzzy Sweets. All Rights Reserved.</p>
+          <p>Copyright © 2025 Buzzy Sweets. All Rights Reserved.</p>
         </div>
       </footer>
     );
