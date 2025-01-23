@@ -61,7 +61,7 @@ async def send_transactional_email(subject, sender_name, sender_email, html_cont
         "subject": subject,
         "htmlContent": html_content,
     }
-
+    print('EMAIL content:', email)
     try:
         # Run send_transac_email in a separate thread
         response = await asyncio.to_thread(api_instance.send_transac_email, email)
@@ -206,11 +206,11 @@ async def create_contact():
         response = await send_transactional_email(
             "Contact Form Submission",
             "Paul",
-            "your-email@example.com",
+            "paultrose1@gmail.com",
             f"<p>Name: {contact['name']['first']} {contact['name']['last']}</p>"
             f"<p>Email: {contact['email']}</p>"
             f"<p>Message: {contact['message']}</p>",
-            "your-email@example.com"
+            "paultrose1@gmail.com"
         )
 
         logger.info("Email sent successfully: %s", response)

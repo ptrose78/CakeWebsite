@@ -143,6 +143,7 @@ const PaymentForm = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`  // Pass token for authorization if needed
       },
       body
     });
@@ -257,7 +258,8 @@ const createOrder = async (token, locationId, cart) => {
   const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/create-order`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`  // Pass token for authorization if needed
     },
     body,
   })
@@ -290,6 +292,7 @@ const storeCard = async (token, customerResults, verificationToken) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`  // Pass token for authorization if needed
     },
     body,
   });

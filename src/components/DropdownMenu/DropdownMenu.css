@@ -4,6 +4,11 @@
     margin: 0;
 }
 
+.baker-image {
+    height: 70px;
+    width: auto;
+}
+
 /* Header button with caret */
 .dropdown-menu {
     width: 100%; /* Full width of the container */
@@ -26,7 +31,7 @@
 .dropdown-menu.jumbotron-menu {
     width: 30%;
     height: 85px;
-    background-color: #448d3b; /* Darker beige for emphasis */
+    background-color: #f0c289; /* Darker beige for emphasis */
     color: #ffffff; /* White text */
     font-size: 1.2em;
     font-weight: bold;
@@ -38,8 +43,8 @@
 
 /* Hover effect for jumbotron button */
 .dropdown-menu.jumbotron-menu:hover {
-    background-color: #559c39; /* Slightly darker beige */
-    color: #ffffff;
+    background-color: #f0c289; /* Slightly darker beige */
+    color: #f6ebeb;
 }
 
 /* Caret transition */
@@ -57,6 +62,7 @@
     overflow: hidden;
     background-color: #e2caad; /* Beige color */
     transition: max-height 0.3s ease;
+    z-index: 999;
 }
 
 /* Open state for dropdown with expanded height */
@@ -169,6 +175,13 @@
         display: none;
     }
 
+    .baker-image {
+        position: relative;
+        right: 15px;
+        height: 75px;
+        width: auto;
+    }
+
     /* Dropdown links */
     .jumbotron-menu .dropdown-content .cake-link, .jumbotron-menu .dropdown-content .cupcake-link, .jumbotron-menu .dropdown-content .cookie-link {
         color: #5A3E36;
@@ -220,6 +233,13 @@
 }
 
 @media (min-width: 1024px) {
+    .baker-image {
+        position: relative;
+        right: 25px;
+        height: 110px;
+        width: auto;
+    }
+
     .dropdown-menu {
         width: 100%; /* Full width of the container */
         text-align: center; /* Center text */
@@ -241,12 +261,12 @@
     .dropdown-menu.jumbotron-menu {
         font-size: 2.5em;
         height: 150px;
-        width: 25%;
+        width: 27%;
     }
     .jumbotron-menu .dropdown-content {
-        width: 25%;
+        width: 27%;
     }
-
+   
     .navbar-dropdownmenu {
         display: inline-block;
         margin-top: -34px;
@@ -301,5 +321,15 @@
         background-color: #e2caad; /* Beige color */
         width: 100%;
         font-size: 34px;
+    }
+
+    /* Jumbotron button styling */
+    .dropdown-menu.jumbotron-menu {
+        font-size: 2.5em;
+        height: 150px;
+        width: 18%;
+    }
+    .jumbotron-menu .dropdown-content {
+        width: 18%;
     }
   }

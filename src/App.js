@@ -15,7 +15,6 @@ import Footer from './components/Footer/Footer.js';
 import SignIn from './pages/SignIn/SignIn.js';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop.js';
 
-
 function App() {
   const location = useLocation();
 
