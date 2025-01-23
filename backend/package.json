@@ -96,7 +96,6 @@
 
 
 "micro-dev": "micro-dev",
-
   
 
 
@@ -215,7 +214,7 @@
 
 
 
- "start": "python3 server.py",
+"start": "python server.py",
   
 
 
@@ -249,7 +248,7 @@
 
 
 
-"start:production": "python3 server.py",
+"start:production": "python server.py",
   
 
 
