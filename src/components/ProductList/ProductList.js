@@ -126,8 +126,8 @@ const ProductList = ({ category }) => {
           <div className="product-list">
             {products.map((product) => (
               <li key={product.id}>
-                <h2>{product.name}</h2>
-                <p>Price: ${product.price} {checkCookie(product) && "per dozen"}</p>
+                <h2 className="mb-1">{product.name}</h2>
+                <p className="mb-1">Price: ${product.price} {checkCookie(product) && "per dozen"}</p>
                 {product.image ? (
                   <img src={product.image} alt={product.name} width="200" height="200" />
                 ) : (

@@ -66,9 +66,10 @@
 
 .sidebar-container .sidebar-link {
     color: #5A3E36;
+    
 }
 
 .sidebar-container .sidebar-link:hover {
-    color: #8a5b4e; 
+    color: #5A3E36; 
 }
 

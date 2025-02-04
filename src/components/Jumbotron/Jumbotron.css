@@ -23,6 +23,7 @@
   text-align: center;
   animation: slideIn 1.5s ease-out forwards;
   opacity: 0;
+
 }
 
 @keyframes slideIn {
@@ -40,7 +41,7 @@
   font-family: 'Pacifico', cursive;
   font-size: 7vw;
   margin-bottom: 10px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .jumbotron p {
