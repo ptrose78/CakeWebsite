@@ -31,10 +31,12 @@ const DropdownMenu = ({ className, header, img, menuId }) => {
             </button>
             <div className="drowdown-container">
                 <div onClick={handleDropdownMenuToggle} className={`dropdown-content ${isOpen ? 'show' : ''}`}>
-                <Link className="cake-link" to={ROUTES.cakesRoute()}>Cakes</Link>
-                <Link className="cupcake-link" to={ROUTES.cupcakesRoute()}>Cupcakes</Link>
-                <Link className="cookie-link" to={ROUTES.cookiesRoute()}>Cookies</Link>
+                <Link className="cake-link text-white bg-pink-500 hover:bg-pink-600 transition flex-grow" to={ROUTES.cakesRoute()}>Cakes</Link>
+                <Link className="cupcake-link text-white bg-purple-500 hover:bg-purple-600 transition flex-grow" to={ROUTES.cupcakesRoute()}>Cupcakes</Link>
+                <Link className="cookie-link text-white bg-yellow-500 hover:bg-yellow-600 transition flex-grow" to={ROUTES.cookiesRoute()}>Cookies</Link>
+
                 </div>
+
             </div>
         </div>
     );

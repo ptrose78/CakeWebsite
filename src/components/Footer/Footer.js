@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="footer-container">
           {/* Logo Section */}
           <div className="footer-logo">
-            <Link to={ROUTES.homeRoute()}><Logo logoImage={0} alt="Business Logo" /></Link>
+            <Link to={ROUTES.homeRoute()}><Logo logoImage={2} alt="Business Logo" /></Link>
           </div>
   
           {/* Navigation Links */}

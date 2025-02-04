@@ -17,8 +17,8 @@
     font-size: 1.0em;
     font-weight: bold;
     padding: 10px;
-    color: #5A3E36; /* Dark brown */
-    background-color: #e4cd4d;
+
+    background-color: #e6e2ca;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -31,7 +31,7 @@
 .dropdown-menu.jumbotron-menu {
     width: 30%;
     height: 85px;
-    background-color: #f0c289; /* Darker beige for emphasis */
+  
     color: #ffffff; /* White text */
     font-size: 1.2em;
     font-weight: bold;
@@ -43,7 +43,7 @@
 
 /* Hover effect for jumbotron button */
 .dropdown-menu.jumbotron-menu:hover {
-    background-color: #f0c289; /* Slightly darker beige */
+ 
     color: #f6ebeb;
 }
 
@@ -60,7 +60,7 @@
 .dropdown-content {
     max-height: 0;
     overflow: hidden;
-    background-color: #e2caad; /* Beige color */
+    
     transition: max-height 0.3s ease;
     z-index: 999;
 }
@@ -73,7 +73,6 @@
 
 /* Dropdown links */
 .dropdown-content .cake-link, .dropdown-content .cupcake-link, .dropdown-content .cookie-link {
-    color: #5A3E36;
     padding: 10px 15px;
     margin: 0px;
     text-decoration: none;
@@ -81,16 +80,6 @@
     display: block;
     transition: background-color 0.3s;
     font-size: 18px;
-}
-
-.dropdown-content .cake-link:hover, .dropdown-content .cupcake-link:hover, .dropdown-content .cookie-link:hover {
-    background-color: #D9663D; /* Highlighted orange on hover */
-    color: #fff;
-}
-
-.sidebar-menu .dropdown-content .cake-link:hover, .sidebar-menu .dropdown-content .cupcake-link:hover, .sidebar-menu .dropdown-content .cookie-link:hover {
-    background-color: #D9663D; /* Highlighted orange on hover */
-    color: #fff;
 }
 
 .dropdown-container.jumbotron-menu {
@@ -158,7 +147,7 @@
 .navbar-dropdownmenu .dropdown-content a {
     position: relative;
     bottom: 15px;
-    background-color: #e2caad; /* Beige color */
+    
     overflow: visible;
 }
 
@@ -166,7 +155,7 @@
     position: relative;
     overflow: visible;
     top: 0px;
-    background-color: #e2caad; /* Beige color */
+    
     width: 100%;
 }
 
@@ -184,7 +173,6 @@
 
     /* Dropdown links */
     .jumbotron-menu .dropdown-content .cake-link, .jumbotron-menu .dropdown-content .cupcake-link, .jumbotron-menu .dropdown-content .cookie-link {
-        color: #5A3E36;
         padding: 10px 15px;
         margin: 0px;
         text-decoration: none;
@@ -196,7 +184,6 @@
 
     /* Dropdown links */
     .navbar-dropdownmenu .dropdown-content .cake-link, .navbar-dropdownmenu .dropdown-content .cupcake-link, .navbar-dropdownmenu .dropdown-content .cookie-link {
-        color: #5A3E36;
         padding: 10px 15px;
         margin: 0px;
         text-decoration: none;
@@ -218,7 +205,7 @@
     }
 
     .dropdown-content .cake-link:hover, .dropdown-content .cupcake-link:hover, .dropdown-content .cookie-link:hover {
-        background-color: #D9663D; /* Highlighted orange on hover */
+       
         color: #fff;
     }
 
@@ -226,7 +213,7 @@
         position: relative;
         overflow: visible;
         top: 0px;
-        background-color: #e2caad; /* Beige color */
+        
         width: 100%;
         font-size: 28px;
     }
@@ -280,7 +267,7 @@
 
     /* Dropdown links */
     .dropdown-content a {
-        color: #5A3E36;
+       
         padding: 10px 15px;
         margin: 0px;
         text-decoration: none;
@@ -292,7 +279,7 @@
 
     /* Dropdown links */
     .navbar-dropdownmenu .dropdown-content .cake-link, .navbar-dropdownmenu .dropdown-content .cupcake-link, .navbar-dropdownmenu .dropdown-content .cookie-link {
-        color: #5A3E36;
+        
         padding: 10px 15px;
         margin: 0px;
         text-decoration: none;
@@ -303,12 +290,12 @@
     }
 
     .sidebar-menu .dropdown-content .cake-link:hover, .sidebar-menu .dropdown-content .cupcake-link:hover, .sidebar-menu .dropdown-content .cookie-link:hover {
-        background-color: #D9663D; /* Highlighted orange on hover */
+       
         color: #fff;
     }
 
     .dropdown-content .cake-link:hover, .dropdown-content .cupcake-link:hover, .dropdown-content .cookie-link:hover {
-        background-color: #D9663D; /* Highlighted orange on hover */
+        
         color: #fff;
     }
 }

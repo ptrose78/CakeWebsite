@@ -16,7 +16,7 @@ export const postContactForm = createAsyncThunk(
         },
         body: JSON.stringify(contact)
       })
-
+      console.log(response)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

@@ -20,7 +20,7 @@ const ProductList = ({ category }) => {
   const dispatch = useDispatch();
 
   // Redux state
-  const isSiteDisabled   = useSelector(selectIsSiteDisabled);
+  const isSiteDisabled = useSelector(selectIsSiteDisabled);
   const status = useSelector(selectProductsStatus);
   const error = useSelector(selectProductsError);
   const products = useSelector(selectFilteredProducts); //provides global access to products from its productListSlice.js
