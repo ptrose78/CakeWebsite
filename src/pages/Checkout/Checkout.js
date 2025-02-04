@@ -49,7 +49,7 @@ const Checkout = () => {
       <div className="checkout-content">
         {/* Customer Information Form - First Column */}
         <div className="checkout-form">
-          <h2>Customer Information</h2>
+          <h3>Customer Information</h3>
           <form onSubmit={handleSubmit}>
             <div className="input-container email">
               <input

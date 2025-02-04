@@ -11,7 +11,7 @@ const Cookies = () => {
     const selectedProduct = useSelector(selectSelectedProduct);
 
     return(
-        <div className="cookies-section">   
+        <div className="cookies-section bg-pink-200">   
             <h1 className="cookies-title">Cookies</h1>
             <p className="cookies-description">Welcome to our Cookies page! Explore our delicious cookie offerings here.</p>
             <ProductList category="Cookie" />

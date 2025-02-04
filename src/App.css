@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -53,6 +57,19 @@ html, body {
   height: 100%; /* Ensure the root elements stretch fully */
 
 }
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
 
 html, body, #root, .App {
   overflow-x: hidden; /* Prevent horizontal scrolling */

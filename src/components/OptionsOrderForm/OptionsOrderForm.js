@@ -71,13 +71,20 @@ const OptionsOrderForm = ({ product, onClose }) => {
                     onClose(); 
                  }}>✕</button>
                 
-                <div className="product-header">
-                    {product.image ? (
-                        <img src={product.image} alt={product.name} width="100" height="100" />
-                    ) : (
-                        <p>Image not available</p>
-                    )}
-                    <h2>{product?.name} Order</h2>
+                <div className="product-header flex flex-col items-center"> {/* Flexbox container */}
+                {product.image ? (
+                    <div className="image-container"> {/* Container for styling image */}
+                    <img 
+                        src={product.image} 
+                        alt={product.name} 
+                        className="product-image" // Add a class for styling
+                        width="100" height="100"
+                        />
+                    </div>
+                ) : (
+                    <p>Image not available</p>
+                )}
+                <h2>{product?.name} Order</h2>
                 </div>
 
                 <form name="option-form" onSubmit={(e) => handleAddToCart(e)}> 

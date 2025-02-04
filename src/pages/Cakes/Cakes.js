@@ -11,7 +11,7 @@ const Cakes = () => {
     const selectedProduct = useSelector(selectSelectedProduct);
 
     return(
-        <div className="cakes-section">   
+        <div className="cakes-section bg-pink-200">   
             <h1 className="cakes-title">Cakes</h1>
             <p className="cakes-description">Welcome to our Cakes page! Explore our delicious cake offerings here.</p>
             <ProductList category="Cake" />
