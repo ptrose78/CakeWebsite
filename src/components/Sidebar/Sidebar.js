@@ -20,6 +20,10 @@ const Sidebar = () => {
         }
     }
 
+    const handleLinkClick = () => {
+        dispatch(closeMenu()); // Close the menu
+    };
+
     return (
         <div className="sidebar-container">
             <button className="menu-button" onClick={handleMenuToggle}>
@@ -27,12 +31,11 @@ const Sidebar = () => {
             </button>
             
             <div  className={`sidebar-menu ${isMenuOpen ? 'open' : ''}`}>          
-                    <DropdownMenu  menuId="sidebar-menu" header="Our Treats" />
+                    <DropdownMenu  menuId="sidebar-menu" header="Our Treats" onClose={handleLinkClick} />
                     <Link className="sidebar-link" onClick={handleMenuToggle} to={ROUTES.aboutRoute()}>About</Link>
                     <Link className="sidebar-link" onClick={handleMenuToggle} to={ROUTES.contactUsRoute()}>Contact Us</Link>
             </div>   
             
-
         </div>
     )
 }

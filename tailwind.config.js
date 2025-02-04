@@ -9,9 +9,10 @@ module.exports = {
       'great-vibes': ['Great Vibes', 'cursive'], // Or any other name you choose
       'lobster-two': ['Lobster Two', 'cursive'],
       'dancing-script': ['Dancing Script', 'cursive'],
+      'open-sans': ['Open Sans', 'sans-serif'],
     },
     screens: {
-      'sm': '640px',
+      'sm': '640px',  
       'md': '770px', 
       'lg': '1024px',
       'xl': '1280px',
