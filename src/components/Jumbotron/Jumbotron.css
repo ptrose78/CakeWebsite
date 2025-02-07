@@ -1,4 +1,4 @@
-.jumbotron {
+/* .jumbotron {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -68,7 +68,7 @@
 
 .order-button {
   background-color: #D9663D; /* Soft orange */
-  border: none;
+  /* border: none;
   padding: 10px 20px;
   color: #fff;
   font-weight: bold;
@@ -129,4 +129,4 @@
   100% {
     opacity: 1;
   }
-}
+} */ */
