@@ -49,22 +49,22 @@ const Jumbotron = () => {
   }
 
   return (
-    <div className="relative mt-6 w-full h-[575px] bg-pink-200 flex flex-col items-center justify-center text-center p-6 pt-4">
-      <div className="mt-14">
+    <div className="mt-6 w-full bg-pink-200 flex flex-col items-center justify-center text-center p-2 pt-4">
+      <div className="mt-4">
         <h1 className="text-5xl font-great-vibes text-amber-800 drop-shadow-md">
           {headline}
         </h1>
         <p className="mt-2 mb-4 text-xl text-brown-600 leading-relaxed italic">
           {subtext}
         </p>
-        <div className="mt-2 mb-7 w-half justify-center space-x-2 sm:space-x-6 md:space-x-8 md:hidden">
+        <div className="mt-6 mb-4 w-half justify-center space-x-2 sm:space-x-4 md:space-x-8 md:hidden">
           <Link to="/cakes" className="lobster-two px-2 py-1 text-xl text-bold bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition">Cakes</Link>
           <Link to="/cupcakes" className="lobster-two px-2 py-1 text-xl bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">Cupcakes</Link>
           <Link to="/cookies" className="lobster-two px-2 py-1 text-xl bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">Cookies</Link>
         </div>
       </div>
 
-      <div className="relative bottom-8 mt-2 w-full h-[575px] bg-pink-200 flex flex-col items-center justify-center text-center p-6 pt-2">
+      <div className="relative bottom-2 mt-2 w-full bg-pink-200 flex flex-col items-center justify-center text-center p-6 pt-2">
       <div className="mt-2 relative w-full max-w-4xl overflow-hidden rounded-lg h-[300px]"> {/* Fixed Height */}
         {slideshowImages.map((image, index) => (
           <div
