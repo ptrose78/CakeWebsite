@@ -1,5 +1,4 @@
 // src/components/PaymentForm.js
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetCart, selectCart } from '../../features/cart/cartSlice';
@@ -8,16 +7,12 @@ import { disableSite } from '../../features/siteDisabled/siteDisabledSlice';
 import './PaymentForm.css';
 import { v4 as uuidv4 } from 'uuid';
 
-
 const PaymentForm = () => {
 
   const dispatch = useDispatch();
  
   const appId = process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID;
   const locationId = process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID;
-
-   console.log(process.env.REACT_APP_YOUR_SQUARE_APPLICATION_ID);
-   console.log(process.env.REACT_APP_YOUR_SQUARE_LOCATION_ID);
 
   const cart = useSelector(selectCart);
   const { customerInfo } = useSelector(selectCheckout);
@@ -67,7 +62,7 @@ const PaymentForm = () => {
           const customerResults = await createCustomer(tokenResult.token, customerInfo);
           console.log('customerResults on frontend:', customerResults)
 
-          ////create the order
+          //create the order
           const orderResults = await createOrder(tokenResult.token, locationId, cart);
           console.log('orderResults on frontend:', orderResults)
 
@@ -116,13 +111,7 @@ const PaymentForm = () => {
   };
 
   const createPayment = async (token, customerResults, orderResults, cart) => {
-    console.log('create Payment started on front end')
-    console.log(token);
-    console.log(window.crypto.randomUUID());
-    console.log(customerResults.customer.id);
-    console.log(orderResults.order.id);
-    console.log('cart total price:', Math.round(cart.totalPrice*100));
-
+    
    const bodyParameters = {
       source_id: token,
       idempotency_key: window.crypto.randomUUID(),
@@ -133,11 +122,8 @@ const PaymentForm = () => {
         currency: "USD"
       }
     }
-    console.log("body parameters of payment:", bodyParameters)
-   const body = JSON.stringify(bodyParameters);
-
-    console.log("body of payment:", body)
-    
+   
+   const body = JSON.stringify(bodyParameters);   
 
     const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/process-payment`, {
       method: 'POST',
@@ -147,9 +133,6 @@ const PaymentForm = () => {
       },
       body
     });
-    console.log('payment complete on front end')
-
-    console.log('payment response:', response)
     const result = await response.json();
 
     if (!response.ok) {
@@ -176,15 +159,12 @@ const verifyBuyer = async (payments, token, customerInfo, intent) => {
   };
 
   try {
- 
     const verificationResults = await payments.verifyBuyer(token, verificationDetails);
-  
 
     if (!verificationResults || !verificationResults.token) {
       throw new Error('Buyer verification failed: No token received.');
     }
 
-   
     return verificationResults.token; // Return the verification token
   } catch (error) {
     throw new Error('Buyer verification failed.');
@@ -208,7 +188,6 @@ const verifyBuyer = async (payments, token, customerInfo, intent) => {
     };
 
   const body = JSON.stringify(bodyParameters);
-  console.log(process.env.REACT_APP_API_URL_BACK)
 
   const response = await fetch(`${process.env.REACT_APP_API_URL_BACK}/create-customer`, {
     method: 'POST',
@@ -219,7 +198,6 @@ const verifyBuyer = async (payments, token, customerInfo, intent) => {
     body,
   });
   
-  console.log('customer response:', response)
   const result = await response.json();
 
   if (!response.ok) {
@@ -230,7 +208,6 @@ const verifyBuyer = async (payments, token, customerInfo, intent) => {
 };
 
 const createOrder = async (token, locationId, cart) => {
-  console.log('start of create order')
   const line_items = cart.items.map((item) => {
     return {
       name: item.name,
@@ -242,7 +219,7 @@ const createOrder = async (token, locationId, cart) => {
     };
   });
   
-  const myUUID = uuidv4(); //Generates a random UUID
+  const myUUID = uuidv4(); 
 
   const bodyParameters = {
     order: {
@@ -264,7 +241,6 @@ const createOrder = async (token, locationId, cart) => {
     body,
   })
 
-  console.log('order response:', response)
   const result = await response.json();
 
   if (!response.ok) {
@@ -343,7 +319,5 @@ return (
   </div>
 );
 }
-
-
 
 export default PaymentForm;

@@ -9,10 +9,13 @@ const Jumbotron = () => {
   const { images } = useSelector(selectImages);
   const { headline, subtext } = useSelector(selectJumbotron);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true); // State to track loading
 
   useEffect(() => {
     if (!images) {
       dispatch(fetchImageFromStorage());
+    } else {
+      setLoading(false); // Set loading to false when images are loaded
     }
   }, [dispatch, images]);
 
@@ -44,8 +47,12 @@ const Jumbotron = () => {
     setCurrentIndex(prevIndex => (prevIndex + 1) % slideshowImages.length);
   };
 
-  if (slideshowImages.length === 0) {
-    return null;
+  if (loading) {  // Show loading message while images are loading
+    return (
+      <div className="mt-6 w-full bg-pink-200 flex flex-col items-center justify-center text-center p-2 pt-4">
+        <h1 className="text-5xl font-great-vibes text-amber-800 drop-shadow-md">Loading...</h1>
+      </div>
+    );
   }
 
   return (
@@ -65,32 +72,31 @@ const Jumbotron = () => {
       </div>
 
       <div className="relative bottom-2 mt-2 w-full bg-pink-200 flex flex-col items-center justify-center text-center p-6 pt-2">
-      <div className="mt-2 relative w-full max-w-4xl overflow-hidden rounded-lg h-[300px]"> {/* Fixed Height */}
-        {slideshowImages.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
-              index === currentIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <img
-              src={image}
-              alt="Jumbotron Slideshow"
-              className="w-full h-full object-contain" 
-            />
-          </div>
-        ))}
+      <div className="mt-2 relative w-full max-w-4xl rounded-lg" style={{ height: '600px' }}>
+
+          {slideshowImages.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <img
+                src={image}
+                alt="Jumbotron Slideshow"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
 
         {/* Arrows */}
-        <div className="absolute inset-y-0 left-0 flex items-center justify-center">
+        <div className="absolute inset-y-0 left-16 flex items-center justify-center pl-2 md:pl-2">
           <button onClick={goToPrevious} aria-label="Previous slide" className="p-2 bg-gray-800 bg-opacity-50 text-white rounded-r-lg hover:bg-opacity-75">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
         </div>
-        <div className="absolute inset-y-0 right-0 flex items-center justify-center">
+        <div className="absolute inset-y-0 right-16 flex items-center justify-center pr-2 md:pr-2">
           <button onClick={goToNext} aria-label="Next slide" className="p-2 bg-gray-800 bg-opacity-50 text-white rounded-l-lg hover:bg-opacity-75">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
